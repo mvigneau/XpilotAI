@@ -1,5 +1,9 @@
 #Evan Gray - January 2018
+<<<<<<< HEAD
 ###### hello its me #######
+=======
+### hey #####
+>>>>>>> 24ad439e189cc52e59851b1eb0165937f5018f90
 import libpyAI as ai
 def AI_loop():
   #Release keys
