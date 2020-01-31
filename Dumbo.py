@@ -1,4 +1,5 @@
 #Evan Gray - January 2018
+###### hello its me #######
 import libpyAI as ai
 def AI_loop():
   #Release keys
