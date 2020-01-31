@@ -1,9 +1,4 @@
 #Evan Gray - January 2018
-<<<<<<< HEAD
-###### hello its me #######
-=======
-### hey #####
->>>>>>> 24ad439e189cc52e59851b1eb0165937f5018f90
 import libpyAI as ai
 def AI_loop():
   #Release keys
@@ -14,19 +9,35 @@ def AI_loop():
   heading = int(ai.selfHeadingDeg())
   tracking = int(ai.selfTrackingDeg())
   frontWall = ai.wallFeeler(500,heading)
-  leftWall = ai.wallFeeler(500,heading+5)
-  rightWall = ai.wallFeeler(500,heading-5)
+  leftWall = ai.wallFeeler(500,heading+90)
+  rightWall = ai.wallFeeler(500,heading-90)
   trackWall = ai.wallFeeler(500,tracking)
   #Thrust rules
-  if ai.selfSpeed() <= 50 and frontWall >= 5:
+
+  if ai.selfSpeed() <= 1 and frontWall >= 20:
     ai.thrust(1)
-  elif trackWall < 5:
+  elif trackWall < 40:
     ai.thrust(1)
   #Turn rules
-  if leftWall < rightWall:
-    ai.turnRight(1)
-  else:
-    ai.turnLeft(1)
+#  if leftWall < rightWall:
+#    ai.turnRight(1)
+#  else:
+#    ai.turnLeft(1)
+#------------------------
+  degList = []
+  deg = 0
+  for i in range(18):
+      degList.append(wallFeeler(500, heading + deg))
+      deg = deg + 10
+
+  highestDist = 0
+  for element in degList:
+      Print(element)
+      if element > highestDist:
+          highestDist = element 
+  ai.turnToDeg(heading + (list.index(highestDist) * 10)
+#-------------------------------
+
   #Just keep shooting
   ai.fireShot()
-ai.start(AI_loop,["-name","Dumbo","-join","localhost"])
+  ai.start(AI_loop,["-name","Dumbo","-join","cc8418"])
