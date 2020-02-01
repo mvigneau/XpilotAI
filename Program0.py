@@ -18,8 +18,6 @@ def AI_loop():
   backWall = ai.wallFeeler(500,heading-180) 
   trackWall = ai.wallFeeler(500,tracking)
   
-You can run a server with the following command:
-  
   #Thrust rules
   if ai.selfSpeed() <= 5 and (frontWall >= 200) and (left45Wall >= 200) and (right45Wall >= 200) and (right90Wall >= 200) and (left90Wall >= 200) and (left135Wall >= 50) and (right135Wall >= 50) and (backWall >= 50):
     ai.thrust(1)
@@ -38,7 +36,16 @@ You can run a server with the following command:
   else:
     ai.thrust(0)
    
-  #Just keep shooting
-  ai.fireShot()
+  #######   Shooting Ennemies  ########
+  ##Find the closest ennemy##
+  ClosestID = ai.closestShipId()
+  ##Get the closest ennemy direction and speed##
+  ClosestSpeed = ai.ennemySpeedId(ClosestID)
+  ClosestDir = ai.ennemyTrackingDegId(ClosestID)
+  ## Get the lockheadingdeg ##
+  head = ai.lockHeadingDeg()
+  if(head < 10):  
+    ai.fireShot()
+
 
 ai.start(AI_loop,["-name","Dubster","-join","localhost"])
