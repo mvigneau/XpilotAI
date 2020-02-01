@@ -19,25 +19,12 @@ def AI_loop():
   elif trackWall < 40:
     ai.thrust(1)
   #Turn rules
-#  if leftWall < rightWall:
-#    ai.turnRight(1)
-#  else:
-#    ai.turnLeft(1)
-#------------------------
-  degList = []
-  deg = 0
-  for i in range(18):
-      degList.append(wallFeeler(500, heading + deg))
-      deg = deg + 10
-
-  highestDist = 0
-  for element in degList:
-      Print(element)
-      if element > highestDist:
-          highestDist = element 
-  ai.turnToDeg(heading + (list.index(highestDist) * 10)
-#-------------------------------
+  if leftWall < rightWall:
+    ai.turnRight(1)
+  else:
+    ai.turnLeft(1)
 
   #Just keep shooting
   ai.fireShot()
-  ai.start(AI_loop,["-name","Dumbo","-join","cc8418"])
+ai.start(AI_loop,["-name","Dumbo","-join","cc8418"])
+
