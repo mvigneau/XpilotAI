@@ -24,6 +24,7 @@ You can run a server with the following command:
   if ai.selfSpeed() <= 5 and (frontWall >= 200) and (left45Wall >= 200) and (right45Wall >= 200) and (right90Wall >= 200) and (left90Wall >= 200) and (left135Wall >= 50) and (right135Wall >= 50) and (backWall >= 50):
     ai.thrust(1)
   elif trackWall < 100:
+./xpilots -map maps/simple.xp -noQuit -switchBase 1
     ai.thrust(1)
   elif frontWall <= 300 and (left45Wall < right45Wall): 
     ai.turnRight(1)
