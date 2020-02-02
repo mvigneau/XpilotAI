@@ -36,6 +36,7 @@ def AI_loop():
   else:
     ai.thrust(0)
    
+<<<<<<< HEAD
   #Ennemy shooting rules
   #find closest ennemy 
   ClosestID = closestShipId()
@@ -44,5 +45,18 @@ def AI_loop():
   ClosestDirection = enemyTrackingDegId(ClosestID) 
   
   ai.fireShot()
+=======
+  #######   Shooting Ennemies  ########
+  ##Find the closest ennemy##
+  ClosestID = ai.closestShipId()
+  ##Get the closest ennemy direction and speed##
+  ClosestSpeed = ai.ennemySpeedId(ClosestID)
+  ClosestDir = ai.ennemyTrackingDegId(ClosestID)
+  ## Get the lockheadingdeg ##
+  head = ai.lockHeadingDeg()
+  if(head < 10):  
+    ai.fireShot()
+
+>>>>>>> 7058b5dd3058406dfd57cbc05f3f2fc3bb1e29ea
 
 ai.start(AI_loop,["-name","Dubster","-join","localhost"])
