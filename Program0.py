@@ -30,31 +30,27 @@ def AI_loop():
   #print(ClosestDir)
   ## Get the lockheadingdeg ##
   enemy = ai.lockNext()
-  print(enemy)
+  #print(enemy)
   head = ai.lockHeadingDeg()
-  print(head)
+  #print(head)
   enemyDist = ai.selfLockDist()
-  print(enemyDist)
+  #print(enemyDist)
   
   ### Turning Rules ###
-  if frontWall <= 200 and (left45Wall < right45Wall): 
-    print("turning right")
+  if frontWall <= 300 and (left45Wall < right45Wall): 
     ai.turnRight(1)
-  elif frontWall <= 200 and (left45Wall > right45Wall):
+  elif frontWall <= 300 and (left45Wall > right45Wall):
     ai.turnLeft(1)
   elif left90Wall <= 200:
-    print("turning right")
     ai.turnRight(1) 
   elif right90Wall <= 200:
-    print("turning left")
+    ai.turnLeft(1)
+  elif right90Wall <= 200:
     ai.turnLeft(1)
   ### Thrust commands ####
   elif ai.selfSpeed() <= 10 and (frontWall >= 200) and (left45Wall >= 200) and (right45Wall >= 200) and (right90Wall >= 200) and (left90Wall >= 200) and (left135Wall >= 50) and (right135Wall >= 50) and (backWall >= 50):
-    print("go forward")
     ai.thrust(1)
-  elif trackWall < 75 and ai.selfSpeed() >= 10:
-    ai.thrust(1)
-  elif trackWall < 50 and ai.selfSpeed() <= 10:
+  elif trackWall < 75:
     ai.thrust(1)
   elif backWall <= 75:
     ai.thrust(1)  
@@ -63,16 +59,15 @@ def AI_loop():
   elif right135Wall <= 75:
     ai.thrust(1)
   ##### Shooting Ennemy Commands #####
-  elif enemyDist <= 500 and heading > (head):
+  elif enemyDist <= 500 and heading > head:
     ai.turnRight(1)
     ai.fireShot()
-  elif enemyDist <= 500 and heading < (head):
+  elif enemyDist <= 500 and heading < head:
     ai.turnLeft(1)
     ai.fireShot()
   else:
-    print("chilling")
     ai.thrust(0)
   
   
 
-ai.start(AI_loop,["-name","Dubster","-join","localhost"])
+ai.start(AI_loop,["-name","Previous","-join","localhost"])
