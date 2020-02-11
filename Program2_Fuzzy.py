@@ -52,5 +52,19 @@ def Fuzzy(Closing_rate, Distance):
 	
 	print(Membership_Slow, Membership_Medium, Membership_Fast)
 	
+	## Step 2 -- Distance; close or far ##
+	Distance_Close = 0
+	Distance_Far = 0
+	if(Distance <= 400):
+		Distance_Close = 1
+	if(Distance > 400 and Distance < 600):
+		Distance_Close = round(-0.005 * Distance + 3,3)
+	if(Distance > 400 and Distance < 600):
+		Distance_Far = round(0.005 * Distance - 2,3)
+	if(Distance >= 600):
+		Distance_Far = 1
+	
+	print(Distance_Close, Distance_Far)
+	
 	return 0
 	
