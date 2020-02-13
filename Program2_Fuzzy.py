@@ -28,7 +28,7 @@ def Closing_Rate(Degree, tracking, Speed, Distance):
 		
 	return closing_rate, distance
 
-def Fuzzy(Closing_rate, Distance):
+def Fuzzy_Speed(Closing_rate):
 	
 	## Step 1 -- Closing Rate; slow, medium or fast ##
 	Membership_Slow = 0 
@@ -50,8 +50,9 @@ def Fuzzy(Closing_rate, Distance):
 	if (Closing_rate >= 8): 
 			Membership_Fast = 1
 	
-	print(Membership_Slow, Membership_Medium, Membership_Fast)
-	
+	return (Membership_Slow, Membership_Medium, Membership_Fast)
+
+def Fuzzy_Distance(Distance):	
 	## Step 2 -- Distance; close or far ##
 	Distance_Close = 0
 	Distance_Far = 0
@@ -64,7 +65,31 @@ def Fuzzy(Closing_rate, Distance):
 	if(Distance >= 600):
 		Distance_Far = 1
 	
-	print(Distance_Close, Distance_Far)
+	return(Distance_Close, Distance_Far)
+
+def Fuzzy_Risk(Membership_Slow, Membership_Medium, Membership_Fast, Distance_Close, Distance_Far):
 	
-	return 0
+	risk_low = 0
+	risk_medium = 0
+	risk_high = 0
+	
+	if(Membership_Slow > 0 and Distance_Far > 0):
+		risk_low = min(Membership_Slow, Distance_Far)
+	if(Membership_Fast > 0 and Distance_Close > 0):
+		risk_high = min(Membership_Fast, Distance_Close)
+	if(Membership_Fast > 0 and Distance_Far > 0):
+		risk_medium = min(Membership_Fast, Distance_Far)
+	if(Membership_Medium > 0 and Distance_Far > 0):
+		risk_medium = min(Membership_Medium, Distance_Far)
+	if(Membership_Medium > 0 and Distance_Close > 0):
+		risk_high = min(Membership_Medium, Distance_Close)
+	if(Membership_Slow > 0 or Distance_Far > 0):
+		risk_low = max(Membership_Slow, Distance_Far)
+	
+	#print(risk_low, risk_medium, risk_high)
+	total_risk = (risk_low * 25 + risk_medium * 50 + risk_high * 75) / (risk_low + risk_medium + risk_high)
+	#print(total_risk)
+	
+	return total_risk
+
 	
