@@ -55,14 +55,14 @@ def AI_loop():
   ClosestDir = ai.enemyTrackingDegId(ClosestID)
   #print(ClosestDir)
   ## Get the lockheadingdeg ##
-  enemy = ai.lockNext()
+  enemy = ai.lockClose()
   #print(enemy)
   head = ai.lockHeadingDeg()
   #print(head)
   enemyDist = ai.selfLockDist()
   #print(enemyDist)
   
-  #print("max_risk: ", max_risk)
+  print("max_risk: ", max_risk)
   #print("track_risk: ", track_risk)
   #print("heading: ", heading)
   
@@ -73,22 +73,22 @@ def AI_loop():
   #print("dist2: ", dist2)
   
   ## Production system rules based off fuzzy output ##
-  if(dist <= 130 and dist >= 0 and ai.selfSpeed() > 0 and max_risk >= 40):
+  if(dist <= 130 and dist >= 0 and ai.selfSpeed() > 0 and max_risk >= 75):
     ai.turnLeft(1)
     #print("turning left")
-  elif(dist2 <= 130 and dist2 >= 0 and ai.selfSpeed() > 0 and max_risk >= 40):
+  elif(dist2 <= 130 and dist2 >= 0 and ai.selfSpeed() > 0 and max_risk >= 75):
     ai.turnRight(1)
     #print("turning right")
   elif(ai.selfSpeed() <= 10):
     ai.thrust(1)
     #print("thrust")
-  elif(trackWall <= 150 and dist):
+  elif(trackWall <= 150):
     ai.thrust(1)
     #print("thrust")
-  elif(enemyDist <= 500 and heading > (head) and enemyDist != 0 and max_risk <= 40):
+  elif(enemyDist <= 3000 and heading > (head) and enemyDist != 0):
     ai.turnRight(1)
     ai.fireShot()
-  elif(enemyDist <= 500 and heading < (head) and enemyDist != 0 and max_risk <= 40):
+  elif(enemyDist <= 3000 and heading < (head) and enemyDist != 0):
     ai.turnLeft(1)
     ai.fireShot()
   else:
@@ -98,4 +98,4 @@ def AI_loop():
   
   
 
-ai.start(AI_loop,["-name","Dubster","-join","cc8418"])
+ai.start(AI_loop,["-name","Dubster","-join","localhost"])

@@ -63,13 +63,13 @@ def Fuzzy_Distance(Distance):
 	## Step 2 -- Distance; close or far ##
 	Distance_Close = 0
 	Distance_Far = 0
-	if(Distance <= 400):
+	if(Distance <= 300):
 		Distance_Close = 1
-	if(Distance > 400 and Distance < 600):
-		Distance_Close = round(-0.005 * Distance + 3,3)
-	if(Distance > 400 and Distance < 600):
-		Distance_Far = round(0.005 * Distance - 2,3)
-	if(Distance >= 600):
+	if(Distance > 300 and Distance < 500):
+		Distance_Close = round(-0.005 * Distance + 2.5,3)
+	if(Distance > 300 and Distance < 500):
+		Distance_Far = round(0.005 * Distance - 1.5,3)
+	if(Distance >= 500):
 		Distance_Far = 1
 	
 	return(Distance_Close, Distance_Far)
