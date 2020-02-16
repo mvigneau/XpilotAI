@@ -59,28 +59,34 @@ def AI_loop():
   #print(head)
   enemyDist = ai.selfLockDist()
   #print(enemyDist)
+  print("max_risk: ", max_risk)
   print("track_risk: ", track_risk)
   print("heading: ", heading)
-  dist = heading - track_risk
+  dist = (heading - track_risk) % 360
+  dist2 = (360 - dist) % 360
   print("dist: ", dist)
-  if(dist <= 90 and dist >= 0 and ai.selfSpeed() > 0):
+  print("dist2: ", dist2)
+  if(dist <= 130 and dist >= 0 and ai.selfSpeed() > 0 and max_risk >= 40):
     ai.turnLeft(1)
     print("turning left")
-  elif((360-(dist*-1)) <= 90 and (360-(dist*-1)) >= 0 and ai.selfSpeed() > 0):
-    ai.turnLeft(1)
-    print("turning left")
-  elif((360-(dist*-1)) >= -90 and (360-(dist*-1)) <= 0 and ai.selfSpeed() > 0):
-    ai.turnRight(1)
-    print("turning right")
-  elif(dist >= -90 and dist <= 0 and ai.selfSpeed() > 0):
+  elif(dist2 <= 130 and dist2 >= 0 and ai.selfSpeed() > 0 and max_risk >= 40):
     ai.turnRight(1)
     print("turning right")
   elif(ai.selfSpeed() <= 10):
     ai.thrust(1)
     print("thrust")
-  elif(trackWall <= 100):
+  elif(trackWall <= 150 and dist):
     ai.thrust(1)
+    print("thrust")
+  elif enemyDist <= 500 and heading > (head):
+    ai.turnRight(1)
+    ai.fireShot()
+  elif enemyDist <= 500 and heading < (head):
+    ai.turnLeft(1)
+    ai.fireShot()
   else:
+    print("chilling")
+    ai.thrust(0)
     ai.fireShot()
   ### Turning Rules ###
   #if frontWall <= 200 and (left45Wall < right45Wall): 
