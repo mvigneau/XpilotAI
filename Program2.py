@@ -85,10 +85,10 @@ def AI_loop():
   elif(trackWall <= 150 and dist):
     ai.thrust(1)
     #print("thrust")
-  elif enemyDist <= 500 and heading > (head) and enemyDist != 0:
+  elif(enemyDist <= 500 and heading > (head) and enemyDist != 0 and max_risk <= 40):
     ai.turnRight(1)
     ai.fireShot()
-  elif enemyDist <= 500 and heading < (head) and enemyDist != 0:
+  elif(enemyDist <= 500 and heading < (head) and enemyDist != 0 and max_risk <= 40):
     ai.turnLeft(1)
     ai.fireShot()
   else:
@@ -98,4 +98,4 @@ def AI_loop():
   
   
 
-ai.start(AI_loop,["-name","Dubster","-join","localhost"])
+ai.start(AI_loop,["-name","Dubster","-join","cc8418"])

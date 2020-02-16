@@ -75,4 +75,4 @@ def AI_loop():
   
   
 
-ai.start(AI_loop,["-name","Dubster","-join","localhost"])
+ai.start(AI_loop,["-name","Dubster","-join","cc8418"])
