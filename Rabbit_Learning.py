@@ -4,7 +4,7 @@ from Rabbit_GA import *
 
 global population
 
-def AI_loop():
+def AI_loop(population):
   #global population
   #Release keys
   ai.thrust(0)
