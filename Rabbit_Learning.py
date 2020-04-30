@@ -9,6 +9,7 @@ mutation_prob = 0.01
 chromosome_size = 13
 fitness_target = 20
 population = init_population(population_size, chromosome_size)
+count_frame = 0
 
 def AI_loop():
   #Release keys
@@ -29,8 +30,6 @@ def AI_loop():
     speedAlert = current_chromosome[9:13]
     speedAlertValue = transform(speedAlert, 1)
     print("speedAlertValue", speedAlertValue)
-
-    count_frame = 0
 
     #Set variables
     heading = int(ai.selfHeadingDeg())
