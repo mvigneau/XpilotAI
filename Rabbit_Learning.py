@@ -106,10 +106,10 @@ def AI_loop():
     ai.thrust(0)
 
   if ai.selfAlive() == 1: 
-    count_frame += 1
+     print(count_frame += 1)
 
-  else:
-    print(count_frame)
+  # else:
+  #   print(count_frame)
 # def main():
   ### Setting Up GA ###
   # population_size = 1
