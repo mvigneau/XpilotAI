@@ -3,7 +3,7 @@ import libpyAI as ai
 from Rabbit_GA import * 
 
 def AI_loop():
-  global population
+  #global population
   #Release keys
   ai.thrust(0)
   ai.turnLeft(0)
@@ -105,7 +105,7 @@ def main():
   mutation_prob = 0.01
   chromosome_size = 13
   fitness_target = 20
-  population = init_population(population_size, chromosome_size)
+  global population = init_population(population_size, chromosome_size)
   count_frame = 0
   ai.start(AI_loop,["-name","Rabbit","-join","localhost"])
 
