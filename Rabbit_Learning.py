@@ -2,8 +2,6 @@
 import libpyAI as ai
 from Rabbit_GA import * 
 
-global population
-
 ### Setting Up GA ###
 population_size = 1
 crossover_prob = 0.7
@@ -15,12 +13,12 @@ count_frame = 0
 
 
 def AI_loop():
-  #global population
+
   #Release keys
   ai.thrust(0)
   ai.turnLeft(0)
   ai.turnRight(0)
-
+  print(ai)
   #for chrom in range(len(population)):
   chrom = 0
   print("pop", population)
