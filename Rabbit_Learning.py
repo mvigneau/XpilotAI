@@ -1,29 +1,33 @@
 ### Program 1 -- Mathieu Vigneault,  
 import libpyAI as ai
 from Rabbit_GA import * 
+
+### Setting Up GA ###
+population_size = 1
+crossover_prob = 0.7
+mutation_prob = 0.01
+chromosome_size = 13
+fitness_target = 20
+population = init_population(population_size, chromosome_size)
+
 def AI_loop():
   #Release keys
   ai.thrust(0)
   ai.turnLeft(0)
   ai.turnRight(0)
 
-  ### Setting Up GA ###
-  population_size = 1
-  crossover_prob = 0.7
-  mutation_prob = 0.01
-  chromosome_size = 13
-  fitness_target = 20
-
-  population = init_population(population_size, chromosome_size)
   print("pop", population)
   population[0]
   frontAlert = population[0][0:5]
   print("frontAlert", frontAlert)
   frontAlertValue = transform(frontAlert, 25)
+  print("frontAlertValue", frontAlertValue)
   backAlert = population[0][5:9]
   backAlertValue = transform(backAlert, 25)
+  print("backAlertValue", backAlertValue)
   speedAlert = population[0][9:13]
   speedAlertValue = transform(speedAlert, 1)
+  print("speedAlertValue", speedAlertValue)
 
 
   #Set variables

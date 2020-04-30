@@ -62,7 +62,7 @@ def AI_loop():
   enemyDist = ai.selfLockDist()
   #print(enemyDist)
   
-  print("max_risk: ", max_risk)
+  #print("max_risk: ", max_risk)
   #print("track_risk: ", track_risk)
   #print("heading: ", heading)
   
@@ -98,4 +98,4 @@ def AI_loop():
   
   
 
-ai.start(AI_loop,["-name","Dubster","-join","localhost"])
+ai.start(AI_loop,["-name", "Dubster", "-join", "136.244.227.81", "-port", "15350"])

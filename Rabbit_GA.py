@@ -134,47 +134,47 @@ def transform(gene, jump):
 
 
 
-def main():
+# def main():
 
-	### Initiate a population ###
-	population_list = init_population()
-	found = False
-	counter = 0 
-	data = []
-	while found == False:
-		### Get fitness of population ###
-		fitness_list = fitness(population_list)
-		### Check if fitness target is reached ###
-		result = check_fitness(fitness_list)
+# 	### Initiate a population ###
+# 	population_list = init_population()
+# 	found = False
+# 	counter = 0 
+# 	data = []
+# 	while found == False:
+# 		### Get fitness of population ###
+# 		fitness_list = fitness(population_list)
+# 		### Check if fitness target is reached ###
+# 		result = check_fitness(fitness_list)
 		
-		if counter % 10 == 0:
-			point = (counter, result)
-			data.append(point)
-			#print(data)
+# 		if counter % 10 == 0:
+# 			point = (counter, result)
+# 			data.append(point)
+# 			#print(data)
 
-		if result == fitness_target:
-			found = True
+# 		if result == fitness_target:
+# 			found = True
 
-		### Creating a new population ##
-		new_population = []
+# 		### Creating a new population ##
+# 		new_population = []
 
-		while(len(new_population) != population_size):
+# 		while(len(new_population) != population_size):
 
-			### Select a pair of chromosomes ###
-			new_population = select(population_list, fitness_list, new_population)
-			### Apply crossover on it ###
-			new_population = crossover(new_population)
+# 			### Select a pair of chromosomes ###
+# 			new_population = select(population_list, fitness_list, new_population)
+# 			### Apply crossover on it ###
+# 			new_population = crossover(new_population)
 
-		### Apply mutation to new population ###
-		new_population = mutate(new_population)
-		population_list = new_population
-		counter += 1
-	#print(new_population)
-	print(result)
-	zip(*data)
-	plt.scatter(*zip(*data))
-	plt.axis([0, len(data), 0, 21])
-	plt.show()
+# 		### Apply mutation to new population ###
+# 		new_population = mutate(new_population)
+# 		population_list = new_population
+# 		counter += 1
+# 	#print(new_population)
+# 	print(result)
+# 	zip(*data)
+# 	plt.scatter(*zip(*data))
+# 	plt.axis([0, len(data), 0, 21])
+# 	plt.show()
 	
 
-main()
+# main()
