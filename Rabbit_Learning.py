@@ -30,6 +30,7 @@ def AI_loop():
     speedAlertValue = transform(speedAlert, 1)
     print("speedAlertValue", speedAlertValue)
 
+    count_frame = 0
     while ai.selfAlive == 1:
 
       #Set variables
@@ -100,8 +101,9 @@ def AI_loop():
         print("chilling")
         ai.thrust(0)
 
+      count_frame += 1
 
-
+  print(count_frame)
 
 ai.start(AI_loop,["-name","Rabbit","-join","localhost"])
 
