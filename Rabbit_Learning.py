@@ -105,6 +105,6 @@ def AI_loop(population):
 
   print(count_frame)
 
-ai.start(AI_loop,["-name","Rabbit","-join","localhost"])
+ai.start(AI_loop(population),["-name","Rabbit","-join","localhost"])
 
   
