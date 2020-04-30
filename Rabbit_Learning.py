@@ -18,7 +18,7 @@ def AI_loop():
   ai.turnRight(0)
 
   #for chrom in range(len(population)):
-
+  chrom = 0
   print("pop", population)
   current_chromosome = population[chrom]
   print(current_chromosome)
