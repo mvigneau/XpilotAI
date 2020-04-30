@@ -66,6 +66,8 @@ def AI_loop():
   enemyDist = ai.selfLockDist()
   print(enemyDist)
   
+  if ai.selfAlive() == 1: 
+     print(count_frame = count_frame + 1)
   ### Turning Rules ###
   if frontWall <= frontAlertValue and (left45Wall < right45Wall): 
     print("turning right")
@@ -102,9 +104,6 @@ def AI_loop():
   else:
     print("chilling")
     ai.thrust(0)
-
-  if ai.selfAlive() == 1: 
-     print(count_frame = count_frame + 1)
 
   # else:
   #   print(count_frame)
