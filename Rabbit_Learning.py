@@ -17,7 +17,7 @@ def AI_loop():
   print("pop", population)
   population[0]
   frontAlert = population[0][0:5]
-  print("frontAlert"; frontAlert)
+  print("frontAlert", frontAlert)
   frontAlertValue = transform(frontAlert, 25)
   backAlert = population[0][5:9]
   backAlertValue = transform(backAlert, 25)
