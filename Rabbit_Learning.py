@@ -33,6 +33,11 @@ def AI_loop():
     count_frame = 0
     while ai.selfAlive == 1:
 
+      #Release keys
+      ai.thrust(0)
+      ai.turnLeft(0)
+      ai.turnRight(0)
+
       #Set variables
       heading = int(ai.selfHeadingDeg())
       tracking = int(ai.selfTrackingDeg())
