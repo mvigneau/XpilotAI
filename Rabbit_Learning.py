@@ -1,5 +1,6 @@
 ### Program 1 -- Mathieu Vigneault,  
 import libpyAI as ai
+from Rabbit_GA import * 
 def AI_loop():
   #Release keys
   ai.thrust(0)
