@@ -10,7 +10,7 @@ chromosome_size = 13
 fitness_target = 20
 population = init_population(population_size, chromosome_size)
 
-def AI_loop():
+def AI_loop(population):
   #Release keys
   ai.thrust(0)
   ai.turnLeft(0)
