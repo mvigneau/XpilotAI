@@ -4,7 +4,17 @@ from Rabbit_GA import *
 
 global population
 
-def AI_loop(population):
+### Setting Up GA ###
+population_size = 1
+crossover_prob = 0.7
+mutation_prob = 0.01
+chromosome_size = 13
+fitness_target = 20
+population = init_population(population_size, chromosome_size)
+count_frame = 0
+
+
+def AI_loop():
   #global population
   #Release keys
   ai.thrust(0)
@@ -100,17 +110,18 @@ def AI_loop(population):
 
   # else:
   #   print(count_frame)
-def main():
+# def main():
   ### Setting Up GA ###
-  population_size = 1
-  crossover_prob = 0.7
-  mutation_prob = 0.01
-  chromosome_size = 13
-  fitness_target = 20
-  population = init_population(population_size, chromosome_size)
-  count_frame = 0
-  ai.start(AI_loop,["-name","Rabbit","-join","localhost"])
+  # population_size = 1
+  # crossover_prob = 0.7
+  # mutation_prob = 0.01
+  # chromosome_size = 13
+  # fitness_target = 20
+  # population = init_population(population_size, chromosome_size)
+  # count_frame = 0
+  # ai.start(AI_loop,["-name","Rabbit","-join","localhost"])
 
-main()
+ai.start(AI_loop,["-name","Rabbit","-join","localhost"])
+
 
   
