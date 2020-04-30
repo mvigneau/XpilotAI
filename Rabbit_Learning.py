@@ -2,16 +2,7 @@
 import libpyAI as ai
 from Rabbit_GA import * 
 
-### Setting Up GA ###
-population_size = 1
-crossover_prob = 0.7
-mutation_prob = 0.01
-chromosome_size = 13
-fitness_target = 20
-population = init_population(population_size, chromosome_size)
-count_frame = 0
-
-def AI_loop():
+def AI_loop(population):
   #Release keys
   ai.thrust(0)
   ai.turnLeft(0)
@@ -106,7 +97,17 @@ def AI_loop():
 
   # else:
   #   print(count_frame)
+def main():
+  ### Setting Up GA ###
+  population_size = 1
+  crossover_prob = 0.7
+  mutation_prob = 0.01
+  chromosome_size = 13
+  fitness_target = 20
+  population = init_population(population_size, chromosome_size)
+  count_frame = 0
+  ai.start(AI_loop(population),["-name","Rabbit"])#,"-join","localhost"])
 
-ai.start(AI_loop(),["-name","Rabbit"])#,"-join","localhost"])
+main()
 
   
