@@ -8,7 +8,7 @@ def AI_loop():
   ai.thrust(0)
   ai.turnLeft(0)
   ai.turnRight(0)
-
+  print("hello")
   #for chrom in range(len(population)):
   chrom = 0
   print("pop", population)
