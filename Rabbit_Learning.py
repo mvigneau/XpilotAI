@@ -13,7 +13,7 @@ count_frame = 0
 
 
 def AI_loop():
-
+  global count_frame
   #Release keys
   ai.thrust(0)
   ai.turnLeft(0)
@@ -70,7 +70,6 @@ def AI_loop():
      print(count_frame)
   ### Turning Rules ###
   else:
-    global count_frame 
     count_frame += 1
     if ai.selfSpeed() == 0:
       ai.thrust(1)
