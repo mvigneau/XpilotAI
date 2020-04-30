@@ -44,7 +44,8 @@ def AI_loop():
     backWall = ai.wallFeeler(500,heading-180) 
     trackWall = ai.wallFeeler(500,tracking)
     
-    
+    print("hello")
+
     #######   Shooting Ennemies  ########
     ##Find the closest ennemy##
     ClosestID = ai.closestShipId()
