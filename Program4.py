@@ -1,4 +1,4 @@
-### Program 3 -- Mathieu Vigneault, ______ ###
+### Program 4 -- Mathieu Vigneault, ______ ###
 ### Date: 02-14-2020 ###
 ### This program uses fuzzy rules to determine the wall avoidance ###
 
