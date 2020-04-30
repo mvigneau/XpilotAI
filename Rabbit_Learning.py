@@ -9,15 +9,12 @@ mutation_prob = 0.01
 chromosome_size = 13
 fitness_target = 20
 population = init_population(population_size, chromosome_size)
-print("hello")
-
 
 def AI_loop():
   #Release keys
   ai.thrust(0)
   ai.turnLeft(0)
   ai.turnRight(0)
-  print("hello")
 
   for chrom in range(len(population)):
     print("pop", population)
@@ -34,79 +31,80 @@ def AI_loop():
     print("speedAlertValue", speedAlertValue)
 
     count_frame = 0
-    while (ai.selfAlive == 1):
 
-      #Set variables
-      heading = int(ai.selfHeadingDeg())
-      tracking = int(ai.selfTrackingDeg())
-      frontWall = ai.wallFeeler(500,heading)
-      left45Wall = ai.wallFeeler(500,heading+45)
-      right45Wall = ai.wallFeeler(500,heading-45)
-      left90Wall = ai.wallFeeler(500,heading+90)
-      right90Wall = ai.wallFeeler(500,heading-90)
-      left135Wall = ai.wallFeeler(500,heading+135)
-      right135Wall = ai.wallFeeler(500,heading-135)
-      backWall = ai.wallFeeler(500,heading-180) 
-      trackWall = ai.wallFeeler(500,tracking)
-      
-      
-      #######   Shooting Ennemies  ########
-      ##Find the closest ennemy##
-      ClosestID = ai.closestShipId()
-      #print(ClosestID)
-      ##Get the closest ennemy direction and speed##
-      ClosestSpeed = ai.enemySpeedId(ClosestID)
-      #print(ClosestSpeed)
-      ClosestDir = ai.enemyTrackingDegId(ClosestID)
-      #print(ClosestDir)
-      ## Get the lockheadingdeg ##
-      enemy = ai.lockNext()
-      print(enemy)
-      head = ai.lockHeadingDeg()
-      print(head)
-      enemyDist = ai.selfLockDist()
-      print(enemyDist)
-      
-      ### Turning Rules ###
-      if frontWall <= frontAlertValue and (left45Wall < right45Wall): 
-        print("turning right")
-        ai.turnRight(1)
-      elif frontWall <= frontAlertValue and (left45Wall > right45Wall):
-        ai.turnLeft(1)
-      elif left90Wall <= frontAlertValue:
-        print("turning right")
-        ai.turnRight(1) 
-      elif right90Wall <= frontAlertValue:
-        print("turning left")
-        ai.turnLeft(1)
-      ### Thrust commands ####
-      elif ai.selfSpeed() <= speedAlertValue and (frontWall >= frontAlertValue) and (left45Wall >= frontAlertValue) and (right45Wall >= frontAlertValue) and (right90Wall >= frontAlertValue) and (left90Wall >= frontAlertValue) and (left135Wall >= backAlertValue) and (right135Wall >= backAlertValue) and (backWall >= backAlertValue):
-        print("go forward")
-        ai.thrust(1)
-      elif trackWall < 75 and ai.selfSpeed() >= speedAlertValue:
-        ai.thrust(1)
-      elif trackWall < 50 and ai.selfSpeed() <= speedAlertValue:
-        ai.thrust(1)
-      elif backWall <= 75:
-        ai.thrust(1)  
-      elif left135Wall <= 75:
-        ai.thrust(1)
-      elif right135Wall <= 75:
-        ai.thrust(1)
-      ##### Shooting Ennemy Commands #####
-      elif enemyDist <= 500 and heading > (head):
-        ai.turnRight(1)
-        ai.fireShot()
-      elif enemyDist <= 500 and heading < (head):
-        ai.turnLeft(1)
-        ai.fireShot()
-      else:
-        print("chilling")
-        ai.thrust(0)
-
-      count_frame += 1
+    #Set variables
+    heading = int(ai.selfHeadingDeg())
+    tracking = int(ai.selfTrackingDeg())
+    frontWall = ai.wallFeeler(500,heading)
+    left45Wall = ai.wallFeeler(500,heading+45)
+    right45Wall = ai.wallFeeler(500,heading-45)
+    left90Wall = ai.wallFeeler(500,heading+90)
+    right90Wall = ai.wallFeeler(500,heading-90)
+    left135Wall = ai.wallFeeler(500,heading+135)
+    right135Wall = ai.wallFeeler(500,heading-135)
+    backWall = ai.wallFeeler(500,heading-180) 
+    trackWall = ai.wallFeeler(500,tracking)
     
-    print(count_frame)
+    
+    #######   Shooting Ennemies  ########
+    ##Find the closest ennemy##
+    ClosestID = ai.closestShipId()
+    #print(ClosestID)
+    ##Get the closest ennemy direction and speed##
+    ClosestSpeed = ai.enemySpeedId(ClosestID)
+    #print(ClosestSpeed)
+    ClosestDir = ai.enemyTrackingDegId(ClosestID)
+    #print(ClosestDir)
+    ## Get the lockheadingdeg ##
+    enemy = ai.lockNext()
+    print(enemy)
+    head = ai.lockHeadingDeg()
+    print(head)
+    enemyDist = ai.selfLockDist()
+    print(enemyDist)
+    
+    ### Turning Rules ###
+    if frontWall <= frontAlertValue and (left45Wall < right45Wall): 
+      print("turning right")
+      ai.turnRight(1)
+    elif frontWall <= frontAlertValue and (left45Wall > right45Wall):
+      ai.turnLeft(1)
+    elif left90Wall <= frontAlertValue:
+      print("turning right")
+      ai.turnRight(1) 
+    elif right90Wall <= frontAlertValue:
+      print("turning left")
+      ai.turnLeft(1)
+    ### Thrust commands ####
+    elif ai.selfSpeed() <= speedAlertValue and (frontWall >= frontAlertValue) and (left45Wall >= frontAlertValue) and (right45Wall >= frontAlertValue) and (right90Wall >= frontAlertValue) and (left90Wall >= frontAlertValue) and (left135Wall >= backAlertValue) and (right135Wall >= backAlertValue) and (backWall >= backAlertValue):
+      print("go forward")
+      ai.thrust(1)
+    elif trackWall < 75 and ai.selfSpeed() >= speedAlertValue:
+      ai.thrust(1)
+    elif trackWall < 50 and ai.selfSpeed() <= speedAlertValue:
+      ai.thrust(1)
+    elif backWall <= 75:
+      ai.thrust(1)  
+    elif left135Wall <= 75:
+      ai.thrust(1)
+    elif right135Wall <= 75:
+      ai.thrust(1)
+    ##### Shooting Ennemy Commands #####
+    elif enemyDist <= 500 and heading > (head):
+      ai.turnRight(1)
+      ai.fireShot()
+    elif enemyDist <= 500 and heading < (head):
+      ai.turnLeft(1)
+      ai.fireShot()
+    else:
+      print("chilling")
+      ai.thrust(0)
+
+    if ai.selfAlive() == 1: 
+      count_frame += 1
+
+    else:
+      print(count_frame)
 
 ai.start(AI_loop(),["-name","Rabbit","-join","localhost"])
 
