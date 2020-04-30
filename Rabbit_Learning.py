@@ -70,6 +70,7 @@ def AI_loop():
      print(count_frame)
   ### Turning Rules ###
   else:
+    count_frame += 1
     if ai.selfSpeed() == 0:
       ai.thrust(1)
     elif frontWall <= frontAlertValue and (left45Wall < right45Wall): 
