@@ -15,6 +15,7 @@ def AI_loop(population):
   ai.thrust(0)
   ai.turnLeft(0)
   ai.turnRight(0)
+  print("hello")
 
   for chrom in range(len(population)):
     print("pop", population)
