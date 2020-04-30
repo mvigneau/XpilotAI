@@ -101,11 +101,11 @@ def AI_loop():
     print("chilling")
     ai.thrust(0)
 
-  if ai.selfAlive() == 1: 
-    count_frame += 1
+  # if ai.selfAlive() == 1: 
+  #   count_frame += 1
 
-  else:
-    print(count_frame)
+  # else:
+  #   print(count_frame)
 
 ai.start(AI_loop(),["-name","Rabbit","-join","localhost"])
 
