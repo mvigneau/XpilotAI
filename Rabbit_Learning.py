@@ -103,12 +103,12 @@ def AI_loop():
     elif enemyDist <= 500 and heading < (head):
       ai.turnLeft(1)
       ai.fireShot()
-    elif ai.selfSpeed():
+    elif ai.selfSpeed() == 0:
       ai.thrust(1)
     else:
       print("chilling")
       ai.thrust(0)
-      
+
     count_frame += 1
 
     # count_frame += 1
