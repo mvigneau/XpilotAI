@@ -20,6 +20,7 @@ def AI_loop():
   for chrom in range(len(population)):
     print("pop", population)
     current_chromosome = population[chrom]
+    print(current_chromosome)
     frontAlert = current_chromosome[0:5]
     print("frontAlert", frontAlert)
     frontAlertValue = transform(frontAlert, 25)
@@ -44,7 +45,7 @@ def AI_loop():
     backWall = ai.wallFeeler(500,heading-180) 
     trackWall = ai.wallFeeler(500,tracking)
     
-    
+
     #######   Shooting Ennemies  ########
     ##Find the closest ennemy##
     ClosestID = ai.closestShipId()
