@@ -71,15 +71,15 @@ def AI_loop():
   ### Turning Rules ###
   else:
 
-    if frontWall <= frontAlertValue and (left45Wall < right45Wall): 
+    if frontWall <= frontAlertValue and (left45Wall < right45Wall) and ai.selfSpeed() != 0: 
       print("turning right")
       ai.turnRight(1)
-    elif frontWall <= frontAlertValue and (left45Wall > right45Wall):
+    elif frontWall <= frontAlertValue and (left45Wall > right45Wall) and ai.selfSpeed() != 0:
       ai.turnLeft(1)
-    elif left90Wall <= frontAlertValue:
+    elif left90Wall <= frontAlertValue and ai.selfSpeed() != 0:
       print("turning right")
       ai.turnRight(1) 
-    elif right90Wall <= frontAlertValue:
+    elif right90Wall <= frontAlertValue and ai.selfSpeed() != 0:
       print("turning left")
       ai.turnLeft(1)
     ### Thrust commands ####
