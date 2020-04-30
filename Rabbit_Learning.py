@@ -106,7 +106,7 @@ def AI_loop():
     ai.thrust(0)
 
   if ai.selfAlive() == 1: 
-     print(count_frame += 1)
+     print(count_frame = count_frame + 1)
 
   # else:
   #   print(count_frame)
