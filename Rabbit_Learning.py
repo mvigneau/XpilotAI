@@ -81,13 +81,13 @@ def AI_loop():
       print(fitness_list)
       ## Select Next Generation -- Apply Crossover & Mutation ##
       new_population = select(population, fitness_list)
-      #print(new_population)
+      print"new",new_population)
       new_population = crossover(new_population, chromosome_size, population_size, crossover_prob)
-      #print(new_population)
+      print("crossover", new_population)
       new_population = mutate(new_population, mutation_prob)
-      print(new_population)
+      print("mutate", new_population)
       population = new_population
-      print(population)
+      print("population", population)
       loop = 0
       count_frame = 0
       fitness_list.clear()
