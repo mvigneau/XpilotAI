@@ -130,10 +130,10 @@ def AI_loop():
       elif right135Wall <= 75:
         ai.thrust(1)
       ##### Shooting Ennemy Commands #####
-      elif enemyDist <= 500 and heading > (head):
+      elif enemyDist <= 500 and heading > (head) and ai.selfSpeed() > 4:
         ai.turnRight(1)
         ai.fireShot()
-      elif enemyDist <= 500 and heading < (head):
+      elif enemyDist <= 500 and heading < (head) and ai.selfSpeed() > 4:
         ai.turnLeft(1)
         ai.fireShot()
       elif ai.selfSpeed() < 4:
