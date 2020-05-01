@@ -98,7 +98,6 @@ def crossover(new_population, chromosome_size, population_size, crossover_prob):
 	return new_population
 
 def mutate(new_population, mutation_prob):
-	#print(new_population)
 	
 	for i in range(len(new_population)):
 		for j in range(chromosome_size):
