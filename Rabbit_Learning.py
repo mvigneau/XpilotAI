@@ -97,7 +97,7 @@ def AI_loop():
       count_frame = 0
       fitness_list.clear()
       if generation == generation_size:
-        break;
+        print("Done")
       #print("yes")
     else:   
       loop += 1 
