@@ -142,6 +142,7 @@ def transform_fuzzy(gene, jump, start, end):
 			if (gene[i] == 1):
 				current_value += (jump * (2**(i)))
 		threshold = current_value
+		print(threshold)
 
 	value += current_value
 	
