@@ -63,8 +63,8 @@ def crossover(new_population, chromosome_size, population_size, crossover_prob):
 	#print(new_population)
 	storage = []
 	num_time = population_size // 2
-	print(num_time)
 	for half in range(num_time):
+		print(half)
 		random_number = randint(1, 100)
 		if random_number <= (crossover_prob * 100):
 			parent1 = randrange(0, len(new_population))
@@ -92,7 +92,7 @@ def crossover(new_population, chromosome_size, population_size, crossover_prob):
 			new_population.pop(parent2)
 
 			storage.append(chromosome1)
-			sttorage.append(chromosome2)
+			storage.append(chromosome2)
 
 	for num in range(len(storage)):
 		new_population.append(storage[num])
