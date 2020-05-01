@@ -1,6 +1,6 @@
 ### Mathieu Vigneault
-### 03-23-2020
-### Here is my genetic algorithm it eventually finds the answer
+### 05-1-2020
+### Here is some function for a genetic algorithm
 ### but it is a bit too long at my taste, might be due to selection
 ### process not strict enough ... will fix it soon
 
@@ -8,7 +8,7 @@ from random import *
 import matplotlib.pyplot as plt
 
 
-## Initialize population & Fitness Score##
+## Initialize population given a population size and a chrosomone size ##
 def init_population(population_size, chromosome_size):
 	population_list = []
 	for i in range(population_size):
@@ -22,24 +22,25 @@ def init_population(population_size, chromosome_size):
 	
 	return population_list
 
-
+## Calculate the Fitness on an agent based on survival time, death reault and kill result ##
 def fitness(chromosome, frames, score_previous, score_current):
 
 	value = 0
 	if(abs(score_previous - score_current) == 3.4):
 		value -= 20
 	elif((score_current - score_previous) > 0):
-		value += 500
+		value += 50
 	else:
-		value -= 10
+		value -= 20
 
 	value += frames
 	return value
 
-## Selection Process ## 
+## Selection Process based on the fitness of the individuals ##
+## Higher fitness has a higher chance of reproducing to the next generation ##  
 def select(population, fitness_list):
 	
-	## Calculate Sum of Total Fitness of Entire Population##
+	## Calculate Sum of Total Fitness of Entire Population ##
 	total = 0 
 	for i in range(len(fitness_list)):
 		total += fitness_list[i]
@@ -50,7 +51,7 @@ def select(population, fitness_list):
 		prob = float(fitness_list[j]) / total
 		probability_list.append(prob)
 
-	## repeat these step until you fill up entire new population ##
+	## Repeat these step until you fill up entire new population ##
 	new_population = []
 	for popsize in range(len(population)):
 		## Select A Chromosome ##

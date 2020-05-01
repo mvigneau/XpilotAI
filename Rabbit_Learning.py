@@ -4,10 +4,10 @@ import statistics
 from Rabbit_GA import * 
 
 ### Setting Up GA ###
-population_size = 16
-crossover_prob = 0.5
+population_size = 2
+crossover_prob = 0.7
 mutation_prob = 0.01
-chromosome_size = 13
+chromosome_size = 26
 fitness_target = 20
 population = init_population(population_size, chromosome_size)
 count_frame = 0
@@ -36,8 +36,17 @@ def AI_loop():
   backAlert = current_chromosome[5:9]
   backAlertValue = transform(backAlert, 25)
   #print("backAlertValue", backAlertValue)
-  speedAlert = current_chromosome[9:13]
-  speedAlertValue = transform(speedAlert, 1)
+  speedAlert = current_chromosome[9:13]                 #4 bits
+  speedAlertValue = transform(speedAlert, 1)            #1 jumps per value
+  #print("speedAlertValue", speedAlertValue)
+  EnemyAlert = current_chromosome[13:18]                #5 bits
+  EnemyAlertValue = transform(EnemyAlert, 50)           #50 jumps per value
+  #print("speedAlertValue", speedAlertValue)
+  TrackSlowAlert = current_chromosome[18:22]            #4 bits
+  TrackSlowAlertValue = transform(TrackSlowAlert, 25)   #25 jumps per value
+  #print("speedAlertValue", speedAlertValue)
+  TrackFastAlert = current_chromosome[22:26]            #4 bits 
+  TrackFastAlertValue = transform(TrackFastAlert, 25)   #25 jumps per value
   #print("speedAlertValue", speedAlertValue)
 
 
@@ -109,39 +118,45 @@ def AI_loop():
 
     if(ai.selfAlive() == 1):
       
-      if frontWall <= frontAlertValue and (left45Wall < right45Wall) and ai.selfSpeed() > 4: 
+      if frontWall <= frontAlertValue and (left45Wall < right45Wall) and ai.selfSpeed() > speedAlertValue: 
         #print("turning right")
         ai.turnRight(1)
-      elif frontWall <= frontAlertValue and (left45Wall > right45Wall) and ai.selfSpeed() > 4:
+      elif frontWall <= frontAlertValue and (left45Wall > right45Wall) and ai.selfSpeed() > speedAlertValue:
         ai.turnLeft(1)
-      elif left90Wall <= frontAlertValue and ai.selfSpeed() > 4:
+      elif left90Wall <= frontAlertValue and ai.selfSpeed() > speedAlertValue:
         #print("turning right")
         ai.turnRight(1) 
-      elif right90Wall <= frontAlertValue and ai.selfSpeed() > 4:
+      elif right90Wall <= frontAlertValue and ai.selfSpeed() > speedAlertValue:
         #print("turning left")
         ai.turnLeft(1)
       ### Thrust commands ####
       elif ai.selfSpeed() <= speedAlertValue and (frontWall >= frontAlertValue) and (left45Wall >= frontAlertValue) and (right45Wall >= frontAlertValue) and (right90Wall >= frontAlertValue) and (left90Wall >= frontAlertValue) and (left135Wall >= backAlertValue) and (right135Wall >= backAlertValue) and (backWall >= backAlertValue):
         #print("go forward")
         ai.thrust(1)
-      elif trackWall < 75 and ai.selfSpeed() >= speedAlertValue:
+      elif trackWall <= TrackFastAlertValue and ai.selfSpeed() >= speedAlertValue:
         ai.thrust(1)
-      elif trackWall < 50 and ai.selfSpeed() <= speedAlertValue:
+      elif trackWall <= TrackSlowAlertValue and ai.selfSpeed() <= speedAlertValue:
         ai.thrust(1)
-      elif backWall <= 75:
+      elif backWall <= TrackFastAlertValue and ai.selfSpeed() >= speedAlertValue:
+        ai.thrust(1)
+      elif backWall <= TrackSlowAlertValue and ai.selfSpeed() <= speedAlertValue:
         ai.thrust(1)  
-      elif left135Wall <= 75:
+      elif left135Wall <= TrackFastAlertValue and ai.selfSpeed() >= speedAlertValue::
         ai.thrust(1)
-      elif right135Wall <= 75:
+      elif left135Wall <= TrackSlowAlertValue and ai.selfSpeed() <= speedAlertValue::
+        ai.thrust(1)
+      elif right135Wall <= TrackFastAlertValue and ai.selfSpeed() >= speedAlertValue::
+        ai.thrust(1)
+      elif right135Wall <= TrackSlowAlertValue and ai.selfSpeed() <= speedAlertValue::
         ai.thrust(1)
       ##### Shooting Ennemy Commands #####
-      elif enemyDist <= 500 and heading > (head) and ai.selfSpeed() > 4:
+      elif enemyDist <= EnemyAlertValue and heading > (head) and ai.selfSpeed() > speedAlertValue:
         ai.turnRight(1)
         ai.fireShot()
-      elif enemyDist <= 500 and heading < (head) and ai.selfSpeed() > 4:
+      elif enemyDist <= EnemyAlertValue and heading < (head) and ai.selfSpeed() > speedAlertValue:
         ai.turnLeft(1)
         ai.fireShot()
-      elif ai.selfSpeed() < 4:
+      elif ai.selfSpeed() < speedAlertValue:
         ai.thrust(1)
       else:
         #print("chilling")
