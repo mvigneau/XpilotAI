@@ -16,7 +16,7 @@ fitness_list = []
 score = 0
 
 def AI_loop():
-  global count_frame, loop, boolean, score, population_size, population, mutation_prob
+  global count_frame, loop, boolean, score, population_size, chromosome_size, population, mutation_prob
   #Release keys
   ai.thrust(0)
   ai.turnLeft(0)
