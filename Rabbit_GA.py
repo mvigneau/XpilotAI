@@ -110,7 +110,7 @@ def mutate(new_population, mutation_prob):
 				else:
 					new_population[i][j] = 0
 				#print(new_population[i][0][j])
-	#print(new_population)
+	print(new_population)
 	return new_population 
 
 
