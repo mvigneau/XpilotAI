@@ -85,46 +85,49 @@ def AI_loop():
   ### Turning Rules ###
   else:
 
-    boolean = False
-    if frontWall <= frontAlertValue and (left45Wall < right45Wall) and ai.selfSpeed() != 0: 
-      #print("turning right")
-      ai.turnRight(1)
-    elif frontWall <= frontAlertValue and (left45Wall > right45Wall) and ai.selfSpeed() != 0:
-      ai.turnLeft(1)
-    elif left90Wall <= frontAlertValue and ai.selfSpeed() != 0:
-      #print("turning right")
-      ai.turnRight(1) 
-    elif right90Wall <= frontAlertValue and ai.selfSpeed() != 0:
-      #print("turning left")
-      ai.turnLeft(1)
-    ### Thrust commands ####
-    elif ai.selfSpeed() <= speedAlertValue and (frontWall >= frontAlertValue) and (left45Wall >= frontAlertValue) and (right45Wall >= frontAlertValue) and (right90Wall >= frontAlertValue) and (left90Wall >= frontAlertValue) and (left135Wall >= backAlertValue) and (right135Wall >= backAlertValue) and (backWall >= backAlertValue):
-      #print("go forward")
-      ai.thrust(1)
-    elif trackWall < 75 and ai.selfSpeed() >= speedAlertValue:
-      ai.thrust(1)
-    elif trackWall < 50 and ai.selfSpeed() <= speedAlertValue:
-      ai.thrust(1)
-    elif backWall <= 75:
-      ai.thrust(1)  
-    elif left135Wall <= 75:
-      ai.thrust(1)
-    elif right135Wall <= 75:
-      ai.thrust(1)
-    ##### Shooting Ennemy Commands #####
-    elif enemyDist <= 500 and heading > (head):
-      ai.turnRight(1)
-      ai.fireShot()
-    elif enemyDist <= 500 and heading < (head):
-      ai.turnLeft(1)
-      ai.fireShot()
-    elif ai.selfSpeed() == 0:
-      ai.thrust(1)
-    else:
-      #print("chilling")
-      ai.thrust(0)
+    if(ai.selfAlive() == 1):
+      
+      if frontWall <= frontAlertValue and (left45Wall < right45Wall) and ai.selfSpeed() != 0: 
+        #print("turning right")
+        ai.turnRight(1)
+      elif frontWall <= frontAlertValue and (left45Wall > right45Wall) and ai.selfSpeed() != 0:
+        ai.turnLeft(1)
+      elif left90Wall <= frontAlertValue and ai.selfSpeed() != 0:
+        #print("turning right")
+        ai.turnRight(1) 
+      elif right90Wall <= frontAlertValue and ai.selfSpeed() != 0:
+        #print("turning left")
+        ai.turnLeft(1)
+      ### Thrust commands ####
+      elif ai.selfSpeed() <= speedAlertValue and (frontWall >= frontAlertValue) and (left45Wall >= frontAlertValue) and (right45Wall >= frontAlertValue) and (right90Wall >= frontAlertValue) and (left90Wall >= frontAlertValue) and (left135Wall >= backAlertValue) and (right135Wall >= backAlertValue) and (backWall >= backAlertValue):
+        #print("go forward")
+        ai.thrust(1)
+      elif trackWall < 75 and ai.selfSpeed() >= speedAlertValue:
+        ai.thrust(1)
+      elif trackWall < 50 and ai.selfSpeed() <= speedAlertValue:
+        ai.thrust(1)
+      elif backWall <= 75:
+        ai.thrust(1)  
+      elif left135Wall <= 75:
+        ai.thrust(1)
+      elif right135Wall <= 75:
+        ai.thrust(1)
+      ##### Shooting Ennemy Commands #####
+      elif enemyDist <= 500 and heading > (head):
+        ai.turnRight(1)
+        ai.fireShot()
+      elif enemyDist <= 500 and heading < (head):
+        ai.turnLeft(1)
+        ai.fireShot()
+      elif ai.selfSpeed() == 0:
+        ai.thrust(1)
+      else:
+        #print("chilling")
+        ai.thrust(0)
 
-    count_frame += 1
+      count_frame += 1
+      boolean = False
+
 
     # count_frame += 1
   # else:
