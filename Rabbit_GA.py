@@ -69,7 +69,7 @@ def crossover(new_population, chromosome_size, population_size, crossover_prob):
 			parent2 = randrange(0, len(new_population))
 			chrom = randrange(0,2)
 			spot = randrange(0,chromosome_size)
-			print(chrom, spot)
+			print(chrom, spot, parent1, parent2)
 
 			if chrom == 0:
 				chromosome1_part1 = new_population[parent1][:spot]
@@ -82,6 +82,7 @@ def crossover(new_population, chromosome_size, population_size, crossover_prob):
 				chromosome2_part1 = new_population[parent1][:spot]
 				chromosome2_part2 = new_population[parent2][spot:]
 
+			print("made it out")
 			chromosome1 = chromosome1_part1 + chromosome1_part2
 			chromosome2 = chromosome2_part1 + chromosome2_part2
 			
