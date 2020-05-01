@@ -40,36 +40,30 @@ def fitness(chromosome, frames, score_previous, score_current):
 	value += frames
 	return value
 
-def check_fitness(fitness_list):
-
-	maximum = 0
-	for i in range(len(fitness_list)):
-		if fitness_list[i] == fitness_target:
-			return fitness_target
-		else: 
-			if fitness_list[i] > maximum:
-				maximum = fitness_list[i]
-	return maximum
-
 ## Selection Process ## 
-def select(population_list, fitness_list, new_population):
-	#print(new_population)
+def select(population, population_size, fitness_list):
 	
+	new_population = []
+	
+	## Calculate Sum of Total Fitness of Entire Population##
 	total = 0 
 	for i in range(len(fitness_list)):
 		total += fitness_list[i]
 
+	## Calculate Probability to Select Each Individual ##
 	probability_list = []
 	for j in range(len(fitness_list)):
 		prob = float(fitness_list[j]) / total
 		probability_list.append(prob)
 
-	## Select a pair of chromosomes ##
-	selection1 = choices(population_list, probability_list)
-	selection2 = choices(population_list, probability_list)
+	## repeat these step until you fill up entire new population ##
+	for popsize in range(population_size):
+		## Select A Chromosome ##
+		selection = choices(population_list, probability_list)
 	
-	new_population.append(selection1[0])
-	new_population.append(selection2[0])
+		## Add Selected Chromosome to New Population ##
+		new_population.append(selection);
+
 	return new_population
 
 def crossover(new_population):

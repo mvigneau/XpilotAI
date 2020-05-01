@@ -16,7 +16,7 @@ fitness_list = []
 score = 0
 
 def AI_loop():
-  global count_frame, loop, boolean, score, population_size
+  global count_frame, loop, boolean, score, population_size, population
   #Release keys
   ai.thrust(0)
   ai.turnLeft(0)
@@ -71,13 +71,16 @@ def AI_loop():
   
   if(ai.selfAlive() == 0 and boolean == False): 
 
-    ## calculate fitness ##
+    ## Calculate Fitness Current Population ##
     score_previous = score
     score_current = ai.selfScore()
     fitness_value = fitness(population, count_frame, score_previous, score_current)
     fitness_list.append(fitness_value)
 
     if((loop+1) == population_size):
+      ## Select Next Generation ##
+      new_population = select(population, population_size, fitness_list)
+      print(new_population)
       loop = 0
       count_frame = 0
       print(fitness_list)
