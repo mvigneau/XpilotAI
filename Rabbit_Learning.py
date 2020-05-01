@@ -160,7 +160,7 @@ def AI_loop():
   # count_frame = 0
   # ai.start(AI_loop,["-name","Rabbit","-join","localhost"])
 
-ai.headlessMode()
+#ai.headlessMode()
 ai.start(AI_loop,["-name","Rabbit","-join","localhost"])
 
 
