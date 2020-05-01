@@ -4,7 +4,7 @@ import statistics
 from Rabbit_GA import * 
 
 ### Setting Up GA ###
-population_size = 4
+population_size = 16
 crossover_prob = 0.5
 mutation_prob = 0.01
 chromosome_size = 13
