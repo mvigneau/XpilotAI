@@ -55,7 +55,7 @@ def select(population, population_size, fitness_list):
 		selection = choices(population, probability_list)
 	
 		## Add Selected Chromosome to New Population ##
-		new_population.append(selection);
+		new_population.append(selection)
 
 	return new_population
 
