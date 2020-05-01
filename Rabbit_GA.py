@@ -35,7 +35,7 @@ def fitness(chromosome, frames, score_previous, score_current):
 	return value
 
 ## Selection Process ## 
-def select(population, population_size, fitness_list):
+def select(population, fitness_list):
 	
 	## Calculate Sum of Total Fitness of Entire Population##
 	total = 0 
