@@ -80,14 +80,14 @@ def AI_loop():
     if((loop+1) == population_size):
       print(fitness_list)
       ## Select Next Generation ##
-      new_population = select(population, population_size, fitness_list)
+      new_population = select(population, fitness_list)
       print(new_population)
       new_population = crossover(new_population, chromosome_size, population_size, crossover_prob)
-      print(new_population)
+      #print(new_population)
       new_population = mutate(new_population, mutation_prob)
-      print(new_population)
+      #print(new_population)
       population = new_population
-      print(population)
+      #print(population)
       loop = 0
       count_frame = 0
       fitness_list.clear()
