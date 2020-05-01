@@ -67,6 +67,8 @@ def crossover(new_population, chromosome_size, population_size, crossover_prob):
 		if random_number <= (crossover_prob * 100):
 			parent1 = randrange(0, len(new_population))
 			parent2 = randrange(0, len(new_population))
+			while(parent1 == parent2):
+				parent2 = randrange(0, len(new_population))
 			chrom = randrange(0,2)
 			spot = randrange(0,chromosome_size)
 			print(chrom, spot, parent1, parent2)
@@ -82,18 +84,19 @@ def crossover(new_population, chromosome_size, population_size, crossover_prob):
 				chromosome2_part1 = new_population[parent1][:spot]
 				chromosome2_part2 = new_population[parent2][spot:]
 
-			print("made it out")
 			chromosome1 = chromosome1_part1 + chromosome1_part2
 			chromosome2 = chromosome2_part1 + chromosome2_part2
 			
-			print(new_population.pop(parent1))
-			new_population.pop(parent1)
-			print(new_population.pop(parent2))
-			new_population.pop(parent2)
+			if(parent1 < parent2):
+				new_population.pop(parent1)
+				new_population.pop(parent2-1)
+			else:
+				new_population.pop(parent2)
+				new_population.pop(parent1-1)
 
 			storage.append(chromosome1)
 			storage.append(chromosome2)
-	print("yep")
+
 	for num in range(len(storage)):
 		print(storage[num])
 		new_population.append(storage[num])
