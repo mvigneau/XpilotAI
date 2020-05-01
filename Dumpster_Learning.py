@@ -2,8 +2,8 @@
 ### Date: 02-14-2020 ###
 ### This program uses fuzzy rules to determine the wall avoidance ###
 import libpyAI as ai
-from Dumbster_Fuzzy import *
-from Dumbster_GA import *
+from Dumpster_Fuzzy import *
+from Dumpster_GA import *
 
 ### Setting Up GA ###
 population_size = 32
