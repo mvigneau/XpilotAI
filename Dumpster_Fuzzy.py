@@ -59,17 +59,19 @@ def Fuzzy_Speed(Closing_rate, closingRate_SlowTopAlertValue, closingRate_SlowBot
 	return (Membership_Slow, Membership_Medium, Membership_Fast)
 
 ## Give a degree of membership for ditance; close or far ##
-def Fuzzy_Distance(Distance):	
+def Fuzzy_Distance(Distance, Distance_CloseTopAlertValue, Distance_CloseBottomAlertValue, Distance_FarBottomAlertValue, Distance_FarTopAlertValue):	
+	
 	## Step 2 -- Distance; close or far ##
 	Distance_Close = 0
 	Distance_Far = 0
-	if(Distance <= 300):
+
+	if(Distance <= Distance_CloseTopAlertValue):
 		Distance_Close = 1
-	if(Distance > 300 and Distance < 500):
-		Distance_Close = round(-0.005 * Distance + 2.5,3)
-	if(Distance > 300 and Distance < 500):
-		Distance_Far = round(0.005 * Distance - 1.5,3)
-	if(Distance >= 500):
+	if(Distance > Distance_CloseTopAlertValue and Distance < Distance_CloseBottomAlertValue):
+		Distance_Close = FindSlope(Distance_CloseTopAlertValue,1,Distance_CloseBottomAlertValue,0)
+	if(Distance > Distance_FarBottomAlertValue and Distance < Distance_FarTopAlertValue):
+		Distance_Far = FindSlope(Distance_FarBottomAlertValue,1,Distance_FarTopAlertValue,0)
+	if(Distance >= Distance_FarTopAlertValue):
 		Distance_Far = 1
 	
 	return(Distance_Close, Distance_Far)

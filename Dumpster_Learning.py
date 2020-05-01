@@ -59,6 +59,20 @@ def AI_loop():
   closingRate_FastBottomAlertValue = transform_fuzzy(closingRate_FastBottomAlert, 1, closingRate_SlowBottomAlertValue, closingRate_FastTopAlertValue) 
   #print("frontAlertValue", frontAlertValue)
 
+
+
+  Distance_CloseTopAlert = current_chromosome[32:37]
+  Distance_CloseTopAlertValue = transform_fuzzy(Distance_CloseTopAlert, 50, 0, 16) 
+
+  Distance_FarTopAlert = current_chromosome[37:42]
+  Distance_FarTopAlertValue = transform_fuzzy(Distance_CloseTopAlert, 50, Distance_CloseTopAlertValue, Distance_CloseTopAlertValue+16) 
+
+  Distance_CloseBottomAlert = current_chromosome[42:47]
+  Distance_CloseBottomAlertValue = transform_fuzzy(Distance_CloseBottomAlert, 50, Distance_CloseTopAlertValue, Distance_FarTopAlertValue) 
+
+  Distance_FarBottomAlert = current_chromosome[47:52]
+  Distance_FarBottomAlertValue = transform_fuzzy(Distance_FarBottomAlert, 50, Distance_CloseBottomAlertValue, Distance_FarTopAlertValue) 
+
   print("got pass the chrom")
 
   #Set variables
