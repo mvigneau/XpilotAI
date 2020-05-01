@@ -103,7 +103,6 @@ def Fuzzy_Risk(Membership_Slow, Membership_Medium, Membership_Fast, Distance_Clo
 		risk_low = max(Membership_Slow, Distance_Far)
 	
 	total_risk = (risk_low * 25 + risk_medium * 50 + risk_high * 75) / (risk_low + risk_medium + risk_high)
-	#print(total_risk)
 	
 	return total_risk
 

@@ -73,7 +73,7 @@ def AI_loop():
   Distance_FarBottomAlert = current_chromosome[47:52]
   Distance_FarBottomAlertValue = transform_fuzzy(Distance_FarBottomAlert, 50, Distance_CloseBottomAlertValue, Distance_FarTopAlertValue) 
 
-  print("got pass the chrom")
+  #print("got pass the chrom")
 
   #Set variables
   heading = int(ai.selfHeadingDeg())
