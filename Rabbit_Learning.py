@@ -16,7 +16,7 @@ boolean = False
 fitness_list = []
 score = 0
 generation_size = 200
-generation = 0
+generation = 1
 
 def AI_loop():
   global count_frame, loop, boolean, score, population_size, chromosome_size, population, mutation_prob, crossover_prob, fitness_list, generation, generation_size
@@ -90,9 +90,9 @@ def AI_loop():
     fitness_list.append(fitness_value)
 
     if((loop+1) == population_size):
-      generation += 1
       print("Generation:", generation)
-      print("Agent Fitness:", fitness_list)
+      print("Agent Fitness:")
+      print(fitness_list)
       print("Average Fitness:", statistics.mean(fitness_list))
       ## Select Next Generation -- Apply Crossover & Mutation ##
       new_population = select(population, fitness_list)
@@ -105,6 +105,7 @@ def AI_loop():
       #print("population", population)
       loop = 0
       count_frame = 0
+      generation += 1
       fitness_list.clear()
       if generation == generation_size:
         print("Done")
