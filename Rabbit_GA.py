@@ -43,8 +43,6 @@ def fitness(chromosome, frames, score_previous, score_current):
 ## Selection Process ## 
 def select(population, population_size, fitness_list):
 	
-	new_population = []
-	
 	## Calculate Sum of Total Fitness of Entire Population##
 	total = 0 
 	for i in range(len(fitness_list)):
@@ -56,11 +54,11 @@ def select(population, population_size, fitness_list):
 		prob = float(fitness_list[j]) / total
 		probability_list.append(prob)
 
-	print("half")
 	## repeat these step until you fill up entire new population ##
-	for popsize in range(population_size):
+	new_population = []
+	for popsize in range(len(population)):
 		## Select A Chromosome ##
-		selection = choices(population_list, probability_list)
+		selection = choices(population, probability_list)
 	
 		## Add Selected Chromosome to New Population ##
 		new_population.append(selection);
