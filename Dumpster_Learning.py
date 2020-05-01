@@ -136,9 +136,8 @@ def AI_loop():
   #print("heading: ", heading)
   
 
-
   if(ai.selfAlive() == 0 and boolean == False): 
-
+    print("hello")
     ## Calculate Fitness Current Population ##
     score_previous = score
     score_current = ai.selfScore()
