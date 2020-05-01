@@ -11,10 +11,11 @@ fitness_target = 20
 population = init_population(population_size, chromosome_size)
 count_frame = 0
 loop = 0
+boolean = False
 fitness_list = []
 
 def AI_loop():
-  global count_frame, loop, population_size
+  global count_frame, loop, boolean, population_size
   #Release keys
   ai.thrust(0)
   ai.turnLeft(0)
@@ -67,7 +68,8 @@ def AI_loop():
   enemyDist = ai.selfLockDist()
   #print(enemyDist)
   
-  if(ai.selfAlive() == 0): 
+  if(ai.selfAlive() == 0 and boolean == False): 
+
     ## calculate fitness ##
     fitness(population, count_frame)
 
@@ -78,11 +80,12 @@ def AI_loop():
     else:   
       loop += 1 
       count_frame = 0
-
+    boolean = True
 
   ### Turning Rules ###
   else:
 
+    boolean = False
     if frontWall <= frontAlertValue and (left45Wall < right45Wall) and ai.selfSpeed() != 0: 
       #print("turning right")
       ai.turnRight(1)
