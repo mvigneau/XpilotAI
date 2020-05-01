@@ -1,5 +1,6 @@
 ### Program 1 -- Mathieu Vigneault,  
 import libpyAI as ai
+import statistics 
 from Rabbit_GA import * 
 
 ### Setting Up GA ###
@@ -78,7 +79,8 @@ def AI_loop():
     fitness_list.append(fitness_value)
 
     if((loop+1) == population_size):
-      print(fitness_list, mean(fitness_list))
+      print(fitness_list)
+      print(statistics.mean(fitness_list))
       ## Select Next Generation -- Apply Crossover & Mutation ##
       new_population = select(population, fitness_list)
       #print("new", new_population)
