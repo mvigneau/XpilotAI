@@ -3,7 +3,7 @@ import libpyAI as ai
 from Rabbit_GA import * 
 
 ### Setting Up GA ###
-population_size = 2
+population_size = 4
 crossover_prob = 0.7
 mutation_prob = 0.01
 chromosome_size = 13
