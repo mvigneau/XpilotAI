@@ -88,9 +88,9 @@ def AI_loop():
     score_current = ai.selfScore()
     fitness_value = fitness(population, count_frame, score_previous, score_current)
     fitness_list.append(fitness_value)
-    generation += 1
 
     if((loop+1) == population_size):
+      generation += 1
       print("Generation:", generation)
       print("Agent Fitness:", fitness_list)
       print("Average Fitness:", statistics.mean(fitness_list))
@@ -166,21 +166,6 @@ def AI_loop():
 
       count_frame += 3
       boolean = False
-
-
-    # count_frame += 1
-  # else:
-  #   print(count_frame)
-# def main():
-  ### Setting Up GA ###
-  # population_size = 1
-  # crossover_prob = 0.7
-  # mutation_prob = 0.01
-  # chromosome_size = 13
-  # fitness_target = 20
-  # population = init_population(population_size, chromosome_size)
-  # count_frame = 0
-  # ai.start(AI_loop,["-name","Rabbit","-join","localhost"])
 
 ai.headlessMode()
 ai.start(AI_loop,["-name","Rabbit","-join","localhost"])
