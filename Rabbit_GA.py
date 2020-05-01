@@ -7,12 +7,6 @@
 from random import *
 import matplotlib.pyplot as plt
 
-population_size = 8
-crossover_prob = 0.7
-mutation_prob = 0.01
-chromosome_size = 13
-fitness_target = 20
-
 
 ## Initialize population & Fitness Score##
 def init_population(population_size, chromosome_size):
@@ -65,7 +59,7 @@ def select(population, population_size, fitness_list):
 
 	return new_population
 
-def crossover(new_population, chromosome_size, population_size):
+def crossover(new_population, chromosome_size, population_size, crossover_prob):
 	#print(new_population)
 	
 	random_number = randint(1, 100)
@@ -90,8 +84,8 @@ def crossover(new_population, chromosome_size, population_size):
 		chromosome1 = chromosome1_part1 + chromosome1_part2
 		chromosome2 = chromosome2_part1 + chromosome2_part2
 		
-		new_population.pop()
-		new_population.pop()
+		new_population.pop(parent1)
+		new_population.pop(parent2)
 
 		new_population.append(chromosome1)
 		new_population.append(chromosome2)
