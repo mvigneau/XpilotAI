@@ -29,16 +29,16 @@ def init_population(population_size, chromosome_size):
 	return population_list
 
 
-def fitness(chromosome, frames):
+def fitness(chromosome, frames, score_previous, score_current):
 
-	return frames
-	# for j in range(len(population_list[i])):
-	# 	if population_list[i][j] == 1:
-	# 		fitness_score += 1
+	value = 0
+	if(abs(score_current - score_previous) == 3.4):
+		value -= 10
+	else:
+		value -= 5
 
-	# fitness_list.append(fitness_score)
-
-	# return fitness_list
+	value += frames
+	return value
 
 def check_fitness(fitness_list):
 
