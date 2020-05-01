@@ -143,13 +143,13 @@ def AI_loop():
         ai.thrust(1)
       elif backWall <= TrackSlowAlertValue and ai.selfSpeed() <= speedAlertValue:
         ai.thrust(1)  
-      elif left135Wall <= TrackFastAlertValue and ai.selfSpeed() >= speedAlertValue::
+      elif left135Wall <= TrackFastAlertValue and ai.selfSpeed() >= speedAlertValue:
         ai.thrust(1)
-      elif left135Wall <= TrackSlowAlertValue and ai.selfSpeed() <= speedAlertValue::
+      elif left135Wall <= TrackSlowAlertValue and ai.selfSpeed() <= speedAlertValue:
         ai.thrust(1)
-      elif right135Wall <= TrackFastAlertValue and ai.selfSpeed() >= speedAlertValue::
+      elif right135Wall <= TrackFastAlertValue and ai.selfSpeed() >= speedAlertValue:
         ai.thrust(1)
-      elif right135Wall <= TrackSlowAlertValue and ai.selfSpeed() <= speedAlertValue::
+      elif right135Wall <= TrackSlowAlertValue and ai.selfSpeed() <= speedAlertValue:
         ai.thrust(1)
       ##### Shooting Ennemy Commands #####
       elif enemyDist <= EnemyAlertValue and heading > (head) and ai.selfSpeed() > speedAlertValue:
