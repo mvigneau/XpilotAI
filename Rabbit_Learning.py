@@ -67,14 +67,18 @@ def AI_loop():
   enemyDist = ai.selfLockDist()
   #print(enemyDist)
   
-  if ai.selfAlive() == 0: 
+  if(ai.selfAlive() == 0): 
     ## calculate fitness ##
     fitness(population, count_frame)
 
-    if(loop == population_size):
-      loop == 0
+    if((loop+1) == population_size):
+      loop = 0
+      count_frame = 0
+      print(loop)
     else:   
-      loop += 1     
+      loop += 1 
+      count_frame = 0
+
 
   ### Turning Rules ###
   else:
