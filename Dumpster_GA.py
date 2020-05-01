@@ -136,6 +136,7 @@ def transform_fuzzy(gene, jump, start, end):
 	gene.reverse()
 	current_value = 100000
 	while(current_value >= end):
+		print("yes")
 		for i in range(len(gene)):
 			if (gene[i] == 1):
 				current_value += (jump * (2**(i)))
