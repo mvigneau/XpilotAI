@@ -84,7 +84,7 @@ def AI_loop():
       print("new", new_population)
       new_population = crossover(new_population, chromosome_size, population_size, crossover_prob)
       print("crossover", new_population)
-      new_population = mutate(new_population, mutation_prob)
+      new_population = mutate(new_population, chromosome_size, mutation_prob)
       print("mutate", new_population)
       population = new_population
       print("population", population)
