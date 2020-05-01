@@ -63,28 +63,29 @@ def select(population, population_size, fitness_list):
 		## Add Selected Chromosome to New Population ##
 		new_population.append(selection);
 
-	print("good")
 	return new_population
 
-def crossover(new_population):
+def crossover(new_population, chromosome_size, population_size):
 	#print(new_population)
 	
 	random_number = randint(1, 100)
 	if random_number <= (crossover_prob * 100):
+		parent1 = randrange(0, population_size)
+		parent2 = randrange(0, population_size)
 		chrom = randrange(0,2)
-		spot = randrange(0,20)
+		spot = randrange(0,chromosome_size)
 		#print(chrom, spot)
 
 		if chrom == 0:
-			chromosome1_part1 = new_population[0][:spot]
-			chromosome1_part2 = new_population[1][spot:]
-			chromosome2_part1 = new_population[1][:spot]
-			chromosome2_part2 = new_population[0][spot:]
+			chromosome1_part1 = new_population[parent1][:spot]
+			chromosome1_part2 = new_population[parent2][spot:]
+			chromosome2_part1 = new_population[parent2][:spot]
+			chromosome2_part2 = new_population[parent1][spot:]
 		else:
-			chromosome1_part1 = new_population[1][:spot]
-			chromosome1_part2 = new_population[0][spot:]
-			chromosome2_part1 = new_population[0][:spot]
-			chromosome2_part2 = new_population[1][spot:]
+			chromosome1_part1 = new_population[parent2][:spot]
+			chromosome1_part2 = new_population[parent1][spot:]
+			chromosome2_part1 = new_population[parent1][:spot]
+			chromosome2_part2 = new_population[parent2][spot:]
 
 		chromosome1 = chromosome1_part1 + chromosome1_part2
 		chromosome2 = chromosome2_part1 + chromosome2_part2
