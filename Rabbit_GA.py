@@ -92,7 +92,6 @@ def crossover(new_population, chromosome_size, population_size, crossover_prob):
 			storage.append(chromosome2)
 
 	for num in range(len(storage)):
-		print(storage[num])
 		new_population.append(storage[num])
 
 	return new_population
@@ -110,7 +109,7 @@ def mutate(new_population, chromosome_size, mutation_prob):
 				else:
 					new_population[i][j] = 0
 				#print(new_population[i][0][j])
-	print(new_population)
+	#print(new_population)
 	return new_population 
 
 
