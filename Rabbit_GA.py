@@ -86,8 +86,8 @@ def crossover(new_population, chromosome_size, population_size, crossover_prob):
 			chromosome1 = chromosome1_part1 + chromosome1_part2
 			chromosome2 = chromosome2_part1 + chromosome2_part2
 			
-			new_population.pop(parent1)
-			new_population.pop(parent2)
+			print(new_population.pop(parent1))
+			print(new_population.pop(parent2))
 
 			storage.append(chromosome1)
 			storage.append(chromosome2)
