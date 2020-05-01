@@ -91,6 +91,7 @@ def AI_loop():
       loop = 0
       count_frame = 0
       fitness_list.clear()
+      print("yes")
     else:   
       loop += 1 
       count_frame = 0
