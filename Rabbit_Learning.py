@@ -28,13 +28,13 @@ def AI_loop():
   frontAlert = current_chromosome[0:5]
   #print("frontAlert", frontAlert)
   frontAlertValue = transform(frontAlert, 25)
-  print("frontAlertValue", frontAlertValue)
+  #print("frontAlertValue", frontAlertValue)
   backAlert = current_chromosome[5:9]
   backAlertValue = transform(backAlert, 25)
-  print("backAlertValue", backAlertValue)
+  #print("backAlertValue", backAlertValue)
   speedAlert = current_chromosome[9:13]
   speedAlertValue = transform(speedAlert, 1)
-  print("speedAlertValue", speedAlertValue)
+  #print("speedAlertValue", speedAlertValue)
 
 
   #Set variables
