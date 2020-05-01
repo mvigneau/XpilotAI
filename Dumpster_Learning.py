@@ -145,5 +145,6 @@ def AI_loop():
     ai.fireShot()
   
   
+ai.start(AI_loop,["-name", "Dumpster", "-join", "localhost"])
 
-ai.start(AI_loop,["-name", "Dumpster", "-join", "136.244.227.81", "-port", "15350"])
+#ai.start(AI_loop,["-name", "Dumpster", "-join", "136.244.227.81", "-port", "15350"])
