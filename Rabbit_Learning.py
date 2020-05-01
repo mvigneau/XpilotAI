@@ -78,12 +78,12 @@ def AI_loop():
     fitness_list.append(fitness_value)
 
     if((loop+1) == population_size):
+      print(fitness_list)
       ## Select Next Generation ##
       new_population = select(population, population_size, fitness_list)
       print(new_population)
       loop = 0
       count_frame = 0
-      print(fitness_list)
       fitness_list.clear()
     else:   
       loop += 1 
