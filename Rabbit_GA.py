@@ -61,34 +61,41 @@ def select(population, population_size, fitness_list):
 
 def crossover(new_population, chromosome_size, population_size, crossover_prob):
 	#print(new_population)
-	
-	random_number = randint(1, 100)
-	if random_number <= (crossover_prob * 100):
-		parent1 = randrange(0, population_size)
-		parent2 = randrange(0, population_size)
-		chrom = randrange(0,2)
-		spot = randrange(0,chromosome_size)
-		#print(chrom, spot)
+	storage = []
 
-		if chrom == 0:
-			chromosome1_part1 = new_population[parent1][:spot]
-			chromosome1_part2 = new_population[parent2][spot:]
-			chromosome2_part1 = new_population[parent2][:spot]
-			chromosome2_part2 = new_population[parent1][spot:]
-		else:
-			chromosome1_part1 = new_population[parent2][:spot]
-			chromosome1_part2 = new_population[parent1][spot:]
-			chromosome2_part1 = new_population[parent1][:spot]
-			chromosome2_part2 = new_population[parent2][spot:]
+	for half in range(population_size//2):
+		random_number = randint(1, 100)
+		if random_number <= (crossover_prob * 100):
+			parent1 = randrange(0, len(new_population))
+			parent2 = randrange(0, len(new_population))
+			chrom = randrange(0,2)
+			spot = randrange(0,chromosome_size)
+			#print(chrom, spot)
 
-		chromosome1 = chromosome1_part1 + chromosome1_part2
-		chromosome2 = chromosome2_part1 + chromosome2_part2
-		
-		new_population.pop(parent1)
-		new_population.pop(parent2)
+			if chrom == 0:
+				chromosome1_part1 = new_population[parent1][:spot]
+				chromosome1_part2 = new_population[parent2][spot:]
+				chromosome2_part1 = new_population[parent2][:spot]
+				chromosome2_part2 = new_population[parent1][spot:]
+			else:
+				chromosome1_part1 = new_population[parent2][:spot]
+				chromosome1_part2 = new_population[parent1][spot:]
+				chromosome2_part1 = new_population[parent1][:spot]
+				chromosome2_part2 = new_population[parent2][spot:]
 
-		new_population.append(chromosome1)
-		new_population.append(chromosome2)
+			chromosome1 = chromosome1_part1 + chromosome1_part2
+			chromosome2 = chromosome2_part1 + chromosome2_part2
+			
+			new_population.pop(parent1)
+			new_population.pop(parent2)
+
+			storage.append(chromosome1)
+			sttorage.append(chromosome2)
+
+	for num in range(len(storage)):
+		new_population.append(storage[num])
+
+	print(new_population)
 
 	return new_population
 
