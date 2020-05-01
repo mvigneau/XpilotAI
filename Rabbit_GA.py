@@ -95,6 +95,7 @@ def crossover(new_population, chromosome_size, population_size, crossover_prob):
 		#print(storage[num])
 		new_population.append(storage[num])
 
+	print(new_population)
 	return new_population
 
 def mutate(new_population, mutation_prob):
