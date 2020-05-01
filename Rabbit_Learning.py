@@ -78,6 +78,7 @@ def AI_loop():
       loop = 0
       count_frame = 0
       print(fitness_list)
+      fitness_list.clear()
     else:   
       loop += 1 
       count_frame = 0
