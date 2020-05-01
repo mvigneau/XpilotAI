@@ -21,6 +21,7 @@ generation_size = 200
 generation = 0
 
 def AI_loop():
+  global count_frame, loop, boolean, score, population_size, chromosome_size, population, mutation_prob, crossover_prob, fitness_list, generation, generation_size
   #Release keys
   ai.thrust(0)
   ai.turnLeft(0)
@@ -29,7 +30,7 @@ def AI_loop():
   ### Order of chromosome do not matter when created ###
   #print("pop", population)
   current_chromosome = population[loop]
-  #print(current_chromosome)
+  print(current_chromosome)
   closingRate_SlowTopAlert = current_chromosome[0:4]
   closingRate_SlowTopAlertValue = transform_fuzzy(closingRate_SlowTopAlert, 1, 0, 16) 
   
@@ -42,7 +43,7 @@ def AI_loop():
   closingRate_FastTopAlert = current_chromosome[12:16]                 
   closingRate_FastTopAlertValue = transform_fuzzy(closingRate_FastTopAlert, 1, closingRate_MediumTopRightAlertValue, closingRate_MediumTopRightAlertValue+16) 
   
-  #print("frontAlertValue", frontAlertValue)
+  print("frontAlertValue", frontAlertValue)
   closingRate_SlowBottomAlert = current_chromosome[16:20]                               
   closingRate_SlowBottomAlertValue = transform_fuzzy(closingRate_SlowBottomAlert, 1, closingRate_SlowTopAlertValue, closingRate_FastTopAlertValue)   
 
