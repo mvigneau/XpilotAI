@@ -68,7 +68,7 @@ def AI_loop():
   #print(head)
   enemyDist = ai.selfLockDist()
   #print(enemyDist)
-  print(count_frame)
+  #print(count_frame)
   if(ai.selfAlive() == 0 and boolean == False): 
 
     ## Calculate Fitness Current Population ##
@@ -81,17 +81,17 @@ def AI_loop():
       print(fitness_list)
       ## Select Next Generation -- Apply Crossover & Mutation ##
       new_population = select(population, fitness_list)
-      print("new", new_population)
+      #print("new", new_population)
       new_population = crossover(new_population, chromosome_size, population_size, crossover_prob)
-      print("crossover", new_population)
+      #print("crossover", new_population)
       new_population = mutate(new_population, chromosome_size, mutation_prob)
-      print("mutate", new_population)
+      #print("mutate", new_population)
       population = new_population
-      print("population", population)
+      #print("population", population)
       loop = 0
       count_frame = 0
       fitness_list.clear()
-      print("yes")
+      #print("yes")
     else:   
       loop += 1 
       count_frame = 0
