@@ -53,7 +53,7 @@ def select(population, population_size, fitness_list):
 	for popsize in range(len(population)):
 		## Select A Chromosome ##
 		selection = choices(population, probability_list)
-		print(selection)
+		print(selection[0])
 	
 		## Add Selected Chromosome to New Population ##
 		new_population.append(selection)
