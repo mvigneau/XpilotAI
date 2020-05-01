@@ -4,7 +4,7 @@ from Rabbit_GA import *
 
 ### Setting Up GA ###
 population_size = 4
-crossover_prob = 0.7
+crossover_prob = 0.5
 mutation_prob = 0.01
 chromosome_size = 13
 fitness_target = 20
@@ -78,7 +78,7 @@ def AI_loop():
     fitness_list.append(fitness_value)
 
     if((loop+1) == population_size):
-      print(fitness_list)
+      print(fitness_list, avg(fitness_list))
       ## Select Next Generation -- Apply Crossover & Mutation ##
       new_population = select(population, fitness_list)
       #print("new", new_population)
