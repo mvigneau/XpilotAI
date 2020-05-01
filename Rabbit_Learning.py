@@ -164,7 +164,7 @@ def AI_loop():
         #print("chilling")
         ai.thrust(0)
 
-      count_frame += 1
+      count_frame += 3
       boolean = False
 
 
