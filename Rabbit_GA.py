@@ -31,8 +31,7 @@ def init_population(population_size, chromosome_size):
 
 def fitness(chromosome, frames):
 
-	print(frames)
-	return None
+	return frames
 	# for j in range(len(population_list[i])):
 	# 	if population_list[i][j] == 1:
 	# 		fitness_score += 1

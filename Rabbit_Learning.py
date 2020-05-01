@@ -71,12 +71,13 @@ def AI_loop():
   if(ai.selfAlive() == 0 and boolean == False): 
 
     ## calculate fitness ##
-    fitness(population, count_frame)
+    fitness_value = fitness(population, count_frame)
+    fitness_list.append(fitness_value)
 
     if((loop+1) == population_size):
       loop = 0
       count_frame = 0
-      print(loop)
+      print(fitness_list)
     else:   
       loop += 1 
       count_frame = 0
