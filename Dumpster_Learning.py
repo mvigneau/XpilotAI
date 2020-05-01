@@ -100,7 +100,6 @@ def AI_loop():
     ### Fuzzy membership ###
     closing_rate, distance = Closing_Rate(Degree, tracking, Speed, Distance)
     low, medium, fast = Fuzzy_Speed(closing_rate, closingRate_SlowTopAlertValue, closingRate_SlowBottomAlertValue, closingRate_MediumBottomLeftAlertValue, closingRate_MediumTopLeftAlertValue, closingRate_MediumTopRightAlertValue, closingRate_MediumBottomRightAlertValue, closingRate_FastBottomAlertValue, closingRate_FastTopAlertValue)
-    print(low, medium, fast)
     close, far = Fuzzy_Distance(distance)
     risk = Fuzzy_Risk(low, medium, fast, close, far)
     risk_list.append(risk)
@@ -133,37 +132,81 @@ def AI_loop():
   #print("track_risk: ", track_risk)
   #print("heading: ", heading)
   
-  ## Get the angles on both side between tracking and heading ##
-  dist = (heading - track_risk) % 360
-  dist2 = (360 - dist) % 360
-  #print("dist: ", dist)
-  #print("dist2: ", dist2)
-  
-  ## Production system rules based off fuzzy output ##
-  if(dist <= 130 and dist >= 0 and ai.selfSpeed() > 0 and max_risk >= 75):
-    ai.turnLeft(1)
-    #print("turning left")
-  elif(dist2 <= 130 and dist2 >= 0 and ai.selfSpeed() > 0 and max_risk >= 75):
-    ai.turnRight(1)
-    #print("turning right")
-  elif(ai.selfSpeed() <= 10):
-    ai.thrust(1)
-    #print("thrust")
-  elif(trackWall <= 150):
-    ai.thrust(1)
-    #print("thrust")
-  elif(enemyDist <= 3000 and heading > (head) and enemyDist != 0):
-    ai.turnRight(1)
-    ai.fireShot()
-  elif(enemyDist <= 3000 and heading < (head) and enemyDist != 0):
-    ai.turnLeft(1)
-    ai.fireShot()
+
+
+  if(ai.selfAlive() == 0 and boolean == False): 
+
+    ## Calculate Fitness Current Population ##
+    score_previous = score
+    score_current = ai.selfScore()
+    fitness_value = fitness(population, count_frame, score_previous, score_current)
+    fitness_list.append(fitness_value)
+
+    if((loop+1) == population_size):
+      print("Generation:", generation)
+      print("Agent Fitness:")
+      print(fitness_list)
+      print("Average Fitness:", statistics.mean(fitness_list))
+      ## Select Next Generation -- Apply Crossover & Mutation ##
+      new_population = select(population, fitness_list)
+      #print("new", new_population)
+      new_population = crossover(new_population, chromosome_size, population_size, crossover_prob)
+      #print("crossover", new_population)
+      new_population = mutate(new_population, chromosome_size, mutation_prob)
+      #print("mutate", new_population)
+      population = new_population
+      #print("population", population)
+      loop = 0
+      count_frame = 0
+      generation += 1
+      fitness_list.clear()
+      if generation == generation_size:
+        print("Done")
+        ### DONE -- QUIT ###
+      
+    else:   
+      loop += 1 
+      count_frame = 0
+    boolean = True
+
+  ### Rules ###
   else:
-    #print("chilling")
-    ai.thrust(0)
-    ai.fireShot()
-  
-  
+    
+    if(ai.selfAlive() == 1):
+      ## Get the angles on both side between tracking and heading ##
+      dist = (heading - track_risk) % 360
+      dist2 = (360 - dist) % 360
+      #print("dist: ", dist)
+      #print("dist2: ", dist2)
+      
+      ## Production system rules based off fuzzy output ##
+      if(dist <= 130 and dist >= 0 and ai.selfSpeed() > 0 and max_risk >= 75):
+        ai.turnLeft(1)
+        #print("turning left")
+      elif(dist2 <= 130 and dist2 >= 0 and ai.selfSpeed() > 0 and max_risk >= 75):
+        ai.turnRight(1)
+        #print("turning right")
+      elif(ai.selfSpeed() <= 10):
+        ai.thrust(1)
+        #print("thrust")
+      elif(trackWall <= 150):
+        ai.thrust(1)
+        #print("thrust")
+      elif(enemyDist <= 3000 and heading > (head) and enemyDist != 0):
+        ai.turnRight(1)
+        ai.fireShot()
+      elif(enemyDist <= 3000 and heading < (head) and enemyDist != 0):
+        ai.turnLeft(1)
+        ai.fireShot()
+      else:
+        #print("chilling")
+        ai.thrust(0)
+        ai.fireShot()
+
+      count_frame += 3
+      boolean = False
+    
+ai.headlessMode()
 ai.start(AI_loop,["-name", "Dumpster", "-join", "localhost"])
 
 #ai.start(AI_loop,["-name", "Dumpster", "-join", "136.244.227.81", "-port", "15350"])
