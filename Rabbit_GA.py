@@ -62,7 +62,6 @@ def select(population, fitness_list):
 def crossover(new_population, chromosome_size, population_size, crossover_prob):
 	#print(new_population)
 	storage = []
-	num_time = population_size // 2
 	for half in range((len(new_population)//2)):
 		random_number = randint(1, 100)
 		if random_number <= (crossover_prob * 100):
@@ -91,9 +90,6 @@ def crossover(new_population, chromosome_size, population_size, crossover_prob):
 
 			storage.append(chromosome1)
 			storage.append(chromosome2)
-
-		print("new_pop", new_population)
-		print("storage", storage)
 
 	for num in range(len(storage)):
 		#print(storage[num])
