@@ -68,7 +68,7 @@ def AI_loop():
   #print(head)
   enemyDist = ai.selfLockDist()
   #print(enemyDist)
-  
+  print(count_frame)
   if(ai.selfAlive() == 0 and boolean == False): 
 
     ## Calculate Fitness Current Population ##
