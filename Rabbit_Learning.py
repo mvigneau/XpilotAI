@@ -21,11 +21,11 @@ def AI_loop():
   print(ai.selfAlive())
   #for chrom in range(len(population)):
   chrom = 0
-  print("pop", population)
+  #print("pop", population)
   current_chromosome = population[chrom]
-  print(current_chromosome)
+  #print(current_chromosome)
   frontAlert = current_chromosome[0:5]
-  print("frontAlert", frontAlert)
+  #print("frontAlert", frontAlert)
   frontAlertValue = transform(frontAlert, 25)
   print("frontAlertValue", frontAlertValue)
   backAlert = current_chromosome[5:9]
@@ -60,11 +60,11 @@ def AI_loop():
   #print(ClosestDir)
   ## Get the lockheadingdeg ##
   enemy = ai.lockNext()
-  print(enemy)
+  #print(enemy)
   head = ai.lockHeadingDeg()
-  print(head)
+  #print(head)
   enemyDist = ai.selfLockDist()
-  print(enemyDist)
+  #print(enemyDist)
   
   if ai.selfAlive() == 0: 
      print(count_frame)
@@ -72,19 +72,19 @@ def AI_loop():
   else:
 
     if frontWall <= frontAlertValue and (left45Wall < right45Wall) and ai.selfSpeed() != 0: 
-      print("turning right")
+      #print("turning right")
       ai.turnRight(1)
     elif frontWall <= frontAlertValue and (left45Wall > right45Wall) and ai.selfSpeed() != 0:
       ai.turnLeft(1)
     elif left90Wall <= frontAlertValue and ai.selfSpeed() != 0:
-      print("turning right")
+      #print("turning right")
       ai.turnRight(1) 
     elif right90Wall <= frontAlertValue and ai.selfSpeed() != 0:
-      print("turning left")
+      #print("turning left")
       ai.turnLeft(1)
     ### Thrust commands ####
     elif ai.selfSpeed() <= speedAlertValue and (frontWall >= frontAlertValue) and (left45Wall >= frontAlertValue) and (right45Wall >= frontAlertValue) and (right90Wall >= frontAlertValue) and (left90Wall >= frontAlertValue) and (left135Wall >= backAlertValue) and (right135Wall >= backAlertValue) and (backWall >= backAlertValue):
-      print("go forward")
+      #print("go forward")
       ai.thrust(1)
     elif trackWall < 75 and ai.selfSpeed() >= speedAlertValue:
       ai.thrust(1)
@@ -106,7 +106,7 @@ def AI_loop():
     elif ai.selfSpeed() == 0:
       ai.thrust(1)
     else:
-      print("chilling")
+      #print("chilling")
       ai.thrust(0)
 
     count_frame += 1
