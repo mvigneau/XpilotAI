@@ -26,10 +26,12 @@ def init_population(population_size, chromosome_size):
 def fitness(chromosome, frames, score_previous, score_current):
 
 	value = 0
-	if(abs(score_current - score_previous) == 3.4):
-		value -= 10
+	if(abs(score_previous - score_current) == 3.4):
+		value -= 20
+	elif((score_current - score_previous) > 0):
+		value += 50
 	else:
-		value -= 5
+		value -= 10
 
 	value += frames
 	return value
