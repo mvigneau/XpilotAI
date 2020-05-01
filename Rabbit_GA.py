@@ -53,6 +53,7 @@ def select(population, population_size, fitness_list):
 	for popsize in range(len(population)):
 		## Select A Chromosome ##
 		selection = choices(population, probability_list)
+		print(selection)
 	
 		## Add Selected Chromosome to New Population ##
 		new_population.append(selection)
@@ -92,11 +93,11 @@ def crossover(new_population, chromosome_size, population_size, crossover_prob):
 			storage.append(chromosome1)
 			storage.append(chromosome2)
 
-		print(new_population)
-		print(storage)
+		#print(new_population)
+		#print(storage)
 
 	for num in range(len(storage)):
-		print(storage[num])
+		#print(storage[num])
 		new_population.append(storage[num])
 
 	print(new_population)
