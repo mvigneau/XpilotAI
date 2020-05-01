@@ -15,9 +15,11 @@ loop = 0
 boolean = False
 fitness_list = []
 score = 0
+generation_size = 200
+generation = 0
 
 def AI_loop():
-  global count_frame, loop, boolean, score, population_size, chromosome_size, population, mutation_prob, crossover_prob, fitness_list
+  global count_frame, loop, boolean, score, population_size, chromosome_size, population, mutation_prob, crossover_prob, fitness_list, generation, generation_size
   #Release keys
   ai.thrust(0)
   ai.turnLeft(0)
@@ -77,6 +79,7 @@ def AI_loop():
     score_current = ai.selfScore()
     fitness_value = fitness(population, count_frame, score_previous, score_current)
     fitness_list.append(fitness_value)
+    generation += 1
 
     if((loop+1) == population_size):
       print(fitness_list)
@@ -93,6 +96,8 @@ def AI_loop():
       loop = 0
       count_frame = 0
       fitness_list.clear()
+      if generation == generation_size:
+        break;
       #print("yes")
     else:   
       loop += 1 
