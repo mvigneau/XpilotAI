@@ -66,7 +66,7 @@ def AI_loop():
   Distance_CloseTopAlertValue = transform_fuzzy(Distance_CloseTopAlert, 50, 0, (50*(2**len(Distance_CloseTopAlert)))) 
   print("Distance_CloseTopAlertValue", Distance_CloseTopAlertValue)
   Distance_FarTopAlert = current_chromosome[37:42]
-  Distance_FarTopAlertValue = transform_fuzzy(Distance_CloseTopAlert, 50, Distance_CloseTopAlertValue, Distance_CloseTopAlertValue+16) 
+  Distance_FarTopAlertValue = transform_fuzzy(Distance_CloseTopAlert, 50, Distance_CloseTopAlertValue, Distance_CloseTopAlertValue+(50*(2**len(Distance_CloseTopAlert)))) 
 
   Distance_CloseBottomAlert = current_chromosome[42:47]
   Distance_CloseBottomAlertValue = transform_fuzzy(Distance_CloseBottomAlert, 50, Distance_CloseTopAlertValue, Distance_FarTopAlertValue) 
