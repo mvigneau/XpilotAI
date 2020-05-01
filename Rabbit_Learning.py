@@ -91,8 +91,9 @@ def AI_loop():
     generation += 1
 
     if((loop+1) == population_size):
-      print(fitness_list)
-      print(statistics.mean(fitness_list))
+      print("Generation:", generation)
+      print("Agent Fitness:", fitness_list)
+      print("Average Fitness:", statistics.mean(fitness_list))
       ## Select Next Generation -- Apply Crossover & Mutation ##
       new_population = select(population, fitness_list)
       #print("new", new_population)
@@ -107,7 +108,8 @@ def AI_loop():
       fitness_list.clear()
       if generation == generation_size:
         print("Done")
-      #print("yes")
+        ### DONE -- QUIT ###
+      
     else:   
       loop += 1 
       count_frame = 0
