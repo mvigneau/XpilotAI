@@ -131,50 +131,16 @@ def transform(gene, jump):
 			value += (jump * (2**(i)))
 	return value
 
+def transform_fuzzy(gene, jump, start, end):
+	value = start
+	gene.reverse()
+	current_value = 100000:
+	while(current_value >= end):
+		for i in range(len(gene)):
+			if (gene[i] == 1):
+				current_value += (jump * (2**(i)))
 
-
-
-# def main():
-
-# 	### Initiate a population ###
-# 	population_list = init_population()
-# 	found = False
-# 	counter = 0 
-# 	data = []
-# 	while found == False:
-# 		### Get fitness of population ###
-# 		fitness_list = fitness(population_list)
-# 		### Check if fitness target is reached ###
-# 		result = check_fitness(fitness_list)
-		
-# 		if counter % 10 == 0:
-# 			point = (counter, result)
-# 			data.append(point)
-# 			#print(data)
-
-# 		if result == fitness_target:
-# 			found = True
-
-# 		### Creating a new population ##
-# 		new_population = []
-
-# 		while(len(new_population) != population_size):
-
-# 			### Select a pair of chromosomes ###
-# 			new_population = select(population_list, fitness_list, new_population)
-# 			### Apply crossover on it ###
-# 			new_population = crossover(new_population)
-
-# 		### Apply mutation to new population ###
-# 		new_population = mutate(new_population)
-# 		population_list = new_population
-# 		counter += 1
-# 	#print(new_population)
-# 	print(result)
-# 	zip(*data)
-# 	plt.scatter(*zip(*data))
-# 	plt.axis([0, len(data), 0, 21])
-# 	plt.show()
+	value += current_value
 	
+	return value
 
-# main()

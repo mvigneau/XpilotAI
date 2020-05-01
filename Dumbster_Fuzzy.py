@@ -41,19 +41,19 @@ def Fuzzy_Speed(Closing_rate):
 	Membership_Medium = 0
 	Membership_Fast = 0
 	
-	if(Closing_rate <= 3):
+	if(Closing_rate <= closingRate_SlowTopAlertValue):
 		Membership_Slow = 1
-	if(Closing_rate > 3 and Closing_rate < 5):
-		Membership_Slow = round(-0.5 * Closing_rate + 2.5,3)
-	if(Closing_rate > 3 and Closing_rate < 5):
-		Membership_Medium = round(0.5 * Closing_rate - 1.5,3)
-	if(Closing_rate >= 5 and Closing_rate <= 6):
+	if(Closing_rate > closingRate_SlowTopAlertValue and Closing_rate < closingRate_SlowBottomAlertValue):
+		Membership_Slow  = FindSlope(closingRate_SlowTopAlertValue,1,closingRate_SlowBottomAlertValue,0)
+	if(Closing_rate > closingRate_MediumBottomLeftAlertValue and Closing_rate < closingRate_MediumTopLeftAlertValue):
+		Membership_Medium = FindSlope(closingRate_MediumBottomLeftAlertValue,1,closingRate_MediumTopLeftAlertValue,0)
+	if(Closing_rate >= closingRate_MediumTopLeftAlertValue and Closing_rate <= closingRate_MediumTopRightAlertValue):
 		Membership_Medium = 1
-	if(Closing_rate > 6 and Closing_rate < 8):
-		Membership_Medium = round(-0.5 * Closing_rate + 4, 3)
-	if(Closing_rate > 6 and Closing_rate < 8):
-		Membership_Fast = round(0.5 * Closing_rate - 3,3)
-	if (Closing_rate >= 8): 
+	if(Closing_rate > closingRate_MediumTopRightAlertValue and Closing_rate < closingRate_MediumBottomRightAlertValue):
+		Membership_Medium = FindSlope(closingRate_MediumTopRightAlertValue,1,closingRate_MediumBottomRightAlertValue,0)
+	if(Closing_rate > closingRate_FastBottomAlertValue and Closing_rate < closingRate_FastTopAlertValue):
+		Membership_Fast = FindSlope(closingRate_FastBottomAlertValue,1,closingRate_FastTopAlertValue,0)
+	if (Closing_rate >= closingRate_FastTopAlertValue): 
 			Membership_Fast = 1
 	
 	return (Membership_Slow, Membership_Medium, Membership_Fast)
@@ -104,5 +104,13 @@ def Fuzzy_Risk(Membership_Slow, Membership_Medium, Membership_Fast, Distance_Clo
 	#print(total_risk)
 	
 	return total_risk
+
+def FindSlope(x1, y1, x2, y2):
+
+	x_change = abs(x2-x1)
+	y_change = abs(y2-y1)
+
+	slope = round((y_change/x_change),3)
+	return slope
 
 	

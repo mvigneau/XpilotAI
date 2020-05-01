@@ -26,29 +26,36 @@ def AI_loop():
   ai.turnLeft(0)
   ai.turnRight(0)
 
+  ### Order of chromosome do not matter when created ###
   #print("pop", population)
   current_chromosome = population[loop]
   #print(current_chromosome)
-  frontAlert = current_chromosome[0:5]
-  #print("frontAlert", frontAlert)
-  frontAlertValue = transform(frontAlert, 25)
+  closingRate_SlowTopAlert = current_chromosome[0:4]
+  closingRate_SlowTopAlertValue = transform_fuzzy(closingRate_SlowTopAlert, 1, 0, 16) 
+  
+  closingRate_MediumTopLeftAlert = current_chromosome[4:8]                 
+  closingRate_MediumTopLeftAlertValue = transform_fuzzy(closingRate_MediumTopLeftAlert, 1, closingRate_SlowTopAlertValue, closingRate_SlowTopAlertValue+16) 
+  
+  closingRate_MediumTopRightAlert = current_chromosome[8:12]                 
+  closingRate_MediumTopRightAlertValue = transform_fuzzy(closingRate_MediumTopRightAlert, 1, closingRate_MediumTopLeftAlertValue, closingRate_MediumTopLeftAlertValue+16) 
+  
+  closingRate_FastTopAlert = current_chromosome[12:16]                 
+  closingRate_FastTopAlertValue = transform_fuzzy(closingRate_FastTopAlert, 1, closingRate_MediumTopRightAlertValue, closingRate_MediumTopRightAlertValue+16) 
+  
   #print("frontAlertValue", frontAlertValue)
-  backAlert = current_chromosome[5:9]
-  backAlertValue = transform(backAlert, 25)
-  #print("backAlertValue", backAlertValue)
-  speedAlert = current_chromosome[9:13]                 #4 bits
-  speedAlertValue = transform(speedAlert, 1)            #1 jumps per value
-  #print("speedAlertValue", speedAlertValue)
-  EnemyAlert = current_chromosome[13:18]                #5 bits
-  EnemyAlertValue = transform(EnemyAlert, 50)           #50 jumps per value
-  #print("speedAlertValue", speedAlertValue)
-  TrackSlowAlert = current_chromosome[18:22]            #4 bits
-  TrackSlowAlertValue = transform(TrackSlowAlert, 25)   #25 jumps per value
-  #print("speedAlertValue", speedAlertValue)
-  TrackFastAlert = current_chromosome[22:26]            #4 bits 
-  TrackFastAlertValue = transform(TrackFastAlert, 25)   #25 jumps per value
-  #print("speedAlertValue", speedAlertValue)
+  closingRate_SlowBottomAlert = current_chromosome[16:20]                               
+  closingRate_SlowBottomAlertValue = transform_fuzzy(closingRate_SlowBottomAlert, 1, closingRate_SlowTopAlertValue, closingRate_FastTopAlertValue)   
 
+  #print("frontAlertValue", frontAlertValue)
+  closingRate_MediumBottomLeftAlert = current_chromosome[20:24]                 
+  closingRate_MediumBottomLeftAlertValue = transform_fuzzy(closingRate_MediumBottomLeftAlert, 1, 0, closingRate_MediumTopLeftAlertValue) 
+
+  closingRate_MediumBottomRightAlert = current_chromosome[24:28]                 
+  closingRate_MediumBottomRightAlertValue = transform_fuzzy(closingRate_MediumBottomRightAlert, 1, closingRate_MediumTopRightAlertValue, closingRate_MediumTopRightAlertValue+16) 
+ 
+  closingRate_FastBottomAlert = current_chromosome[28:32]                 
+  closingRate_FastBottomAlertValue = transform_fuzzy(closingRate_FastBottomAlert, 1, closingRate_SlowBottomAlertValue, closingRate_FastTopAlertValue) 
+  #print("frontAlertValue", frontAlertValue)
 
   #Set variables
   heading = int(ai.selfHeadingDeg())
