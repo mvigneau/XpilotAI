@@ -56,6 +56,7 @@ def select(population, population_size, fitness_list):
 		prob = float(fitness_list[j]) / total
 		probability_list.append(prob)
 
+	print("half")
 	## repeat these step until you fill up entire new population ##
 	for popsize in range(population_size):
 		## Select A Chromosome ##
@@ -64,6 +65,7 @@ def select(population, population_size, fitness_list):
 		## Add Selected Chromosome to New Population ##
 		new_population.append(selection);
 
+	print("good")
 	return new_population
 
 def crossover(new_population):
