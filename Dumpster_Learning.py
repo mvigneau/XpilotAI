@@ -57,6 +57,8 @@ def AI_loop():
   closingRate_FastBottomAlertValue = transform_fuzzy(closingRate_FastBottomAlert, 1, closingRate_SlowBottomAlertValue, closingRate_FastTopAlertValue) 
   #print("frontAlertValue", frontAlertValue)
 
+  print("got pass the chrom")
+
   #Set variables
   heading = int(ai.selfHeadingDeg())
   tracking = int(ai.selfTrackingDeg())
@@ -81,7 +83,7 @@ def AI_loop():
   	
     ### Fuzzy membership ###
     closing_rate, distance = Closing_Rate(Degree, tracking, Speed, Distance)
-    low, medium, fast = Fuzzy_Speed(closing_rate)
+    low, medium, fast = Fuzzy_Speed(closing_rate, closingRate_SlowTopAlertValue, closingRate_SlowBottomAlertValue, closingRate_MediumBottomLeftAlertValue, closingRate_MediumTopLeftAlertValue, closingRate_MediumTopRightAlertValue, closingRate_MediumBottomRightAlertValue, closingRate_FastBottomAlertValue, closingRate_FastTopAlertValue)
     close, far = Fuzzy_Distance(distance)
     risk = Fuzzy_Risk(low, medium, fast, close, far)
     risk_list.append(risk)

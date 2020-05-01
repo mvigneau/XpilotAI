@@ -34,7 +34,7 @@ def Closing_Rate(Degree, tracking, Speed, Distance):
 	return closing_rate, distance
 
 ## Give a degree of membership for slow, medium, fast closing rate ##
-def Fuzzy_Speed(Closing_rate):
+def Fuzzy_Speed(Closing_rate, closingRate_SlowTopAlertValue, closingRate_SlowBottomAlertValue, closingRate_MediumBottomLeftAlertValue, closingRate_MediumTopLeftAlertValue, closingRate_MediumTopRightAlertValue, closingRate_MediumBottomRightAlertValue, closingRate_FastBottomAlertValue, closingRate_FastTopAlertValue):
 	
 	## Step 1 -- Closing Rate; slow, medium or fast ##
 	Membership_Slow = 0 
