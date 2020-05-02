@@ -42,7 +42,8 @@ def AI_loop():
   closingRate_FastTopAlertValue = transform_fuzzy(closingRate_FastTopAlert, 1, closingRate_MediumTopRightAlertValue, closingRate_MediumTopRightAlertValue+16) 
   
   print("closingRate_FastTopAlertValue", closingRate_FastTopAlertValue)
-  closingRate_SlowBottomAlert = current_chromosome[16:20]   
+  closingRate_SlowBottomAlert = current_chromosome[16:20]  
+  print(closingRate_SlowTopAlertValue, closingRate_MediumTopLeftAlertValue) 
   start = (closingRate_SlowTopAlertValue + (((closingRate_MediumTopLeftAlertValue - closingRate_SlowTopAlertValue)/2)+1))
   end = start + (1 * (2**(i))) 
   print(start, end)                        
