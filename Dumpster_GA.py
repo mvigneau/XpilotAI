@@ -132,7 +132,7 @@ def transform_fuzzy(gene, jump, start, end):
 	value = start
 	gene.reverse()
 	threshold = 100000
-	while(threshold >= end):
+	while(threshold > end):
 		current_value = 0
 		for i in range(len(gene)):
 			if (gene[i] == 1):
