@@ -41,15 +41,15 @@ def AI_loop():
   closingRate_FastTopAlert = current_chromosome[12:16]                 
   closingRate_FastTopAlertValue = transform_fuzzy(closingRate_FastTopAlert, 1, (closingRate_MediumTopRightAlertValue+1), closingRate_MediumTopRightAlertValue+16) 
   
-  print("closingRate_FastTopAlertValue", closingRate_FastTopAlertValue)
+  #print("closingRate_FastTopAlertValue", closingRate_FastTopAlertValue)
   closingRate_SlowBottomAlert = current_chromosome[16:20]  
-  print(closingRate_SlowTopAlertValue, closingRate_MediumTopLeftAlertValue) 
+  #print(closingRate_SlowTopAlertValue, closingRate_MediumTopLeftAlertValue) 
   start = (closingRate_SlowTopAlertValue + (((closingRate_MediumTopLeftAlertValue - closingRate_SlowTopAlertValue)/2)+1))
-  print(len(closingRate_SlowBottomAlert))
+  #print(len(closingRate_SlowBottomAlert))
   end = (start + (1 * (2**(len(closingRate_SlowBottomAlert))))) 
-  print(start, end)                        
+  #print(start, end)                        
   closingRate_SlowBottomAlertValue = transform_fuzzy(closingRate_SlowBottomAlert, 1, start, end)   
-  print("closingRate_SlowBottomAlertValue", closingRate_SlowBottomAlertValue)
+  #print("closingRate_SlowBottomAlertValue", closingRate_SlowBottomAlertValue)
   
   closingRate_MediumBottomLeftAlert = current_chromosome[20:24]             
   end = (closingRate_MediumTopLeftAlertValue - (((closingRate_MediumTopLeftAlertValue - closingRate_SlowTopAlertValue)/2)+1))
@@ -61,14 +61,14 @@ def AI_loop():
   print(start, end)  
   jump = (end - start) // (2**(len(closingRate_MediumBottomLeftAlert)))
   closingRate_MediumBottomLeftAlertValue = transform_fuzzy(closingRate_MediumBottomLeftAlert, jump, start, end)
-  print("closingRate_MediumBottomLeftAlertValue", closingRate_MediumBottomLeftAlertValue)
+  #print("closingRate_MediumBottomLeftAlertValue", closingRate_MediumBottomLeftAlertValue)
   
   closingRate_MediumBottomRightAlert = current_chromosome[24:28]     
   start = (closingRate_MediumTopRightAlertValue + (((closingRate_FastTopAlertValue - closingRate_MediumTopRightAlertValue)/2)+1))
   end = start + (1 * (2**(len(closingRate_MediumBottomRightAlert))))        
   print(start, end)  
   closingRate_MediumBottomRightAlertValue = transform_fuzzy(closingRate_MediumBottomRightAlert, 1, start, end) 
-  print("closingRate_MediumBottomRightAlertValue", closingRate_MediumBottomRightAlertValue)
+  #print("closingRate_MediumBottomRightAlertValue", closingRate_MediumBottomRightAlertValue)
 
   closingRate_FastBottomAlert = current_chromosome[28:32]                   
   end = (closingRate_FastTopAlertValue - (((closingRate_FastTopAlertValue - closingRate_MediumTopRightAlertValue)/2)+1))
@@ -79,21 +79,21 @@ def AI_loop():
     start = 0  
   jump = (end - start) // (2**(len(closingRate_FastBottomAlert)))
   closingRate_FastBottomAlertValue = transform_fuzzy(closingRate_FastBottomAlert, jump, start, end)
-  print("closingRate_FastBottomAlertValue", closingRate_FastBottomAlertValue)
+  #print("closingRate_FastBottomAlertValue", closingRate_FastBottomAlertValue)
 
   Distance_CloseTopAlert = current_chromosome[32:37]
-  print(Distance_CloseTopAlert)
+  #print(Distance_CloseTopAlert)
   Distance_CloseTopAlertValue = transform_fuzzy(Distance_CloseTopAlert, 50, 0, (50*(2**len(Distance_CloseTopAlert)))) 
-  print("Distance_CloseTopAlertValue", Distance_CloseTopAlertValue)
+  #print("Distance_CloseTopAlertValue", Distance_CloseTopAlertValue)
   Distance_FarTopAlert = current_chromosome[37:42]
   Distance_FarTopAlertValue = transform_fuzzy(Distance_CloseTopAlert, 50, Distance_CloseTopAlertValue, Distance_CloseTopAlertValue+(50*(2**len(Distance_CloseTopAlert)))) 
-  print("Distance_FarTopAlertValue", Distance_FarTopAlertValue)
+  #print("Distance_FarTopAlertValue", Distance_FarTopAlertValue)
 
   Distance_CloseBottomAlert = current_chromosome[42:47]
   start = (Distance_CloseTopAlertValue + (((Distance_FarTopAlertValue - Distance_CloseTopAlertValue)/2)+1))
   end = start + (50 * (2**(len(Distance_CloseBottomAlert))))  
   Distance_CloseBottomAlertValue = transform_fuzzy(Distance_CloseBottomAlert, 50, start, end) 
-  print("Distance_CloseBottomAlertValue", Distance_CloseBottomAlertValue)
+  #print("Distance_CloseBottomAlertValue", Distance_CloseBottomAlertValue)
   Distance_FarBottomAlert = current_chromosome[47:52] 
   end = (Distance_FarTopAlertValue - (((Distance_FarTopAlertValue - Distance_CloseTopAlertValue)/2)+1))
   if(end < 0):
@@ -103,7 +103,7 @@ def AI_loop():
     start = 0  
   jump = (end - start) // (2**(len(Distance_FarBottomAlert)))
   Distance_FarBottomAlertValue = transform_fuzzy(Distance_FarBottomAlert, jump, start, end)
-  print("Distance_FarBottomAlertValue", Distance_FarBottomAlertValue)
+  #print("Distance_FarBottomAlertValue", Distance_FarBottomAlertValue)
 
   #print("got pass the chrom")
 
@@ -241,7 +241,7 @@ def AI_loop():
       count_frame += 3
       boolean = False
     
-#ai.headlessMode()
+ai.headlessMode()
 ai.start(AI_loop,["-name", "Dumpster", "-join", "localhost"])
 
 #ai.start(AI_loop,["-name", "Dumpster", "-join", "136.244.227.81", "-port", "15350"])
