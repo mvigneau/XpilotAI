@@ -71,7 +71,7 @@ def AI_loop():
   Distance_FarBottomAlertValue = transform_fuzzy(Distance_FarBottomAlert, ((Distance_FarTopAlertValue - Distance_CloseTopAlertValue) // 32), Distance_CloseTopAlertValue, Distance_FarTopAlertValue)
   #print("Distance_FarBottomAlertValue", Distance_FarBottomAlertValue)
 
-  #print("got pass the chrom")
+  print("got pass the chrom")
 
   #Set variables
   heading = int(ai.selfHeadingDeg())
@@ -172,6 +172,7 @@ def AI_loop():
   else:
     
     if(ai.selfAlive() == 1):
+      print("Alive")
       ## Get the angles on both side between tracking and heading ##
       dist = (heading - track_risk) % 360
       dist2 = (360 - dist) % 360
