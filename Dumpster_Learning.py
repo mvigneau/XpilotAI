@@ -86,7 +86,7 @@ def AI_loop():
   Distance_CloseTopAlertValue = transform_fuzzy(Distance_CloseTopAlert, 50, 0, (50*(2**len(Distance_CloseTopAlert)))) 
   #print("Distance_CloseTopAlertValue", Distance_CloseTopAlertValue)
   Distance_FarTopAlert = current_chromosome[37:42]
-  Distance_FarTopAlertValue = transform_fuzzy(Distance_CloseTopAlert, 50, Distance_CloseTopAlertValue, Distance_CloseTopAlertValue+(50*(2**len(Distance_CloseTopAlert)))) 
+  Distance_FarTopAlertValue = transform_fuzzy(Distance_CloseTopAlert, 50, (Distance_CloseTopAlertValue+50), Distance_CloseTopAlertValue+(50*(2**len(Distance_CloseTopAlert)))) 
   #print("Distance_FarTopAlertValue", Distance_FarTopAlertValue)
 
   Distance_CloseBottomAlert = current_chromosome[42:47]
@@ -132,9 +132,9 @@ def AI_loop():
     ### Fuzzy membership ###
     closing_rate, distance = Closing_Rate(Degree, tracking, Speed, Distance)
     low, medium, fast = Fuzzy_Speed(closing_rate, closingRate_SlowTopAlertValue, closingRate_SlowBottomAlertValue, closingRate_MediumBottomLeftAlertValue, closingRate_MediumTopLeftAlertValue, closingRate_MediumTopRightAlertValue, closingRate_MediumBottomRightAlertValue, closingRate_FastBottomAlertValue, closingRate_FastTopAlertValue)
-    print("low-med-fast", low, medium, fast)
+    #print("low-med-fast", low, medium, fast)
     close, far = Fuzzy_Distance(distance, Distance_CloseTopAlertValue, Distance_CloseBottomAlertValue, Distance_FarBottomAlertValue, Distance_FarTopAlertValue)
-    print("close-far", close, far)
+    #print("close-far", close, far)
     risk = Fuzzy_Risk(low, medium, fast, close, far)
     risk_list.append(risk)
   
@@ -143,7 +143,7 @@ def AI_loop():
   track_risk = (tracking + (risk_list.index(max_risk)*45) % 360)
   min_risk = min(risk_list)
   
-  print("found max risk", max_risk)
+  #print("found max risk", max_risk)
 
   #######   Shooting Ennemies  ########
   
@@ -196,6 +196,7 @@ def AI_loop():
       fitness_list.clear()
       if generation == generation_size:
         print("Done")
+        quitAI()
         ### DONE -- QUIT ###
       
     else:   

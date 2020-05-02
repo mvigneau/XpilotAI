@@ -108,6 +108,7 @@ def AI_loop():
       fitness_list.clear()
       if generation == generation_size:
         print("Done")
+        quitAI()
         ### DONE -- QUIT ###
       
     else:   
