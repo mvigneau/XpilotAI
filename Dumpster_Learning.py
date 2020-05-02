@@ -242,7 +242,7 @@ def AI_loop():
       count_frame += 3
       boolean = False
     
-#ai.headlessMode()
+ai.headlessMode()
 ai.start(AI_loop,["-name", "Dumpster", "-join", "localhost"])
 
 #ai.start(AI_loop,["-name", "Dumpster", "-join", "136.244.227.81", "-port", "15350"])
