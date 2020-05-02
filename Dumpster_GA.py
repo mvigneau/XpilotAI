@@ -129,7 +129,7 @@ def transform(gene, jump):
 	return value
 
 def transform_fuzzy(gene, jump, start, end):
-	print(gene, jump, start, end)
+	#print(gene, jump, start, end)
 	value = start
 	gene.reverse()
 	threshold = 100000
