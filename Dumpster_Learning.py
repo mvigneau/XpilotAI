@@ -11,7 +11,6 @@ population_size = 32
 crossover_prob = 0.7
 mutation_prob = 0.01
 chromosome_size = 52
-fitness_target = 20
 population = init_population(population_size, chromosome_size)
 count_frame = 0
 loop = 0
@@ -48,8 +47,10 @@ def AI_loop():
   print("closingRate_SlowBottomAlertValue", closingRate_SlowBottomAlertValue)
   closingRate_MediumBottomLeftAlert = current_chromosome[20:24]                 
   closingRate_MediumBottomLeftAlertValue = transform_fuzzy(closingRate_MediumBottomLeftAlert, (closingRate_MediumTopLeftAlertValue // (2**len(closingRate_MediumBottomLeftAlert))), 0, closingRate_MediumTopLeftAlertValue) 
+  print("closingRate_MediumBottomLeftAlertValue", closingRate_MediumBottomLeftAlertValue)
   closingRate_MediumBottomRightAlert = current_chromosome[24:28]                 
   closingRate_MediumBottomRightAlertValue = transform_fuzzy(closingRate_MediumBottomRightAlert, 1, closingRate_MediumTopRightAlertValue, closingRate_MediumTopRightAlertValue+16) 
+  print("closingRate_MediumBottomRightAlertValue", closingRate_MediumBottomRightAlertValue)
   closingRate_FastBottomAlert = current_chromosome[28:32]                 
   closingRate_FastBottomAlertValue = transform_fuzzy(closingRate_FastBottomAlert, ((closingRate_FastTopAlertValue - closingRate_SlowBottomAlertValue) // ((2**len(closingRate_FastBottomAlert)))), closingRate_SlowBottomAlertValue, closingRate_FastTopAlertValue) 
   print("closingRate_FastBottomAlertValue", closingRate_FastBottomAlertValue)
