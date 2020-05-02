@@ -2,6 +2,7 @@
 ### Date: 02-14-2020 ###
 ### This program uses fuzzy rules to determine the wall avoidance ###
 import libpyAI as ai
+import statistics 
 from Dumpster_Fuzzy import *
 from Dumpster_GA import *
 
@@ -62,15 +63,15 @@ def AI_loop():
 
 
   Distance_CloseTopAlert = current_chromosome[32:37]
-  print(Distance_CloseTopAlert)
+  #print(Distance_CloseTopAlert)
   Distance_CloseTopAlertValue = transform_fuzzy(Distance_CloseTopAlert, 50, 0, (50*(2**len(Distance_CloseTopAlert)))) 
-  print("Distance_CloseTopAlertValue", Distance_CloseTopAlertValue)
+  #print("Distance_CloseTopAlertValue", Distance_CloseTopAlertValue)
   Distance_FarTopAlert = current_chromosome[37:42]
   Distance_FarTopAlertValue = transform_fuzzy(Distance_CloseTopAlert, 50, Distance_CloseTopAlertValue, Distance_CloseTopAlertValue+(50*(2**len(Distance_CloseTopAlert)))) 
-  print("Distance_FarTopAlertValue", Distance_FarTopAlertValue)
+  #print("Distance_FarTopAlertValue", Distance_FarTopAlertValue)
   Distance_CloseBottomAlert = current_chromosome[42:47]
   Distance_CloseBottomAlertValue = transform_fuzzy(Distance_CloseBottomAlert, 50, Distance_CloseTopAlertValue, Distance_CloseTopAlertValue+(50*(2**len(Distance_CloseTopAlert)))) 
-  print("Distance_CloseBottomAlertValue", Distance_CloseBottomAlertValue)
+  #print("Distance_CloseBottomAlertValue", Distance_CloseBottomAlertValue)
   Distance_FarBottomAlert = current_chromosome[47:52]
   Distance_FarBottomAlertValue = transform_fuzzy(Distance_FarBottomAlert, 50, 0, Distance_FarTopAlertValue) 
 
@@ -101,9 +102,9 @@ def AI_loop():
     ### Fuzzy membership ###
     closing_rate, distance = Closing_Rate(Degree, tracking, Speed, Distance)
     low, medium, fast = Fuzzy_Speed(closing_rate, closingRate_SlowTopAlertValue, closingRate_SlowBottomAlertValue, closingRate_MediumBottomLeftAlertValue, closingRate_MediumTopLeftAlertValue, closingRate_MediumTopRightAlertValue, closingRate_MediumBottomRightAlertValue, closingRate_FastBottomAlertValue, closingRate_FastTopAlertValue)
-    print("low-med-fast", low, medium, fast)
+    #print("low-med-fast", low, medium, fast)
     close, far = Fuzzy_Distance(distance, Distance_CloseTopAlertValue, Distance_CloseBottomAlertValue, Distance_FarBottomAlertValue, Distance_FarTopAlertValue)
-    print("close-far", close, far)
+    #print("close-far", close, far)
     risk = Fuzzy_Risk(low, medium, fast, close, far)
     risk_list.append(risk)
   
