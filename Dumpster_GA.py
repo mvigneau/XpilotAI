@@ -144,5 +144,3 @@ def transform_fuzzy(gene, jump, start, end):
 	value += current_value
 	
 	return value
-
-def Find_Start()
