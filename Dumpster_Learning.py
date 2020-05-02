@@ -133,7 +133,7 @@ def AI_loop():
   
 
   if(ai.selfAlive() == 0 and boolean == False): 
-    print("died", loop)
+
     ## Calculate Fitness Current Population ##
     score_previous = score
     score_current = ai.selfScore()
@@ -171,7 +171,7 @@ def AI_loop():
   else:
     #print("boolean", boolean)
     if(ai.selfAlive() == 1):
-      print("Alive")
+
       ## Get the angles on both side between tracking and heading ##
       dist = (heading - track_risk) % 360
       dist2 = (360 - dist) % 360
