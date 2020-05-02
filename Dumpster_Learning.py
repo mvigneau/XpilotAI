@@ -55,8 +55,6 @@ def AI_loop():
   closingRate_FastBottomAlertValue = transform_fuzzy(closingRate_FastBottomAlert, ((closingRate_FastTopAlertValue - closingRate_SlowBottomAlertValue) // ((2**len(closingRate_FastBottomAlert)))), closingRate_SlowBottomAlertValue, closingRate_FastTopAlertValue) 
   #print("closingRate_FastBottomAlertValue", closingRate_FastBottomAlertValue)
 
-
-
   Distance_CloseTopAlert = current_chromosome[32:37]
   #print(Distance_CloseTopAlert)
   Distance_CloseTopAlertValue = transform_fuzzy(Distance_CloseTopAlert, 50, 0, (50*(2**len(Distance_CloseTopAlert)))) 
@@ -109,6 +107,7 @@ def AI_loop():
   track_risk = (tracking + (risk_list.index(max_risk)*45) % 360)
   min_risk = min(risk_list)
   
+  print("found max risk", max_risk)
 
   #######   Shooting Ennemies  ########
   
@@ -170,7 +169,7 @@ def AI_loop():
 
   ### Rules ###
   else:
-    
+    print("boolean", boolean)
     if(ai.selfAlive() == 1):
       print("Alive")
       ## Get the angles on both side between tracking and heading ##
