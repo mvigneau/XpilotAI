@@ -67,7 +67,8 @@ def AI_loop():
   Distance_CloseBottomAlertValue = transform_fuzzy(Distance_CloseBottomAlert, ((Distance_FarTopAlertValue - Distance_CloseTopAlertValue) // 32), Distance_CloseTopAlertValue, Distance_FarTopAlertValue) 
   print("Distance_CloseBottomAlertValue", Distance_CloseBottomAlertValue)
   Distance_FarBottomAlert = current_chromosome[47:52]
-  Distance_FarBottomAlertValue = transform_fuzzy(Distance_FarBottomAlert, ((Distance_FarTopAlertValue - Distance_CloseTopAlertValue) // 32), Distance_CloseTopAlertValue, Distance_FarTopAlertValue) 
+  Distance_FarBottomAlertValue = transform_fuzzy(Distance_FarBottomAlert, ((Distance_FarTopAlertValue - Distance_CloseTopAlertValue) // 32), Distance_CloseTopAlertValue, Distance_FarTopAlertValue)
+  print("Distance_FarBottomAlertValue", Distance_FarBottomAlertValue)
 
   #print("got pass the chrom")
 
