@@ -7,7 +7,7 @@ from Dumpster_Fuzzy import *
 from Dumpster_GA import *
 
 ### Setting Up GA ###
-population_size = 2
+population_size = 32
 crossover_prob = 0.7
 mutation_prob = 0.01
 chromosome_size = 52
