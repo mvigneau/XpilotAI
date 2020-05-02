@@ -18,7 +18,7 @@ boolean = False
 fitness_list = []
 score = 0
 generation_size = 200
-generation = 0
+generation = 1
 
 def AI_loop():
   global count_frame, loop, boolean, score, population_size, chromosome_size, population, mutation_prob, crossover_prob, fitness_list, generation, generation_size
