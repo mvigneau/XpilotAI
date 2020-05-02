@@ -105,7 +105,7 @@ def AI_loop():
   Distance_FarBottomAlertValue = transform_fuzzy(Distance_FarBottomAlert, jump, start, end)
   #print("Distance_FarBottomAlertValue", Distance_FarBottomAlertValue)
 
-  print("got pass the chrom")
+  #print("got pass the chrom")
 
   #Set variables
   heading = int(ai.selfHeadingDeg())
