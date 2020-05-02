@@ -112,14 +112,11 @@ def mutate(new_population, chromosome_size, mutation_prob):
 		for j in range(chromosome_size):
 			random_number = randint(1, 100)
 			if random_number <= (mutation_prob * 100):
-				#print(i,j)
-				#print(new_population[i][0][j])
 				if new_population[i][j] == 0:
 					new_population[i][j] = 1
 				else:
 					new_population[i][j] = 0
-				#print(new_population[i][0][j])
-	#print(new_population)
+
 	return new_population 
 
 
@@ -135,7 +132,6 @@ def transform_fuzzy(gene, jump, start, end):
 	value = start
 	gene.reverse()
 	threshold = 100000
-	print("ok")
 	while(threshold >= end):
 		current_value = 0
 		for i in range(len(gene)):

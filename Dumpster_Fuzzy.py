@@ -61,7 +61,6 @@ def Fuzzy_Speed(Closing_rate, closingRate_SlowTopAlertValue, closingRate_SlowBot
 ## Give a degree of membership for ditance; close or far ##
 def Fuzzy_Distance(Distance, Distance_CloseTopAlertValue, Distance_CloseBottomAlertValue, Distance_FarBottomAlertValue, Distance_FarTopAlertValue):	
 	
-	print("in")
 	## Step 2 -- Distance; close or far ##
 	Distance_Close = 0
 	Distance_Far = 0
@@ -75,7 +74,6 @@ def Fuzzy_Distance(Distance, Distance_CloseTopAlertValue, Distance_CloseBottomAl
 	if(Distance >= Distance_FarTopAlertValue):
 		Distance_Far = 1
 	
-	print("out")
 	return(Distance_Close, Distance_Far)
 
 ## Fuzzy rules to determine output in terms of risks and defuzification ##
