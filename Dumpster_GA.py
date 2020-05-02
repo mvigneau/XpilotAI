@@ -145,3 +145,4 @@ def transform_fuzzy(gene, jump, start, end):
 	
 	return value
 
+def Find_Start()
