@@ -8,7 +8,6 @@ population_size = 32
 crossover_prob = 0.7
 mutation_prob = 0.01
 chromosome_size = 26
-fitness_target = 20
 population = init_population(population_size, chromosome_size)
 count_frame = 0
 loop = 0
