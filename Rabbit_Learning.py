@@ -99,9 +99,9 @@ def AI_loop():
       print("Best Fitness:", max(fitness_list))
 
       ## Output Data into Excel File ##
-      titles = ["Generation", "Average Fitness", "Best Fitness","Population Size", "Chromosome Size", "Crossover Probability", "Mutation Probability"]
-      data = [generation, statistics.mean(fitness_list), max(fitness_list), population_size, chromosome_size, crossover_prob, mutation_prob]
-      Save_Data("Training_Data.xls", 0, titles, data, first_time)
+      titles = ["Generation", "Average Fitness", "Best Fitness", "Best Chromosome","Population Size", "Chromosome Size", "Crossover Probability", "Mutation Probability"]
+      data = [generation, statistics.mean(fitness_list), max(fitness_list), population[fitness_list.index(max(fitness_list))], population_size, chromosome_size, crossover_prob, mutation_prob]
+      first_time = Save_Data("Training_Data.xls", 0, titles, data, first_time)
 
       ## Select Next Generation -- Apply Crossover & Mutation ##
       new_population = select(population, fitness_list)

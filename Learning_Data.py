@@ -40,3 +40,5 @@ def Save_Data(filename, sheet_number, titles, data, first_time):
 
        ## save the writable workbook 
        wb.save(filename)
+
+       return first_time
