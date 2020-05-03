@@ -114,7 +114,7 @@ def AI_loop():
       ## Formatting entire population's fitness in a big string to register it in excel file##
       string_fitness = ""
       for fit in range(len(fitness_list)):
-          string_fitness = string_fitness + str(fitness_list[fit])
+        string_fitness = string_fitness + str(fitness_list[fit])
         if(fit != (len(fitness_list)-1)):
           string_fitness = string_fitness + ","
 
