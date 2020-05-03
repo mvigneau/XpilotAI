@@ -15,7 +15,7 @@ def Save_Data(filename, sheet_number, titles, data, number_rows):
 
        ## Copy the workbook read over into a workbook we can write into ##
        wb = copy(book)
-
+       print("got new workbook")
        ## Get the sheet to write to within the writable copy ##
        w_sheet = wb.get_sheet(sheet_number)
 

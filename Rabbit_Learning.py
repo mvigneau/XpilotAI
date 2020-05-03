@@ -99,6 +99,7 @@ def AI_loop():
       ## Output Data into Excel File ##
       titles = ["Generation", "Average Fitness", "Best Fitness","Population Size", "Chromosome Size", "Crossover Probability", "Mutation Probability"]
       data = [generation, statistics.mean(fitness_list), max(fitness_list), population_size, chromosome_size, crossover_prob, mutation_prob]
+      print("Saving Data")
       SaveData("Training_Data.xlsx", 1, titles, data)
       ## Select Next Generation -- Apply Crossover & Mutation ##
       new_population = select(population, fitness_list)
