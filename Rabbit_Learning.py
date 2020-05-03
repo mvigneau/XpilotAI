@@ -5,7 +5,7 @@ from Learning_Data import *
 from Rabbit_GA import * 
 
 ### Setting Up GA ###
-population_size = 4
+population_size = 64
 crossover_prob = 0.7
 mutation_prob = 0.01
 chromosome_size = 26
@@ -185,6 +185,11 @@ def AI_loop():
         ai.thrust(1)
       elif right135Wall <= TrackSlowAlertValue and ai.selfSpeed() <= speedAlertValue:
         ai.thrust(1)
+      ##### Bullet Avoidance Commands #####
+      elif ai.shotAlert(0) <= 0: 
+        print(ai.shotAlert(0))
+      elif ai.shotAlert(0) >= 0:
+        print(ai.shotAlert(0))
       ##### Shooting Ennemy Commands #####
       elif enemyDist <= EnemyAlertValue and heading > (head) and ai.selfSpeed() > speedAlertValue:
         ai.turnRight(1)
@@ -201,7 +206,7 @@ def AI_loop():
       count_frame += 3
       boolean = False
 
-ai.headlessMode()
+#ai.headlessMode()
 ai.start(AI_loop,["-name","Rabbit","-join","localhost"])
 
 
