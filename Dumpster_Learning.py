@@ -7,7 +7,7 @@ from Dumpster_Fuzzy import *
 from Dumpster_GA import *
 
 ### Setting Up GA ###
-population_size = 32
+population_size = 8
 crossover_prob = 0.7
 mutation_prob = 0.01
 chromosome_size = 52
@@ -239,7 +239,7 @@ def AI_loop():
       count_frame += 3
       boolean = False
     
-#ai.headlessMode()
+ai.headlessMode()
 ai.start(AI_loop,["-name", "Dumpster", "-join", "localhost"])
 
 #ai.start(AI_loop,["-name", "Dumpster", "-join", "136.244.227.81", "-port", "15350"])
