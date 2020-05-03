@@ -186,10 +186,14 @@ def AI_loop():
       elif right135Wall <= TrackSlowAlertValue and ai.selfSpeed() <= speedAlertValue:
         ai.thrust(1)
       ##### Bullet Avoidance Commands #####
-      elif ai.shotAlert(0) <= 0: 
-        print(ai.shotAlert(0))
       elif ai.shotAlert(0) >= 0:
-        print(ai.shotAlert(0))
+        if ai.angleDiff(heading, ai.shotVelDir(0)) > 0:
+          ai.turnLeft(1)
+          ai.thrust(1)
+
+        else: 
+          ai.turnRight(1)
+          ai.thrust(1)
       ##### Shooting Ennemy Commands #####
       elif enemyDist <= EnemyAlertValue and heading > (head) and ai.selfSpeed() > speedAlertValue:
         ai.turnRight(1)
