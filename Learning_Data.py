@@ -4,7 +4,7 @@ import xlwt
 from xlrd import open_workbook
 from xlutils.copy import copy                           
 
-def Save_Data(filename, sheet_number, titles, data, number_rows):
+def Save_Data(filename, sheet_number, titles, data):
 
        print(filename)
        ## Open existing workbook ##
