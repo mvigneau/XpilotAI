@@ -1,7 +1,7 @@
 ### Program 1 -- Mathieu Vigneault,  
 import libpyAI as ai
 import statistics 
-from Learning_Dara import * 
+from Learning_Data import * 
 from Rabbit_GA import * 
 
 ### Setting Up GA ###
