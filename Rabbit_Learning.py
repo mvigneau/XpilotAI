@@ -1,10 +1,11 @@
 ### Program 1 -- Mathieu Vigneault,  
 import libpyAI as ai
 import statistics 
+from Learning_Dara import * 
 from Rabbit_GA import * 
 
 ### Setting Up GA ###
-population_size = 32
+population_size = 4
 crossover_prob = 0.7
 mutation_prob = 0.01
 chromosome_size = 26
@@ -93,6 +94,12 @@ def AI_loop():
       print("Agent Fitness:")
       print(fitness_list)
       print("Average Fitness:", statistics.mean(fitness_list))
+      print("Best Fitness:", max(fitness_list))
+
+      ## Output Data into Excel File ##
+      titles = ["Generation", "Average Fitness", "Best Fitness","Population Size", "Chromosome Size", "Crossover Probability", "Mutation Probability"]
+      data = [generation, statistics.mean(fitness_list), max(fitness_list), population_size, chromosome_size, crossover_prob, mutation_prob]
+      SaveData("Training_Data.xls", 1, titles, data)
       ## Select Next Generation -- Apply Crossover & Mutation ##
       new_population = select(population, fitness_list)
       #print("new", new_population)
