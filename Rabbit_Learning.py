@@ -8,7 +8,7 @@ from Rabbit_GA import *
 population_size = 64
 crossover_prob = 0.7
 mutation_prob = 0.01
-chromosome_size = 26
+chromosome_size = 32
 population = init_population(population_size, chromosome_size)
 count_frame = 0
 loop = 0
@@ -50,7 +50,9 @@ def AI_loop():
   TrackFastAlert = current_chromosome[22:26]            #4 bits 
   TrackFastAlertValue = transform(TrackFastAlert, 25)   #25 jumps per value
   #print("speedAlertValue", speedAlertValue)
-
+  BulletAlert = current_chromosome[26:32]            #4 bits 
+  BulletAlertValue = transform(BulletAlert, 15)   #25 jumps per value
+  #print("speedAlertValue", speedAlertValue)
 
   #Set variables
   heading = int(ai.selfHeadingDeg())
@@ -186,14 +188,17 @@ def AI_loop():
       elif right135Wall <= TrackSlowAlertValue and ai.selfSpeed() <= speedAlertValue:
         ai.thrust(1)
       ##### Bullet Avoidance Commands #####
-      elif ai.shotAlert(0) >= 0:
-        if ai.angleDiff(heading, ai.shotVelDir(0)) > 0:
+      elif ai.shotAlert(0) >= 0 and ai.shotAlert(0) <= BulletAlertValue:
+        if ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() <= speedAlertValue:
           ai.turnLeft(1)
           ai.thrust(1)
-
-        else: 
+        elif ai.angleDiff(heading, ai.shotVelDir(0)) < 0 and ai.selfSpeed() <= speedAlertValue: 
           ai.turnRight(1)
           ai.thrust(1)
+        elif ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() > speedAlertValue:
+          ai.turnLeft(1)
+        else:
+          ai.turnRight(1)
       ##### Shooting Ennemy Commands #####
       elif enemyDist <= EnemyAlertValue and heading > (head) and ai.selfSpeed() > speedAlertValue:
         ai.turnRight(1)
