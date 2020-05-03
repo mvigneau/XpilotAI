@@ -97,14 +97,15 @@ def AI_loop():
       print(fitness_list)
       print("Average Fitness:", statistics.mean(fitness_list))
       print("Best Fitness:", max(fitness_list))
-
-      ## Output Data into Excel File ##
+      
+      ## Finding the optimal chromosome to output it in data file ##
       string_maxChromosome = ""
       for chrom_max in range(chromosome_size):
          string_maxChromosome = string_maxChromosome + str(population[fitness_list.index(max(fitness_list))][chrom_max])
-      print(string_maxChromosome)
+
+      ## Output Data into Excel File ##
       titles = ["Generation", "Average Fitness", "Best Fitness", "Best Chromosome","Population Size", "Chromosome Size", "Crossover Probability", "Mutation Probability"]
-      data = [generation, statistics.mean(fitness_list), max(fitness_list), population[fitness_list.index(max(fitness_list))], population_size, chromosome_size, crossover_prob, mutation_prob]
+      data = [generation, statistics.mean(fitness_list), max(fitness_list), string_maxChromosome, population_size, chromosome_size, crossover_prob, mutation_prob]
       first_time = Save_Data("Training_Data.xls", 0, titles, data, first_time)
 
       ## Select Next Generation -- Apply Crossover & Mutation ##
