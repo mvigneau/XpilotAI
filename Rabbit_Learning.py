@@ -99,6 +99,7 @@ def AI_loop():
       print("Best Fitness:", max(fitness_list))
 
       ## Output Data into Excel File ##
+      print(population[fitness_list.index(max(fitness_list))])
       titles = ["Generation", "Average Fitness", "Best Fitness", "Best Chromosome","Population Size", "Chromosome Size", "Crossover Probability", "Mutation Probability"]
       data = [generation, statistics.mean(fitness_list), max(fitness_list), population[fitness_list.index(max(fitness_list))], population_size, chromosome_size, crossover_prob, mutation_prob]
       first_time = Save_Data("Training_Data.xls", 0, titles, data, first_time)
@@ -116,6 +117,7 @@ def AI_loop():
       count_frame = 0
       generation += 1
       fitness_list.clear()
+
       if (generation == generation_size):
         print("Done")
         ## Set Agent to chromosoze with most fitness ##
