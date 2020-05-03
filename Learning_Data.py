@@ -4,7 +4,7 @@ import xlwt
 from xlrd import open_workbook
 from xlutils.copy import copy                           
 
-def Save_Data(filename, sheet_number, titles, data):
+def Save_Data(filename, sheet_number, titles, data, first_time):
 
        print(filename)
        ## Open existing workbook ##
@@ -20,15 +20,17 @@ def Save_Data(filename, sheet_number, titles, data):
        ## Get the sheet to write to within the writable copy ##
        w_sheet = wb.get_sheet(sheet_number)
 
-       ## find the first row that has no data (empty) ##
-       number_rows = r_sheet.nrows
-       #print(number_rows)
 
        ## write titles of each column at top ##
-       if number_rows == 0:
+       if first_time == True:
               for number in range(len(titles)):
                      w_sheet.write(number_rows, number, titles[number])
                      print(titles[number])
+              first_time = False
+
+       ## find the first row that has no data (empty) ##
+       number_rows = r_sheet.nrows
+
 
        ## Write to writable sheet ##
        for col in range(len(data)):
