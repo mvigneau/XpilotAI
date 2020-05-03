@@ -18,9 +18,10 @@ score = 0
 generation_size = 200
 generation = 1
 first_time = True
+done_learning = False
 
 def AI_loop():
-  global count_frame, loop, boolean, score, population_size, chromosome_size, population, mutation_prob, crossover_prob, fitness_list, generation, generation_size, first_time
+  global count_frame, loop, boolean, score, population_size, chromosome_size, population, mutation_prob, crossover_prob, fitness_list, generation, generation_size, first_time, done_learning
   #Release keys
   ai.thrust(0)
   ai.turnLeft(0)
@@ -115,8 +116,9 @@ def AI_loop():
       count_frame = 0
       generation += 1
       fitness_list.clear()
-      if generation == generation_size:
+      if (generation == generation_size):
         print("Done")
+        ## Set Agent to chromosoze with most fitness ##
         quitAI()
         ### DONE -- QUIT ###
       

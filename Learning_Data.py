@@ -22,7 +22,7 @@ def Save_Data(filename, sheet_number, titles, data, first_time):
 
        ## find the first row that has no data (empty) ##
        number_rows = r_sheet.nrows
-
+       print("before", number_rows)
        ## write titles of each column at top ##
        if(first_time == True):
               for number in range(len(titles)):
@@ -31,9 +31,7 @@ def Save_Data(filename, sheet_number, titles, data, first_time):
               number_rows += 1
               first_time == False
 
-       ## find the first row that has no data (empty) ##
-       number_rows = r_sheet.nrows
-
+       print("after", number_rows)
 
        ## Write to writable sheet ##
        for col in range(len(data)):
