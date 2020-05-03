@@ -28,10 +28,12 @@ def Save_Data(filename, sheet_number, titles, data):
        if number_rows == 0:
               for number in range(titles):
                      w_sheet.write(0, number, titles[number])
+                     print(titles[number])
 
        ## Write to writable sheet ##
        for col in range(data):
               w_sheet.write(number_rows, col, data[col])
+              print(data[col])
 
        ## save the writable workbook 
        wb.save(filename)
