@@ -29,7 +29,7 @@ def Save_Data(filename, sheet_number, titles, data, first_time):
                      w_sheet.write(number_rows, number, titles[number])
                      print(titles[number])
               number_rows += 1
-              first_time == False
+              first_time = False
 
        print("after", number_rows)
 
