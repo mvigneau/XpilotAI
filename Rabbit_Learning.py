@@ -103,9 +103,25 @@ def AI_loop():
       for chrom_max in range(chromosome_size):
          string_maxChromosome = string_maxChromosome + str(population[fitness_list.index(max(fitness_list))][chrom_max])
 
+      ## Formatting entire population in a big string to register it in excel file##
+      string_population = ""
+      for pop in range(population_size):
+        for pop_chrom in range(chromosome_size):
+          string_population = string_population + str(population[pop][pop_chrom])
+        if(pop != (population_size-1)):
+          string_population = string_population + ","
+
+      ## Formatting entire population's fitness in a big string to register it in excel file##
+      string_fitness = ""
+      for fit in range(len(fitness_list)):
+          string_fitness = string_fitness + str(fitness_list[fit])
+        if(fit != (len(fitness_list)-1)):
+          string_fitness = string_fitness + ","
+
+
       ## Output Data into Excel File ##
-      titles = ["Generation", "Average Fitness", "Best Fitness", "Best Chromosome","Population Size", "Chromosome Size", "Crossover Probability", "Mutation Probability"]
-      data = [generation, statistics.mean(fitness_list), max(fitness_list), string_maxChromosome, population_size, chromosome_size, crossover_prob, mutation_prob]
+      titles = ["Generation", "Average Fitness", "Best Fitness","Population Size", "Chromosome Size", "Crossover Probability", "Mutation Probability", "Best Chromosome", "Entire Population Chromosome", "Entire Population Fitness"]
+      data = [generation, statistics.mean(fitness_list), max(fitness_list), population_size, chromosome_size, crossover_prob, mutation_prob, string_maxChromosome, string_population, string_fitness]
       first_time = Save_Data("Training_Data.xls", 0, titles, data, first_time)
 
       ## Select Next Generation -- Apply Crossover & Mutation ##
