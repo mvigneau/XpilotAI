@@ -20,13 +20,16 @@ def Save_Data(filename, sheet_number, titles, data, first_time):
        ## Get the sheet to write to within the writable copy ##
        w_sheet = wb.get_sheet(sheet_number)
 
+       ## find the first row that has no data (empty) ##
+       number_rows = r_sheet.nrows
 
        ## write titles of each column at top ##
-       if first_time == True:
+       if(first_time == True):
               for number in range(len(titles)):
                      w_sheet.write(number_rows, number, titles[number])
                      print(titles[number])
-              first_time = False
+              number_rows += 1
+              first_time == False
 
        ## find the first row that has no data (empty) ##
        number_rows = r_sheet.nrows
