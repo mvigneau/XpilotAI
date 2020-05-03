@@ -135,6 +135,7 @@ def AI_loop():
       #print("mutate", new_population)
       population = new_population
       #print("population", population)
+      
       loop = 0
       count_frame = 0
       generation += 1

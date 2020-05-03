@@ -4,10 +4,11 @@
 import libpyAI as ai
 import statistics 
 from Dumpster_Fuzzy import *
+from Learning_Data import * 
 from Dumpster_GA import *
 
 ### Setting Up GA ###
-population_size = 8
+population_size = 64
 crossover_prob = 0.7
 mutation_prob = 0.01
 chromosome_size = 52
@@ -19,9 +20,11 @@ fitness_list = []
 score = 0
 generation_size = 200
 generation = 1
+first_time = True
+done_learning = False
 
 def AI_loop():
-  global count_frame, loop, boolean, score, population_size, chromosome_size, population, mutation_prob, crossover_prob, fitness_list, generation, generation_size
+  global count_frame, loop, boolean, score, population_size, chromosome_size, population, mutation_prob, crossover_prob, fitness_list, generation, generation_size, first_time, done_learning
   #Release keys
   ai.thrust(0)
   ai.turnLeft(0)
@@ -178,6 +181,32 @@ def AI_loop():
       print("Agent Fitness:")
       print(fitness_list)
       print("Average Fitness:", statistics.mean(fitness_list))
+
+      ## Finding the optimal chromosome to output it in data file ##
+      string_maxChromosome = ""
+      for chrom_max in range(chromosome_size):
+         string_maxChromosome = string_maxChromosome + str(population[fitness_list.index(max(fitness_list))][chrom_max])
+
+      ## Formatting entire population in a big string to register it in excel file##
+      string_population = ""
+      for pop in range(population_size):
+        for pop_chrom in range(chromosome_size):
+          string_population = string_population + str(population[pop][pop_chrom])
+        if(pop != (population_size-1)):
+          string_population = string_population + ","
+
+      ## Formatting entire population's fitness in a big string to register it in excel file##
+      string_fitness = ""
+      for fit in range(len(fitness_list)):
+        string_fitness = string_fitness + str(fitness_list[fit])
+        if(fit != (len(fitness_list)-1)):
+          string_fitness = string_fitness + ","
+
+      ## Output Data into Excel File ##
+      titles = ["Generation", "Average Fitness", "Best Fitness","Population Size", "Chromosome Size", "Crossover Probability", "Mutation Probability", "Best Chromosome", "Entire Population Chromosome", "Entire Population Fitness"]
+      data = [generation, statistics.mean(fitness_list), max(fitness_list), population_size, chromosome_size, crossover_prob, mutation_prob, string_maxChromosome, string_population, string_fitness]
+      first_time = Save_Data("Training_Data.xls", 1, titles, data, first_time)
+
       ## Select Next Generation -- Apply Crossover & Mutation ##
       new_population = select(population, fitness_list)
       #print("new", new_population)
@@ -187,6 +216,7 @@ def AI_loop():
       #print("mutate", new_population)
       population = new_population
       #print("population", population)
+
       loop = 0
       count_frame = 0
       generation += 1
@@ -239,7 +269,7 @@ def AI_loop():
       count_frame += 3
       boolean = False
     
-#ai.headlessMode()
+ai.headlessMode()
 ai.start(AI_loop,["-name", "Dumpster", "-join", "localhost"])
 
 #ai.start(AI_loop,["-name", "Dumpster", "-join", "136.244.227.81", "-port", "15350"])
