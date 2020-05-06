@@ -75,4 +75,7 @@ def AI_loop():
   
   
 
-ai.start(AI_loop,["-name","Dubster","-join","localhost"])
+#ai.start(AI_loop,["-name","Dubster","-join","localhost"])
+ai.start(AI_loop,["-name","Dummy","-join", "136.244.227.81", "-port", "15351"])
+
+#-join 136.244.227.81 -port 15351
