@@ -48,12 +48,12 @@ def AI_loop():
   
   ##Find the closest ennemy##
   ClosestID = ai.closestShipId()
-  #print(ClosestID)
+  print(ClosestID)
   ##Get the closest ennemy direction and speed##
   ClosestSpeed = ai.enemySpeedId(ClosestID)
-  #print(ClosestSpeed)
+  print(ClosestSpeed)
   ClosestDir = ai.enemyTrackingDegId(ClosestID)
-  #print(ClosestDir)
+  print(ClosestDir)
   ## Get the lockheadingdeg ##
   enemy = ai.lockClose()
   #print(enemy)
@@ -62,7 +62,7 @@ def AI_loop():
   enemyDist = ai.selfLockDist()
   #print(enemyDist)
   
-  #print("max_risk: ", max_risk)
+  print("max_risk: ", max_risk)
   #print("track_risk: ", track_risk)
   #print("heading: ", heading)
   
@@ -98,4 +98,4 @@ def AI_loop():
   
   
 
-ai.start(AI_loop,["-name", "Dubster", "-join", "136.244.227.81", "-port", "15350"])
+ai.start(AI_loop,["-name", "Dumpster", "-join", "136.244.227.81", "-port", "15350"])
