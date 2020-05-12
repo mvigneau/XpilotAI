@@ -27,13 +27,12 @@ def fitness(chromosome, frames, score_previous, score_current):
 
 	value = 0
 	if(abs(score_previous - score_current) == 3.4):
-		value -= 40
+		value -= 0
 	elif((score_current - score_previous) > 0):
 		value += (frames * 3)
 	else:
-		value -= 80
+		value -= 0
 
-	value += frames
 	return value
 
 ## Selection Process based on the fitness of the individuals ##
