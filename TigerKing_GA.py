@@ -29,7 +29,7 @@ def fitness(chromosome, frames, score_previous, score_current):
 	if(abs(score_previous - score_current) == 3.4):
 		value -= 0
 	elif((score_current - score_previous) > 0):
-		value += (frames * 3)
+		value += (10000 / frames)
 	else:
 		value -= 0
 
