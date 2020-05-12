@@ -33,7 +33,7 @@ def fitness(chromosome, frames, score_previous, score_current):
 	else:
 		value -= 80
 
-	value += frames
+	value += frames * 10
 	return value
 
 ## Selection Process based on the fitness of the individuals ##
