@@ -217,7 +217,7 @@ def AI_loop():
       boolean = False
 
 ai.headlessMode()
-ai.start(AI_loop,["-name","Rabbit","-join", "136.244.227.80", "-port", "15351"])
+ai.start(AI_loop,["-name","Rabbit","-join", "localhost"])
 
 ##-join 136.244.227.80 -port 15351
   
