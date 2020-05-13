@@ -263,21 +263,21 @@ def AI_loop():
         ai.turnLeft(1)
         ai.fireShot()
       ##### Bullet Avoidance Commands #####
-    elif ai.shotAlert(0) <= 50 and ai.shotAlert(0) <= BulletAlertValue:
-      if ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() <= 5:
-        ai.turnLeft(1)
-        ai.thrust(1)
-      elif ai.angleDiff(heading, ai.shotVelDir(0)) < 0 and ai.selfSpeed() <= 5: 
-        ai.turnRight(1)
-        ai.thrust(1)
-      elif ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() > 5:
-        ai.turnLeft(1)
+      elif ai.shotAlert(0) <= 50 and ai.shotAlert(0) <= BulletAlertValue:
+        if ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() <= 5:
+          ai.turnLeft(1)
+          ai.thrust(1)
+        elif ai.angleDiff(heading, ai.shotVelDir(0)) < 0 and ai.selfSpeed() <= 5: 
+          ai.turnRight(1)
+          ai.thrust(1)
+        elif ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() > 5:
+          ai.turnLeft(1)
+        else:
+          ai.turnRight(1)
       else:
-        ai.turnRight(1)
-    else:
-      #print("chilling")
-      ai.thrust(0)
-      ai.fireShot()
+        #print("chilling")
+        ai.thrust(0)
+        ai.fireShot()
 
       count_frame += 3
       boolean = False
