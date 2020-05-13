@@ -280,6 +280,7 @@ def AI_loop():
 
       count_frame += 3
       boolean = False
+      print("Alive")
 
 ai.headlessMode()
 ai.start(AI_loop,["-name", "Dumpster", "-join", "localhost"])
