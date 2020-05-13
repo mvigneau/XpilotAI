@@ -227,11 +227,9 @@ def AI_loop():
         ### DONE -- QUIT ###
 
     else:  
-      print(loop) 
       loop += 1 
       count_frame = 0
       boolean = True
-      print("Done") 
 
   ### Rules ###
   else:
@@ -282,7 +280,6 @@ def AI_loop():
 
       count_frame += 3
       boolean = False
-      print("alive")
       
 
 ai.headlessMode()
