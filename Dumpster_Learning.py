@@ -143,7 +143,7 @@ def AI_loop():
   track_risk = (tracking + (risk_list.index(max_risk)*45) % 360)
   min_risk = min(risk_list)
   
-  print("found max risk", max_risk)
+  #print("found max risk", max_risk)
 
   #######   Shooting Ennemies  ########
   
@@ -163,9 +163,9 @@ def AI_loop():
   enemyDist = ai.selfLockDist()
   #print(enemyDist)
   
-  print("max_risk: ", max_risk)
-  print("track_risk: ", track_risk)
-  print("heading: ", heading)
+  # print("max_risk: ", max_risk)
+  # print("track_risk: ", track_risk)
+  # print("heading: ", heading)
   
 
   if(ai.selfAlive() == 0 and boolean == False): 
@@ -281,7 +281,7 @@ def AI_loop():
 
       count_frame += 3
       boolean = False
-      print("Alive")
+      
 
 ai.headlessMode()
 ai.start(AI_loop,["-name", "Dumpster", "-join", "localhost"])
