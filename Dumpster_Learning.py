@@ -58,9 +58,9 @@ def AI_loop():
   end = (closingRate_MediumTopLeftAlertValue - (((closingRate_MediumTopLeftAlertValue - closingRate_SlowTopAlertValue)/2)+1))
   if(end < 0):
     end = 0  
-  start = end - (1 * (2**(len(closingRate_MediumBottomLeftAlert))))
-  if(start < 0):
-    start = 0    
+    start = end - (1 * (2**(len(closingRate_MediumBottomLeftAlert))))
+    if(start < 0):
+      start = 0    
   #print(start, end)  
   jump = (end - start) // (2**(len(closingRate_MediumBottomLeftAlert)))
   closingRate_MediumBottomLeftAlertValue = transform_fuzzy(closingRate_MediumBottomLeftAlert, jump, start, end)
@@ -77,11 +77,11 @@ def AI_loop():
   end = (closingRate_FastTopAlertValue - (((closingRate_FastTopAlertValue - closingRate_MediumTopRightAlertValue)/2)+1))
   if(end < 0):
     end = 0 
-  start = end - (1 * (2**(len(closingRate_FastBottomAlert))))
-  if(start < 0):
-    start = 0  
-  jump = (end - start) // (2**(len(closingRate_FastBottomAlert)))
-  closingRate_FastBottomAlertValue = transform_fuzzy(closingRate_FastBottomAlert, jump, start, end)
+    start = end - (1 * (2**(len(closingRate_FastBottomAlert))))
+    if(start < 0):
+      start = 0  
+      jump = (end - start) // (2**(len(closingRate_FastBottomAlert)))
+      closingRate_FastBottomAlertValue = transform_fuzzy(closingRate_FastBottomAlert, jump, start, end)
   #print("closingRate_FastBottomAlertValue", closingRate_FastBottomAlertValue)
 
   Distance_CloseTopAlert = current_chromosome[32:37]
@@ -128,7 +128,7 @@ def AI_loop():
     Distance = ai.wallFeeler(10000,tracking+(45*i))
     result = Closing_Rate(Degree, tracking, Speed, Distance)
     result_list.append(result)
-  	
+    
     ### Fuzzy membership ###
     closing_rate, distance = Closing_Rate(Degree, tracking, Speed, Distance)
     low, medium, fast = Fuzzy_Speed(closing_rate, closingRate_SlowTopAlertValue, closingRate_SlowBottomAlertValue, closingRate_MediumBottomLeftAlertValue, closingRate_MediumTopLeftAlertValue, closingRate_MediumTopRightAlertValue, closingRate_MediumBottomRightAlertValue, closingRate_FastBottomAlertValue, closingRate_FastTopAlertValue)
@@ -137,13 +137,13 @@ def AI_loop():
     #print("close-far", close, far)
     risk = Fuzzy_Risk(low, medium, fast, close, far)
     risk_list.append(risk)
-  
+    
   ## Get the direction in deg that is most risky for the robot ##
   max_risk = max(risk_list)
   track_risk = (tracking + (risk_list.index(max_risk)*45) % 360)
   min_risk = min(risk_list)
   
-  #print("found max risk", max_risk)
+  print("found max risk", max_risk)
 
   #######   Shooting Ennemies  ########
   
@@ -185,15 +185,15 @@ def AI_loop():
       ## Finding the optimal chromosome to output it in data file ##
       string_maxChromosome = ""
       for chrom_max in range(chromosome_size):
-         string_maxChromosome = string_maxChromosome + str(population[fitness_list.index(max(fitness_list))][chrom_max])
+       string_maxChromosome = string_maxChromosome + str(population[fitness_list.index(max(fitness_list))][chrom_max])
 
       ## Formatting entire population in a big string to register it in excel file##
       string_population = ""
       for pop in range(population_size):
         for pop_chrom in range(chromosome_size):
           string_population = string_population + str(population[pop][pop_chrom])
-        if(pop != (population_size-1)):
-          string_population = string_population + ","
+          if(pop != (population_size-1)):
+            string_population = string_population + ","
 
       ## Formatting entire population's fitness in a big string to register it in excel file##
       string_fitness = ""
@@ -225,14 +225,14 @@ def AI_loop():
         print("Done")
         quitAI()
         ### DONE -- QUIT ###
-      
-    else:   
-      loop += 1 
-      count_frame = 0
-    boolean = True
+        
+      else:   
+        loop += 1 
+        count_frame = 0
+        boolean = True
 
   ### Rules ###
-  else:
+else:
     #print("boolean", boolean)
     if(ai.selfAlive() == 1):
 
@@ -262,26 +262,26 @@ def AI_loop():
         ai.turnLeft(1)
         ai.fireShot()
       ##### Bullet Avoidance Commands #####
-      elif ai.shotAlert(0) <= 50 and ai.shotAlert(0) <= BulletAlertValue:
-        if ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() <= 5:
-          ai.turnLeft(1)
-          ai.thrust(1)
-        elif ai.angleDiff(heading, ai.shotVelDir(0)) < 0 and ai.selfSpeed() <= 5: 
-          ai.turnRight(1)
-          ai.thrust(1)
-        elif ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() > 5:
-          ai.turnLeft(1)
-        else:
-          ai.turnRight(1)
+    elif ai.shotAlert(0) <= 50 and ai.shotAlert(0) <= BulletAlertValue:
+      if ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() <= 5:
+        ai.turnLeft(1)
+        ai.thrust(1)
+      elif ai.angleDiff(heading, ai.shotVelDir(0)) < 0 and ai.selfSpeed() <= 5: 
+        ai.turnRight(1)
+        ai.thrust(1)
+      elif ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() > 5:
+        ai.turnLeft(1)
+      else:
+        ai.turnRight(1)
       else:
         #print("chilling")
         ai.thrust(0)
         ai.fireShot()
-
-      count_frame += 3
-      boolean = False
-    
-ai.headlessMode()
-ai.start(AI_loop,["-name", "Dumpster", "-join", "localhost"])
+        
+        count_frame += 3
+        boolean = False
+        
+        ai.headlessMode()
+        ai.start(AI_loop,["-name", "Dumpster", "-join", "localhost"])
 
 #ai.start(AI_loop,["-name", "Dumpster", "-join", "136.244.227.81", "-port", "15350"])

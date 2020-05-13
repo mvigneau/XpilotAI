@@ -2,6 +2,13 @@
 import libpyAI as ai
 import statistics 
 
+frontAlertValue = 275
+backAlertValue = 225
+speedAlertValue = 1
+EnemyAlertValue = 1300
+TrackSlowAlertValue = 125
+TrackFastAlertValue = 125
+BulletAlertValue = 45
 
 def AI_loop():
   global count_frame, loop, boolean, score, population_size, chromosome_size, population, mutation_prob, crossover_prob, fitness_list, generation, generation_size, first_time, done_learning
@@ -9,15 +16,6 @@ def AI_loop():
   ai.thrust(0)
   ai.turnLeft(0)
   ai.turnRight(0)
-
-  frontAlertValue = 275
-  backAlertValue = 225
-  speedAlertValue = 1
-  EnemyAlertValue = 1300
-  TrackSlowAlertValue = 125
-  TrackFastAlertValue = 125
-  BulletAlertValue = 45
-
 
   #Set variables
   heading = int(ai.selfHeadingDeg())
