@@ -226,10 +226,10 @@ def AI_loop():
         quitAI()
         ### DONE -- QUIT ###
 
-      else:   
-        loop += 1 
-        count_frame = 0
-        boolean = True
+    else:   
+      loop += 1 
+      count_frame = 0
+      boolean = True
 
   ### Rules ###
   else:
