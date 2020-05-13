@@ -59,9 +59,9 @@ def AI_loop():
   if(end < 0):
     end = 0  
     start = end - (1 * (2**(len(closingRate_MediumBottomLeftAlert))))
-    if(start < 0):
-      start = 0    
-  #print(start, end)  
+  if(start < 0):
+    start = 0    
+    #print(start, end)  
   jump = (end - start) // (2**(len(closingRate_MediumBottomLeftAlert)))
   closingRate_MediumBottomLeftAlertValue = transform_fuzzy(closingRate_MediumBottomLeftAlert, jump, start, end)
   #print("closingRate_MediumBottomLeftAlertValue", closingRate_MediumBottomLeftAlertValue)
@@ -78,10 +78,10 @@ def AI_loop():
   if(end < 0):
     end = 0 
     start = end - (1 * (2**(len(closingRate_FastBottomAlert))))
-    if(start < 0):
-      start = 0  
-      jump = (end - start) // (2**(len(closingRate_FastBottomAlert)))
-      closingRate_FastBottomAlertValue = transform_fuzzy(closingRate_FastBottomAlert, jump, start, end)
+  if(start < 0):
+    start = 0  
+  jump = (end - start) // (2**(len(closingRate_FastBottomAlert)))
+  closingRate_FastBottomAlertValue = transform_fuzzy(closingRate_FastBottomAlert, jump, start, end)
   #print("closingRate_FastBottomAlertValue", closingRate_FastBottomAlertValue)
 
   Distance_CloseTopAlert = current_chromosome[32:37]
