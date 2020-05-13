@@ -273,15 +273,15 @@ def AI_loop():
         ai.turnLeft(1)
       else:
         ai.turnRight(1)
-      else:
-        #print("chilling")
-        ai.thrust(0)
-        ai.fireShot()
+    else:
+      #print("chilling")
+      ai.thrust(0)
+      ai.fireShot()
 
-        count_frame += 3
-        boolean = False
+      count_frame += 3
+      boolean = False
 
-        ai.headlessMode()
-        ai.start(AI_loop,["-name", "Dumpster", "-join", "localhost"])
+ai.headlessMode()
+ai.start(AI_loop,["-name", "Dumpster", "-join", "localhost"])
 
 #ai.start(AI_loop,["-name", "Dumpster", "-join", "136.244.227.81", "-port", "15350"])
