@@ -231,6 +231,7 @@ def AI_loop():
       loop += 1 
       count_frame = 0
       boolean = True
+      print("Done") 
 
   ### Rules ###
   else:
