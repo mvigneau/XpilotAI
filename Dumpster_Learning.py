@@ -221,16 +221,16 @@ def AI_loop():
       count_frame = 0
       generation += 1
       fitness_list.clear()
-      print(loop)
       if generation == generation_size:
         print("Done")
         quitAI()
         ### DONE -- QUIT ###
 
-      else:   
-        loop += 1 
-        count_frame = 0
-        boolean = True
+    else:  
+      print(loop) 
+      loop += 1 
+      count_frame = 0
+      boolean = True
 
   ### Rules ###
   else:
@@ -281,6 +281,7 @@ def AI_loop():
 
       count_frame += 3
       boolean = False
+      print("alive")
       
 
 ai.headlessMode()
