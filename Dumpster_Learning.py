@@ -143,7 +143,7 @@ def AI_loop():
   track_risk = (tracking + (risk_list.index(max_risk)*45) % 360)
   min_risk = min(risk_list)
   
-  print("found max risk", max_risk)
+  # print("found max risk", max_risk)
 
   #######   Shooting Ennemies  ########
   
