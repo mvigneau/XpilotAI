@@ -128,7 +128,7 @@ def AI_loop():
     Distance = ai.wallFeeler(10000,tracking+(45*i))
     result = Closing_Rate(Degree, tracking, Speed, Distance)
     result_list.append(result)
-    
+
     ### Fuzzy membership ###
     closing_rate, distance = Closing_Rate(Degree, tracking, Speed, Distance)
     low, medium, fast = Fuzzy_Speed(closing_rate, closingRate_SlowTopAlertValue, closingRate_SlowBottomAlertValue, closingRate_MediumBottomLeftAlertValue, closingRate_MediumTopLeftAlertValue, closingRate_MediumTopRightAlertValue, closingRate_MediumBottomRightAlertValue, closingRate_FastBottomAlertValue, closingRate_FastTopAlertValue)
@@ -137,7 +137,7 @@ def AI_loop():
     #print("close-far", close, far)
     risk = Fuzzy_Risk(low, medium, fast, close, far)
     risk_list.append(risk)
-    
+
   ## Get the direction in deg that is most risky for the robot ##
   max_risk = max(risk_list)
   track_risk = (tracking + (risk_list.index(max_risk)*45) % 360)
@@ -225,14 +225,14 @@ def AI_loop():
         print("Done")
         quitAI()
         ### DONE -- QUIT ###
-        
+
       else:   
         loop += 1 
         count_frame = 0
         boolean = True
 
   ### Rules ###
-else:
+  else:
     #print("boolean", boolean)
     if(ai.selfAlive() == 1):
 
@@ -277,10 +277,10 @@ else:
         #print("chilling")
         ai.thrust(0)
         ai.fireShot()
-        
+
         count_frame += 3
         boolean = False
-        
+
         ai.headlessMode()
         ai.start(AI_loop,["-name", "Dumpster", "-join", "localhost"])
 
