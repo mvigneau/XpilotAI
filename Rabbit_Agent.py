@@ -11,7 +11,7 @@ TrackFastAlertValue = 125
 BulletAlertValue = 45
 
 def AI_loop():
-  global count_frame, loop, boolean, score, population_size, chromosome_size, population, mutation_prob, crossover_prob, fitness_list, generation, generation_size, first_time, done_learning
+ 
   #Release keys
   ai.thrust(0)
   ai.turnLeft(0)

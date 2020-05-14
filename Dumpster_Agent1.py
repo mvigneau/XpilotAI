@@ -4,7 +4,6 @@
 import libpyAI as ai
 import statistics 
 from Dumpster_Fuzzy import *
-from Dumpster_GA import *
 
 closingRate_SlowTopAlertValue = 0
 closingRate_MediumTopLeftAlertValue = 9
@@ -20,7 +19,7 @@ Distance_CloseBottomAlertValue = 1701
 Distance_FarBottomAlertValue = 1250
 
 def AI_loop():
-  global count_frame, loop, boolean, score, generation, generation_size, first_time, done_learning
+
   #Release keys
   ai.thrust(0)
   ai.turnLeft(0)
