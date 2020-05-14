@@ -4,7 +4,7 @@ import statistics
 from Learning_Data import * 
 from Rabbit_GA import * 
 
-### Setting Up GA ###
+### Setting Up GA --- Important Parameters ###
 population_size = 64
 crossover_prob = 0.7
 mutation_prob = 0.01
@@ -27,32 +27,32 @@ def AI_loop():
   ai.turnLeft(0)
   ai.turnRight(0)
 
-
-  #print("pop", population)
+  ## Selects an individual in the population and extract each gene ##
   current_chromosome = population[loop]
-  #print(current_chromosome)
+  
+  ## Each Variable Accounted in the Production System ##
+  ## Transform method take the 0s and 1s and turn them into a number ##
   frontAlert = current_chromosome[0:5]
-  #print("frontAlert", frontAlert)
   frontAlertValue = transform(frontAlert, 25)
-  #print("frontAlertValue", frontAlertValue)
+
   backAlert = current_chromosome[5:9]
   backAlertValue = transform(backAlert, 25)
-  #print("backAlertValue", backAlertValue)
+
   speedAlert = current_chromosome[9:13]                 #4 bits
   speedAlertValue = transform(speedAlert, 1)            #1 jumps per value
-  #print("speedAlertValue", speedAlertValue)
+
   EnemyAlert = current_chromosome[13:18]                #5 bits
   EnemyAlertValue = transform(EnemyAlert, 50)           #50 jumps per value
-  #print("speedAlertValue", speedAlertValue)
+
   TrackSlowAlert = current_chromosome[18:22]            #4 bits
   TrackSlowAlertValue = transform(TrackSlowAlert, 25)   #25 jumps per value
-  #print("speedAlertValue", speedAlertValue)
+
   TrackFastAlert = current_chromosome[22:26]            #4 bits 
   TrackFastAlertValue = transform(TrackFastAlert, 25)   #25 jumps per value
-  #print("speedAlertValue", speedAlertValue)
-  BulletAlert = current_chromosome[26:32]            #4 bits 
-  BulletAlertValue = transform(BulletAlert, 15)   #25 jumps per value
-  #print("speedAlertValue", speedAlertValue)
+
+  BulletAlert = current_chromosome[26:32]               #4 bits 
+  BulletAlertValue = transform(BulletAlert, 15)         #15 jumps per value
+
 
   #Set variables
   heading = int(ai.selfHeadingDeg())

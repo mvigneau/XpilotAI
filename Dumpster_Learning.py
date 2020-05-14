@@ -207,26 +207,22 @@ def AI_loop():
       titles = ["Generation", "Average Fitness", "Best Fitness","Population Size", "Chromosome Size", "Crossover Probability", "Mutation Probability", "Best Chromosome", "Entire Population Chromosome", "Entire Population Fitness"]
       data = [generation, statistics.mean(fitness_list), max(fitness_list), population_size, chromosome_size, crossover_prob, mutation_prob, string_maxChromosome, string_population, string_fitness]
       first_time = Save_Data("Dumpster_Training_Data.xls", 0, titles, data, first_time)
-      print("done savings")
-      ## Select Next Generation -- Apply Crossover & Mutation ##
+
+      ## Select Population For Next Generation -- Apply Crossover & Mutation ##
       new_population = select(population, fitness_list)
-      print("new", new_population)
       new_population = crossover(new_population, chromosome_size, population_size, crossover_prob)
-      print("crossover", new_population)
       new_population = mutate(new_population, chromosome_size, mutation_prob)
-      print("mutate", new_population)
       population = new_population
-      print("population", population)
 
       loop = 0
       count_frame = 0
       generation += 1
       fitness_list.clear()
       
+      ### DONE -- QUIT ###
       if generation == generation_size:
         print("Done")
         quitAI()
-        ### DONE -- QUIT ###
 
     else:   
       loop += 1 
@@ -236,7 +232,7 @@ def AI_loop():
 
   ### Rules ###
   else:
-    #print("boolean", boolean)
+
     if(ai.selfAlive() == 1):
 
       ## Get the angles on both side between tracking and heading ##
