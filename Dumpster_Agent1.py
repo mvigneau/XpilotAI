@@ -18,9 +18,9 @@ def AI_loop():
   ai.turnRight(0)
 
   ### Order of chromosome do not matter when created ###
-  daddy = [0,0,0,0,1,0,0,1,1,1,0,0,0,1,1,0,0,0,0,1,1,1,0,0,0,1,1,0,1,0,0,0,1,0,0,1,1,1,1,1,0,1,0,0,1,0,1,0,1,1,1,1]
+  daddy = [[0,0,0,0,1,0,0,1,1,1,0,0,0,1,1,0,0,0,0,1,1,1,0,0,0,1,1,0,1,0,0,0,1,0,0,1,1,1,1,1,0,1,0,0,1,0,1,0,1,1,1,1]]
   population = []
-  population.append(daddy)
+  population.append(daddy[0])
   current_chromosome = population[loop]
   print(current_chromosome)
 
