@@ -169,7 +169,7 @@ def AI_loop():
       elif right90Wall <= frontAlertValue and ai.selfSpeed() > speedAlertValue:
         #print("turning left")
         ai.turnLeft(1)
-        
+
       ### Thrust commands ####
       elif ai.selfSpeed() <= speedAlertValue and (frontWall >= frontAlertValue) and (left45Wall >= frontAlertValue) and (right45Wall >= frontAlertValue) and (right90Wall >= frontAlertValue) and (left90Wall >= frontAlertValue) and (left135Wall >= backAlertValue) and (right135Wall >= backAlertValue) and (backWall >= backAlertValue):
         #print("go forward")
@@ -218,7 +218,7 @@ def AI_loop():
       count_frame += 3
       boolean = False
 
-ai.headlessMode()
+#ai.headlessMode()
 ai.start(AI_loop,["-name","Rabbit","-join", "localhost"])
 
 ##-join 136.244.227.80 -port 15351
