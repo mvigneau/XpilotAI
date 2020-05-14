@@ -9,9 +9,18 @@ closingRate_SlowTopAlertValue = 0
 closingRate_MediumTopLeftAlertValue = 9
 closingRate_MediumTopRightAlertValue = 21
 closingRate_FastTopAlertValue = 27 
+count_frame = 0
+loop = 0
+boolean = False
+fitness_list = []
+score = 0
+generation_size = 200
+generation = 1
+first_time = True
+done_learning = False
 
 def AI_loop():
-  global count_frame, loop, boolean, score, population_size, chromosome_size, population, mutation_prob, crossover_prob, fitness_list, generation, generation_size, first_time, done_learning
+  global count_frame, loop, boolean, score, generation, generation_size, first_time, done_learning
   #Release keys
   ai.thrust(0)
   ai.turnLeft(0)
