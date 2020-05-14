@@ -121,11 +121,11 @@ def AI_loop():
       ai.turnRight(1)
       #print("Rule 8")
     ##### Shooting Ennemy Commands #####
-  elif(enemyDist <= 10000 and heading > (head) and ai.selfSpeed() > 3):
+  elif(enemyDist <= 100000 and heading > (head) and ai.selfSpeed() > 3):
     #print("Rule 9")
     ai.turnRight(1)
     ai.fireShot()
-  elif(enemyDist <= 10000 and heading < (head) and ai.selfSpeed() > 3):
+  elif(enemyDist <= 100000 and heading < (head) and ai.selfSpeed() > 3):
     #print("Rule 10")
     ai.turnLeft(1)
     ai.fireShot()
