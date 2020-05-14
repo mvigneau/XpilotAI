@@ -4,6 +4,7 @@
 import libpyAI as ai
 import statistics 
 from Dumpster_Fuzzy import *
+from Dumpster_GA import *
 
 closingRate_SlowTopAlertValue = 0
 closingRate_MediumTopLeftAlertValue = 9
