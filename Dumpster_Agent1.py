@@ -83,131 +83,59 @@ def AI_loop():
   # print("max_risk: ", max_risk)
   # print("track_risk: ", track_risk)
   # print("heading: ", heading)
+
+  ## Get the angles on both side between tracking and heading ##
+  dist = (heading - track_risk) % 360
+  dist2 = (360 - dist) % 360
+  # print("dist: ", dist)
+  # print("dist2: ", dist2)
   
-  if(ai.selfAlive() == 0 and boolean == False): 
-
-    ## Calculate Fitness Current Population ##
-    score_previous = score
-    score_current = ai.selfScore()
-    fitness_value = fitness(population, count_frame, score_previous, score_current)
-    fitness_list.append(fitness_value)
-
-    if((loop+1) == population_size):
-      print("Generation:", generation)
-      print("Agent Fitness:")
-      print(fitness_list)
-      print("Average Fitness:", statistics.mean(fitness_list))
-      print("Best Fitness:", max(fitness_list))
-      
-      ## Finding the optimal chromosome to output it in data file ##
-      string_maxChromosome = ""
-      for chrom_max in range(chromosome_size):
-         string_maxChromosome = string_maxChromosome + str(population[fitness_list.index(max(fitness_list))][chrom_max])
-
-      ## Formatting entire population in a big string to register it in excel file##
-      string_population = ""
-      for pop in range(population_size):
-        for pop_chrom in range(chromosome_size):
-          string_population = string_population + str(population[pop][pop_chrom])
-        if(pop != (population_size-1)):
-          string_population = string_population + ","
-
-      ## Formatting entire population's fitness in a big string to register it in excel file##
-      string_fitness = ""
-      for fit in range(len(fitness_list)):
-        string_fitness = string_fitness + str(fitness_list[fit])
-        if(fit != (len(fitness_list)-1)):
-          string_fitness = string_fitness + ","
-
-
-      ## Output Data into Excel File ##
-      titles = ["Generation", "Average Fitness", "Best Fitness","Population Size", "Chromosome Size", "Crossover Probability", "Mutation Probability", "Best Chromosome", "Entire Population Chromosome", "Entire Population Fitness"]
-      data = [generation, statistics.mean(fitness_list), max(fitness_list), population_size, chromosome_size, crossover_prob, mutation_prob, string_maxChromosome, string_population, string_fitness]
-      first_time = Save_Data("Dumpster_Training_Data.xls", 0, titles, data, first_time)
-
-      ## Select Population For Next Generation -- Apply Crossover & Mutation ##
-      new_population = select(population, fitness_list)
-      new_population = crossover(new_population, chromosome_size, population_size, crossover_prob)
-      new_population = mutate(new_population, chromosome_size, mutation_prob)
-      population = new_population
-
-      loop = 0
-      count_frame = 0
-      generation += 1
-      fitness_list.clear()
-      
-      ### DONE -- QUIT ###
-      if(generation == generation_size):
-        print("Done")
-        quitAI()
-
-    else:   
-      loop += 1 
-      count_frame = 0
-    boolean = True
-
-  ### Rules ###
+  ## Production system rules based off fuzzy output ##
+  if(dist <= 130 and dist >= 0 and ai.selfSpeed() > 0 and max_risk >= 75):
+    ai.turnLeft(1)
+    #print("Rule 1")
+  elif(dist2 <= 130 and dist2 >= 0 and ai.selfSpeed() > 0 and max_risk >= 75):
+    ai.turnRight(1)
+    #print("Rule 2")
+  elif(ai.selfSpeed() <= 10):
+    ai.thrust(1)
+    #print("Rule 3")
+  elif(trackWall <= 150):
+    ai.thrust(1)
+    #print("Rule 4")
+    ##### Bullet Avoidance Commands #####
+  elif(ai.shotAlert(0) >= 0 and ai.shotAlert(0) <= 50):
+    #print("YES")
+    if(ai.shotVelDir(0) != -1  and ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() <= 5):
+      ai.turnLeft(1)
+      ai.thrust(1)
+      #print("Rule 5")
+    elif(ai.shotVelDir(0) != -1 and ai.angleDiff(heading, ai.shotVelDir(0)) < 0 and ai.selfSpeed() <= 5): 
+      ai.turnRight(1)
+      ai.thrust(1)
+      #print("Rule 6")
+    elif(ai.shotVelDir(0) != -1 and ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() > 5):
+      ai.turnLeft(1)
+      #print("Rule 7")
+    else:
+      ai.turnRight(1)
+      #print("Rule 8")
+    ##### Shooting Ennemy Commands #####
+  elif(enemyDist <= 3000 and heading > (head) and enemyDist != 0 and ai.selfSpeed() > 5):
+    #print("Rule 9")
+    ai.turnRight(1)
+    ai.fireShot()
+  elif(enemyDist <= 3000 and heading < (head) and enemyDist != 0 and ai.selfSpeed() > 5):
+    #print("Rule 10")
+    ai.turnLeft(1)
+    ai.fireShot()
+  elif(ai.selfSpeed() < 5):
+    #print("Rule 11")
+    ai.thrust(1)
   else:
-
-    if(ai.selfAlive() == 1):
-      # print("Alive")
-
-      ## Get the angles on both side between tracking and heading ##
-      dist = (heading - track_risk) % 360
-      dist2 = (360 - dist) % 360
-      # print("dist: ", dist)
-      # print("dist2: ", dist2)
-      
-      ## Production system rules based off fuzzy output ##
-      if(dist <= 130 and dist >= 0 and ai.selfSpeed() > 0 and max_risk >= 75):
-        ai.turnLeft(1)
-        #print("Rule 1")
-      elif(dist2 <= 130 and dist2 >= 0 and ai.selfSpeed() > 0 and max_risk >= 75):
-        ai.turnRight(1)
-        #print("Rule 2")
-      elif(ai.selfSpeed() <= 10):
-        ai.thrust(1)
-        #print("Rule 3")
-      elif(trackWall <= 150):
-        ai.thrust(1)
-        #print("Rule 4")
-        ##### Bullet Avoidance Commands #####
-      elif(ai.shotAlert(0) >= 0 and ai.shotAlert(0) <= 50):
-        #print("YES")
-        if(ai.shotVelDir(0) != -1  and ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() <= 5):
-          ai.turnLeft(1)
-          ai.thrust(1)
-          #print("Rule 5")
-        elif(ai.shotVelDir(0) != -1 and ai.angleDiff(heading, ai.shotVelDir(0)) < 0 and ai.selfSpeed() <= 5): 
-          ai.turnRight(1)
-          ai.thrust(1)
-          #print("Rule 6")
-        elif(ai.shotVelDir(0) != -1 and ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() > 5):
-          ai.turnLeft(1)
-          #print("Rule 7")
-        else:
-          ai.turnRight(1)
-          #print("Rule 8")
-        ##### Shooting Ennemy Commands #####
-      elif(enemyDist <= 3000 and heading > (head) and enemyDist != 0 and ai.selfSpeed() > 5):
-        #print("Rule 9")
-        ai.turnRight(1)
-        ai.fireShot()
-      elif(enemyDist <= 3000 and heading < (head) and enemyDist != 0 and ai.selfSpeed() > 5):
-        #print("Rule 10")
-        ai.turnLeft(1)
-        ai.fireShot()
-      elif(ai.selfSpeed() < 5):
-        #print("Rule 11")
-        ai.thrust(1)
-      else:
-        #print("Rule 12")
-        ai.thrust(0)
-
-      count_frame += 3
-      boolean = False
-      #print("nothing")
-      
+    #print("Rule 12")
+    ai.thrust(0)
+  
 
 #ai.headlessMode()
 ai.start(AI_loop,["-name", "Dumpster", "-join", "localhost"])
