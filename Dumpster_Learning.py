@@ -162,6 +162,7 @@ def AI_loop():
   #print(head)
   enemyDist = ai.selfLockDist()
   #print(enemyDist)
+  print(ai.angleDiff(heading, ai.shotVelDir(0)))
   
   # print("max_risk: ", max_risk)
   # print("track_risk: ", track_risk)
