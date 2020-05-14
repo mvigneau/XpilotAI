@@ -106,26 +106,26 @@ def AI_loop():
     ##### Bullet Avoidance Commands #####
   elif(ai.shotAlert(0) >= 0 and ai.shotAlert(0) <= 50):
     #print("YES")
-    if(ai.shotVelDir(0) != -1  and ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() <= 5):
+    if(ai.shotVelDir(0) != -1  and ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() <= 3):
       ai.turnLeft(1)
       ai.thrust(1)
       #print("Rule 5")
-    elif(ai.shotVelDir(0) != -1 and ai.angleDiff(heading, ai.shotVelDir(0)) < 0 and ai.selfSpeed() <= 5): 
+    elif(ai.shotVelDir(0) != -1 and ai.angleDiff(heading, ai.shotVelDir(0)) < 0 and ai.selfSpeed() <= 3): 
       ai.turnRight(1)
       ai.thrust(1)
       #print("Rule 6")
-    elif(ai.shotVelDir(0) != -1 and ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() > 5):
+    elif(ai.shotVelDir(0) != -1 and ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() > 3):
       ai.turnLeft(1)
       #print("Rule 7")
     else:
       ai.turnRight(1)
       #print("Rule 8")
     ##### Shooting Ennemy Commands #####
-  elif(enemyDist <= 10000 and heading > (head) and enemyDist != 0 and ai.selfSpeed() > 5):
+  elif(enemyDist <= 10000 and heading > (head) and ai.selfSpeed() > 3):
     #print("Rule 9")
     ai.turnRight(1)
     ai.fireShot()
-  elif(enemyDist <= 10000 and heading < (head) and enemyDist != 0 and ai.selfSpeed() > 5):
+  elif(enemyDist <= 10000 and heading < (head) and ai.selfSpeed() > 3):
     #print("Rule 10")
     ai.turnLeft(1)
     ai.fireShot()
