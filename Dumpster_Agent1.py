@@ -41,7 +41,9 @@ def AI_loop():
   
   closingRate_MediumBottomLeftAlert = current_chromosome[20:24]             
   end = (closingRate_MediumTopLeftAlertValue - (((closingRate_MediumTopLeftAlertValue - closingRate_SlowTopAlertValue)/2)+1))
+  print(end)
   if(end < 0):
+    print("yes")
     end = 0  
     start = end - (1 * (2**(len(closingRate_MediumBottomLeftAlert))))
   if(start < 0):
