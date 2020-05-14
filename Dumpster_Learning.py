@@ -265,14 +265,14 @@ def AI_loop():
         ai.turnLeft(1)
         ai.fireShot()
       ##### Bullet Avoidance Commands #####
-      elif ai.shotAlert(0) <= 50 and ai.shotAlert(0) <= BulletAlertValue:
-        if ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() <= 5:
+      elif ai.shotAlert(0) <= 50 and ai.shotAlert(0) <= BulletAlertValue and ai.shotVelDir(0) != -1:
+        if(ai.shotVelDir(0) != -1  and ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() <= 5):
           ai.turnLeft(1)
           ai.thrust(1)
-        elif ai.angleDiff(heading, ai.shotVelDir(0)) < 0 and ai.selfSpeed() <= 5: 
+        elif(ai.shotVelDir(0) != -1 and ai.angleDiff(heading, ai.shotVelDir(0)) < 0 and ai.selfSpeed() <= 5): 
           ai.turnRight(1)
           ai.thrust(1)
-        elif ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() > 5:
+        elif(ai.shotVelDir(0) != -1 and ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() > 5):
           ai.turnLeft(1)
         else:
           ai.turnRight(1)
