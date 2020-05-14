@@ -18,10 +18,13 @@ def AI_loop():
   ai.turnRight(0)
 
   ### Order of chromosome do not matter when created ###
-  current_chromosome = [0,0,0,0,1,0,0,1,1,1,0,0,0,1,1,0,0,0,0,1,1,1,0,0,0,1,1,0,1,0,0,0,1,0,0,1,1,1,1,1,0,1,0,0,1,0,1,0,1,1,1,1]
+  daddy = [0,0,0,0,1,0,0,1,1,1,0,0,0,1,1,0,0,0,0,1,1,1,0,0,0,1,1,0,1,0,0,0,1,0,0,1,1,1,1,1,0,1,0,0,1,0,1,0,1,1,1,1]
+  population = []
+  population.append(daddy)
+  current_chromosome = population[loop]
   print(current_chromosome)
 
-  closingRate_SlowBottomAlert = "0001" 
+  closingRate_SlowBottomAlert = current_chromosome[16:20]  
   print(closingRate_SlowBottomAlert)
   start = (closingRate_SlowTopAlertValue + (((closingRate_MediumTopLeftAlertValue - closingRate_SlowTopAlertValue)/2)+1))
   end = (start + (1 * (2**(len(closingRate_SlowBottomAlert))))) 

@@ -33,7 +33,7 @@ def AI_loop():
 
   ## Get A Chromosome in the Population -- Eventually Will go through each individual in the population ##
   current_chromosome = population[loop]
-  print(current_chromosome)
+
   closingRate_SlowTopAlert = current_chromosome[0:4]
   closingRate_SlowTopAlertValue = transform_fuzzy(closingRate_SlowTopAlert, 1, 0, 16) 
   closingRate_MediumTopLeftAlert = current_chromosome[4:8]                 
