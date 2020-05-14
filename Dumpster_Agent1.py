@@ -210,7 +210,7 @@ def AI_loop():
       #print("nothing")
       
 
-ai.headlessMode()
+#ai.headlessMode()
 ai.start(AI_loop,["-name", "Dumpster", "-join", "localhost"])
 
 #ai.start(AI_loop,["-name", "Dumpster", "-join", "136.244.227.81", "-port", "15350"])
