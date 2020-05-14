@@ -152,11 +152,12 @@ def AI_loop():
       count_frame = 0
     boolean = True
 
-  ### Turning Rules ###
+
   else:
 
     if(ai.selfAlive() == 1):
       
+      ### Turning Rules ###
       if frontWall <= frontAlertValue and (left45Wall < right45Wall) and ai.selfSpeed() > speedAlertValue: 
         #print("turning right")
         ai.turnRight(1)
@@ -168,6 +169,7 @@ def AI_loop():
       elif right90Wall <= frontAlertValue and ai.selfSpeed() > speedAlertValue:
         #print("turning left")
         ai.turnLeft(1)
+        
       ### Thrust commands ####
       elif ai.selfSpeed() <= speedAlertValue and (frontWall >= frontAlertValue) and (left45Wall >= frontAlertValue) and (right45Wall >= frontAlertValue) and (right90Wall >= frontAlertValue) and (left90Wall >= frontAlertValue) and (left135Wall >= backAlertValue) and (right135Wall >= backAlertValue) and (backWall >= backAlertValue):
         #print("go forward")

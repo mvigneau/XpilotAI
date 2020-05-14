@@ -167,7 +167,6 @@ def AI_loop():
   # print("track_risk: ", track_risk)
   # print("heading: ", heading)
   
-
   if(ai.selfAlive() == 0 and boolean == False): 
 
     ## Calculate Fitness Current Population ##
@@ -223,6 +222,7 @@ def AI_loop():
       count_frame = 0
       generation += 1
       fitness_list.clear()
+      
       if generation == generation_size:
         print("Done")
         quitAI()
@@ -231,8 +231,8 @@ def AI_loop():
     else:   
       loop += 1 
       count_frame = 0
-      boolean = True
-      print(loop)
+    
+    boolean = True
 
   ### Rules ###
   else:
@@ -265,7 +265,7 @@ def AI_loop():
         ai.turnLeft(1)
         ai.fireShot()
       ##### Bullet Avoidance Commands #####
-      elif ai.shotAlert(0) <= 50 and ai.shotAlert(0) <= BulletAlertValue and ai.shotVelDir(0) != -1:
+      elif(ai.shotAlert(0) <= 50 and ai.shotAlert(0) <= BulletAlertValue):
         if(ai.shotVelDir(0) != -1  and ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() <= 5):
           ai.turnLeft(1)
           ai.thrust(1)
@@ -277,23 +277,22 @@ def AI_loop():
         else:
           ai.turnRight(1)
       ##### Shooting Ennemy Commands #####
-      elif enemyDist <= 10000 and heading > (head) and ai.selfSpeed() > 5:
+      elif(enemyDist <= 10000 and heading > (head) and ai.selfSpeed() > 5):
         ai.turnRight(1)
         ai.fireShot()
-      elif enemyDist <= 10000 and heading < (head) and ai.selfSpeed() > 5:
+      elif(enemyDist <= 10000 and heading < (head) and ai.selfSpeed() > 5):
         ai.turnLeft(1)
         ai.fireShot()
-      elif ai.selfSpeed() < 5:
+      elif(ai.selfSpeed() < 5):
         ai.thrust(1)
       else:
         ai.thrust(0)
 
       count_frame += 3
       boolean = False
-      print("Alive")
       
 
-#ai.headlessMode()
+ai.headlessMode()
 ai.start(AI_loop,["-name", "Dumpster", "-join", "localhost"])
 
 #ai.start(AI_loop,["-name", "Dumpster", "-join", "136.244.227.81", "-port", "15350"])
