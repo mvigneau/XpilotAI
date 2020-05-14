@@ -54,9 +54,9 @@ def AI_loop():
 
   closingRate_MediumBottomLeftAlert = current_chromosome[20:24]             
   end = (closingRate_MediumTopLeftAlertValue - (((closingRate_MediumTopLeftAlertValue - closingRate_SlowTopAlertValue)/2)+1))
+  start = end - (1 * (2**(len(closingRate_MediumBottomLeftAlert))))
   if(end < 0):
     end = 0  
-    start = end - (1 * (2**(len(closingRate_MediumBottomLeftAlert))))
   if(start < 0):
     start = 0    
     #print(start, end)  
@@ -73,9 +73,9 @@ def AI_loop():
 
   closingRate_FastBottomAlert = current_chromosome[28:32]                   
   end = (closingRate_FastTopAlertValue - (((closingRate_FastTopAlertValue - closingRate_MediumTopRightAlertValue)/2)+1))
+  start = end - (1 * (2**(len(closingRate_FastBottomAlert))))
   if(end < 0):
     end = 0 
-    start = end - (1 * (2**(len(closingRate_FastBottomAlert))))
   if(start < 0):
     start = 0  
   jump = (end - start) // (2**(len(closingRate_FastBottomAlert)))
