@@ -143,7 +143,7 @@ def AI_loop():
   track_risk = (tracking + (risk_list.index(max_risk)*45) % 360)
   min_risk = min(risk_list)
   
-  print("found max risk", max_risk)
+  # print("found max risk", max_risk)
 
   #######   Shooting Ennemies  ########
   
@@ -161,8 +161,6 @@ def AI_loop():
   head = ai.lockHeadingDeg()
   #print(head)
   enemyDist = ai.selfLockDist()
-  print(enemyDist)
-  print(ai.angleDiff(heading, ai.shotVelDir(0)))
   
   # print("max_risk: ", max_risk)
   # print("track_risk: ", track_risk)
