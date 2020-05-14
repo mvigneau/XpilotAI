@@ -19,7 +19,7 @@ def AI_loop():
 
   ### Order of chromosome do not matter when created ###
   current_chromosome = [0,0,0,0,1,0,0,1,1,1,0,0,0,1,1,0,0,0,0,1,1,1,0,0,0,1,1,0,1,0,0,0,1,0,0,1,1,1,1,1,0,1,0,0,1,0,1,0,1,1,1,1]
-  
+  print(current_chromosome)
 
   closingRate_SlowBottomAlert = current_chromosome[16:20]  
 
