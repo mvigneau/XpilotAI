@@ -244,45 +244,49 @@ def AI_loop():
       ## Production system rules based off fuzzy output ##
       if(dist <= 130 and dist >= 0 and ai.selfSpeed() > 0 and max_risk >= 75):
         ai.turnLeft(1)
-        #print("turning left")
+        print("Rule 1")
       elif(dist2 <= 130 and dist2 >= 0 and ai.selfSpeed() > 0 and max_risk >= 75):
         ai.turnRight(1)
-        #print("turning right")
+        print("Rule 2")
       elif(ai.selfSpeed() <= 10):
         ai.thrust(1)
-        #print("thrust")
+        print("Rule 3")
       elif(trackWall <= 150):
         ai.thrust(1)
-        #print("thrust")
-      elif(enemyDist <= 3000 and heading > (head) and enemyDist != 0):
-        ai.turnRight(1)
-        ai.fireShot()
-      elif(enemyDist <= 3000 and heading < (head) and enemyDist != 0):
-        ai.turnLeft(1)
-        ai.fireShot()
+        print("Rule 4")
+
       ##### Bullet Avoidance Commands #####
       elif(ai.shotAlert(0) <= 50 and ai.shotAlert(0) <= BulletAlertValue):
         if(ai.shotVelDir(0) != -1  and ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() <= 5):
           ai.turnLeft(1)
           ai.thrust(1)
+          print("Rule 5")
         elif(ai.shotVelDir(0) != -1 and ai.angleDiff(heading, ai.shotVelDir(0)) < 0 and ai.selfSpeed() <= 5): 
           ai.turnRight(1)
           ai.thrust(1)
+          print("Rule 6")
         elif(ai.shotVelDir(0) != -1 and ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() > 5):
           ai.turnLeft(1)
+          print("Rule 7")
         else:
           ai.turnRight(1)
+          print("Rule 8")
+
       ##### Shooting Ennemy Commands #####
-      elif(enemyDist <= 10000 and heading > (head) and ai.selfSpeed() > 5):
+      elif(enemyDist <= 3000 and heading > (head) and enemyDist != 0 and ai.selfSpeed() > 5):
         ai.turnRight(1)
         ai.fireShot()
-      elif(enemyDist <= 10000 and heading < (head) and ai.selfSpeed() > 5):
+        print("Rule 9")
+      elif(enemyDist <= 3000 and heading < (head) and enemyDist != 0 and ai.selfSpeed() > 5):
         ai.turnLeft(1)
         ai.fireShot()
+        print("Rule 10")
       elif(ai.selfSpeed() < 5):
         ai.thrust(1)
+        print("Rule 11")
       else:
         ai.thrust(0)
+        print("Rule 12")
 
       count_frame += 3
       boolean = False
