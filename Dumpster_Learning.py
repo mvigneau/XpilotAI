@@ -8,7 +8,7 @@ from Learning_Data import *
 from Dumpster_GA import *
 
 ### Setting Up GA ###
-population_size = 64
+population_size = 4
 crossover_prob = 0.7
 mutation_prob = 0.01
 chromosome_size = 52
