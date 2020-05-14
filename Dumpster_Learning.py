@@ -256,7 +256,7 @@ def AI_loop():
         ai.thrust(1)
         print("Rule 4")
         ##### Bullet Avoidance Commands #####
-      elif(ai.shotAlert(0) <= 50 and ai.shotAlert(0) <= BulletAlertValue):
+      elif(ai.shotAlert(0) <= 50 and ai.shotAlert(0) <= 50):
         print("YES")
         if(ai.shotVelDir(0) != -1  and ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() <= 5):
           ai.turnLeft(1)
