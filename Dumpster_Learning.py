@@ -232,6 +232,7 @@ def AI_loop():
       loop += 1 
       count_frame = 0
       boolean = True
+      print(loop)
 
   ### Rules ###
   else:
@@ -285,11 +286,11 @@ def AI_loop():
       elif ai.selfSpeed() < 5:
         ai.thrust(1)
       else:
-        #print("chilling")
         ai.thrust(0)
 
       count_frame += 3
       boolean = False
+      print("Alive")
       
 
 #ai.headlessMode()
