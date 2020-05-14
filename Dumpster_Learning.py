@@ -220,26 +220,25 @@ def AI_loop():
       fitness_list.clear()
       
       ### DONE -- QUIT ###
-      if generation == generation_size:
+      if(generation == generation_size):
         print("Done")
         quitAI()
 
     else:   
       loop += 1 
       count_frame = 0
-    
     boolean = True
 
   ### Rules ###
   else:
 
     if(ai.selfAlive() == 1):
-
+      
       ## Get the angles on both side between tracking and heading ##
       dist = (heading - track_risk) % 360
       dist2 = (360 - dist) % 360
-      #print("dist: ", dist)
-      #print("dist2: ", dist2)
+      print("dist: ", dist)
+      print("dist2: ", dist2)
       
       ## Production system rules based off fuzzy output ##
       if(dist <= 130 and dist >= 0 and ai.selfSpeed() > 0 and max_risk >= 75):

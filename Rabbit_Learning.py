@@ -54,7 +54,7 @@ def AI_loop():
   BulletAlertValue = transform(BulletAlert, 15)         #15 jumps per value
 
 
-  #Set variables
+  ## Get values of variables for Wall Feelers, Head & Tracking ##
   heading = int(ai.selfHeadingDeg())
   tracking = int(ai.selfTrackingDeg())
   frontWall = ai.wallFeeler(500,heading)
@@ -83,8 +83,7 @@ def AI_loop():
   head = ai.lockHeadingDeg()
   #print(head)
   enemyDist = ai.selfLockDist()
-  #print(enemyDist)
-  #print(count_frame)
+
   if(ai.selfAlive() == 0 and boolean == False): 
 
     ## Calculate Fitness Current Population ##
@@ -141,7 +140,7 @@ def AI_loop():
       generation += 1
       fitness_list.clear()
 
-      if (generation == generation_size):
+      if(generation == generation_size):
         print("Done")
         ## Set Agent to chromosoze with most fitness ##
         quitAI()
