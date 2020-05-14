@@ -4,25 +4,11 @@
 import libpyAI as ai
 import statistics 
 from Dumpster_Fuzzy import *
-from Learning_Data import * 
-from Dumpster_GA import *
 
-### Setting Up GA ###
-population_size = 64
-crossover_prob = 0.7
-mutation_prob = 0.01
-chromosome_size = 52
-### Order of chromosome do not matter when created ###
-population = init_population(population_size, chromosome_size) ## Initialize the Population ##
-count_frame = 0
-loop = 0
-boolean = False
-fitness_list = []
-score = 0
-generation_size = 200
-generation = 1
-first_time = True
-done_learning = False
+closingRate_SlowTopAlertValue = 0
+closingRate_MediumTopLeftAlertValue = 9
+closingRate_MediumTopRightAlertValue = 21
+closingRate_FastTopAlertValue = 27 
 
 def AI_loop():
   global count_frame, loop, boolean, score, population_size, chromosome_size, population, mutation_prob, crossover_prob, fitness_list, generation, generation_size, first_time, done_learning
@@ -31,17 +17,8 @@ def AI_loop():
   ai.turnLeft(0)
   ai.turnRight(0)
 
-  ## Get A Chromosome in the Population -- Eventually Will go through each individual in the population ##
-  current_chromosome = population[loop]
-  
-  closingRate_SlowTopAlert = current_chromosome[0:4]
-  closingRate_SlowTopAlertValue = transform_fuzzy(closingRate_SlowTopAlert, 1, 0, 16) 
-  closingRate_MediumTopLeftAlert = current_chromosome[4:8]                 
-  closingRate_MediumTopLeftAlertValue = transform_fuzzy(closingRate_MediumTopLeftAlert, 1, (closingRate_SlowTopAlertValue+1), (closingRate_SlowTopAlertValue+1)+16) 
-  closingRate_MediumTopRightAlert = current_chromosome[8:12]                 
-  closingRate_MediumTopRightAlertValue = transform_fuzzy(closingRate_MediumTopRightAlert, 1, (closingRate_MediumTopLeftAlertValue+1), (closingRate_MediumTopLeftAlertValue+1)+16) 
-  closingRate_FastTopAlert = current_chromosome[12:16]                 
-  closingRate_FastTopAlertValue = transform_fuzzy(closingRate_FastTopAlert, 1, (closingRate_MediumTopRightAlertValue+1), (closingRate_MediumTopRightAlertValue+1)+16) 
+  ### Order of chromosome do not matter when created ###
+  current_chromosome = [0,0,0,0,1,0,0,1,1,1,0,0,0,1,1,0,0,0,0,1,1,1,0,0,0,1,1,0,1,0,0,0,1,0,0,1,1,1,1,1,0,1,0,0,1,0,1,0,1,1,1,1]
   
 
   closingRate_SlowBottomAlert = current_chromosome[16:20]  
@@ -50,7 +27,7 @@ def AI_loop():
   end = (start + (1 * (2**(len(closingRate_SlowBottomAlert))))) 
                     
   closingRate_SlowBottomAlertValue = transform_fuzzy(closingRate_SlowBottomAlert, 1, start, end)   
-
+  print(closingRate_SlowBottomAlertValue)
   
   closingRate_MediumBottomLeftAlert = current_chromosome[20:24]             
   end = (closingRate_MediumTopLeftAlertValue - (((closingRate_MediumTopLeftAlertValue - closingRate_SlowTopAlertValue)/2)+1))
@@ -62,14 +39,14 @@ def AI_loop():
     #print(start, end)  
   jump = (end - start) // (2**(len(closingRate_MediumBottomLeftAlert)))
   closingRate_MediumBottomLeftAlertValue = transform_fuzzy(closingRate_MediumBottomLeftAlert, jump, start, end)
-  #print("closingRate_MediumBottomLeftAlertValue", closingRate_MediumBottomLeftAlertValue)
+  print("closingRate_MediumBottomLeftAlertValue", closingRate_MediumBottomLeftAlertValue)
   
   closingRate_MediumBottomRightAlert = current_chromosome[24:28]     
   start = (closingRate_MediumTopRightAlertValue + (((closingRate_FastTopAlertValue - closingRate_MediumTopRightAlertValue)/2)+1))
   end = start + (1 * (2**(len(closingRate_MediumBottomRightAlert))))        
   #print(start, end)  
   closingRate_MediumBottomRightAlertValue = transform_fuzzy(closingRate_MediumBottomRightAlert, 1, start, end) 
-  #print("closingRate_MediumBottomRightAlertValue", closingRate_MediumBottomRightAlertValue)
+  print("closingRate_MediumBottomRightAlertValue", closingRate_MediumBottomRightAlertValue)
 
   closingRate_FastBottomAlert = current_chromosome[28:32]                   
   end = (closingRate_FastTopAlertValue - (((closingRate_FastTopAlertValue - closingRate_MediumTopRightAlertValue)/2)+1))
@@ -80,28 +57,28 @@ def AI_loop():
     start = 0  
   jump = (end - start) // (2**(len(closingRate_FastBottomAlert)))
   closingRate_FastBottomAlertValue = transform_fuzzy(closingRate_FastBottomAlert, jump, start, end)
-  #print("closingRate_FastBottomAlertValue", closingRate_FastBottomAlertValue)
+  print("closingRate_FastBottomAlertValue", closingRate_FastBottomAlertValue)
 
   Distance_CloseTopAlert = current_chromosome[32:37]
   #print(Distance_CloseTopAlert)
   Distance_CloseTopAlertValue = transform_fuzzy(Distance_CloseTopAlert, 50, 0, (50*(2**len(Distance_CloseTopAlert)))) 
-  #print("Distance_CloseTopAlertValue", Distance_CloseTopAlertValue)
+  print("Distance_CloseTopAlertValue", Distance_CloseTopAlertValue)
   Distance_FarTopAlert = current_chromosome[37:42]
   Distance_FarTopAlertValue = transform_fuzzy(Distance_CloseTopAlert, 50, (Distance_CloseTopAlertValue+50), (Distance_CloseTopAlertValue+50)+(50*(2**len(Distance_CloseTopAlert)))) 
-  #print("Distance_FarTopAlertValue", Distance_FarTopAlertValue)
+  print("Distance_FarTopAlertValue", Distance_FarTopAlertValue)
 
   Distance_CloseBottomAlert = current_chromosome[42:47]
   start = (Distance_CloseTopAlertValue + (((Distance_FarTopAlertValue - Distance_CloseTopAlertValue)/2)+1))
   end = Distance_FarTopAlertValue
   jump = (end - start) // (2**(len(Distance_CloseBottomAlert)))
   Distance_CloseBottomAlertValue = transform_fuzzy(Distance_CloseBottomAlert, jump, start, end) 
-  #print("Distance_CloseBottomAlertValue", Distance_CloseBottomAlertValue)
+  print("Distance_CloseBottomAlertValue", Distance_CloseBottomAlertValue)
   Distance_FarBottomAlert = current_chromosome[47:52] 
   end = (Distance_FarTopAlertValue - (((Distance_FarTopAlertValue - Distance_CloseTopAlertValue)/2)+1))
   start = Distance_CloseTopAlertValue
   jump = (end - start) // (2**(len(Distance_FarBottomAlert)))
   Distance_FarBottomAlertValue = transform_fuzzy(Distance_FarBottomAlert, jump, start, end)
-  #print("Distance_FarBottomAlertValue", Distance_FarBottomAlertValue)
+  print("Distance_FarBottomAlertValue", Distance_FarBottomAlertValue)
 
   #print("got pass the chrom")
 
