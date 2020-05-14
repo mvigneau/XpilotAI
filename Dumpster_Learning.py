@@ -255,8 +255,7 @@ def AI_loop():
       elif(trackWall <= 150):
         ai.thrust(1)
         print("Rule 4")
-
-      ##### Bullet Avoidance Commands #####
+        ##### Bullet Avoidance Commands #####
       elif(ai.shotAlert(0) <= 50 and ai.shotAlert(0) <= BulletAlertValue):
         print("YES")
         if(ai.shotVelDir(0) != -1  and ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() <= 5):
@@ -273,8 +272,7 @@ def AI_loop():
         else:
           ai.turnRight(1)
           print("Rule 8")
-
-      ##### Shooting Ennemy Commands #####
+        ##### Shooting Ennemy Commands #####
       elif(enemyDist <= 3000 and heading > (head) and enemyDist != 0 and ai.selfSpeed() > 5):
         print("Rule 9")
         ai.turnRight(1)
@@ -290,9 +288,9 @@ def AI_loop():
         print("Rule 12")
         ai.thrust(0)
 
-      print("nothing")
       count_frame += 3
       boolean = False
+      print("nothing")
       
 
 #ai.headlessMode()
