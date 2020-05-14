@@ -161,7 +161,7 @@ def AI_loop():
   head = ai.lockHeadingDeg()
   #print(head)
   enemyDist = ai.selfLockDist()
-  #print(enemyDist)
+  print(enemyDist)
   print(ai.angleDiff(heading, ai.shotVelDir(0)))
   
   # print("max_risk: ", max_risk)
@@ -276,20 +276,21 @@ def AI_loop():
 
       ##### Shooting Ennemy Commands #####
       elif(enemyDist <= 3000 and heading > (head) and enemyDist != 0 and ai.selfSpeed() > 5):
+        print("Rule 9")
         ai.turnRight(1)
         ai.fireShot()
-        print("Rule 9")
       elif(enemyDist <= 3000 and heading < (head) and enemyDist != 0 and ai.selfSpeed() > 5):
+        print("Rule 10")
         ai.turnLeft(1)
         ai.fireShot()
-        print("Rule 10")
       elif(ai.selfSpeed() < 5):
-        ai.thrust(1)
         print("Rule 11")
+        ai.thrust(1)
       else:
-        ai.thrust(0)
         print("Rule 12")
+        ai.thrust(0)
 
+      print("nothing")
       count_frame += 3
       boolean = False
       
