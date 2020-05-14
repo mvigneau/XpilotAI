@@ -218,7 +218,7 @@ def AI_loop():
       count_frame += 3
       boolean = False
 
-#ai.headlessMode()
+ai.headlessMode()
 ai.start(AI_loop,["-name","Rabbit","-join", "localhost"])
 
 ##-join 136.244.227.80 -port 15351
