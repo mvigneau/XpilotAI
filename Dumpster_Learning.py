@@ -232,63 +232,63 @@ def AI_loop():
   else:
 
     if(ai.selfAlive() == 1):
-      print("Alive")
+      # print("Alive")
 
       ## Get the angles on both side between tracking and heading ##
       dist = (heading - track_risk) % 360
       dist2 = (360 - dist) % 360
-      print("dist: ", dist)
-      print("dist2: ", dist2)
+      # print("dist: ", dist)
+      # print("dist2: ", dist2)
       
       ## Production system rules based off fuzzy output ##
       if(dist <= 130 and dist >= 0 and ai.selfSpeed() > 0 and max_risk >= 75):
         ai.turnLeft(1)
-        print("Rule 1")
+        #print("Rule 1")
       elif(dist2 <= 130 and dist2 >= 0 and ai.selfSpeed() > 0 and max_risk >= 75):
         ai.turnRight(1)
-        print("Rule 2")
+        #print("Rule 2")
       elif(ai.selfSpeed() <= 10):
         ai.thrust(1)
-        print("Rule 3")
+        #print("Rule 3")
       elif(trackWall <= 150):
         ai.thrust(1)
-        print("Rule 4")
+        #print("Rule 4")
         ##### Bullet Avoidance Commands #####
-      elif(ai.shotAlert(0) <= 50 and ai.shotAlert(0) <= 50):
-        print("YES")
+      elif(ai.shotAlert(0) >= 0 and ai.shotAlert(0) <= 50):
+        #print("YES")
         if(ai.shotVelDir(0) != -1  and ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() <= 5):
           ai.turnLeft(1)
           ai.thrust(1)
-          print("Rule 5")
+          #print("Rule 5")
         elif(ai.shotVelDir(0) != -1 and ai.angleDiff(heading, ai.shotVelDir(0)) < 0 and ai.selfSpeed() <= 5): 
           ai.turnRight(1)
           ai.thrust(1)
-          print("Rule 6")
+          #print("Rule 6")
         elif(ai.shotVelDir(0) != -1 and ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() > 5):
           ai.turnLeft(1)
-          print("Rule 7")
+          #print("Rule 7")
         else:
           ai.turnRight(1)
-          print("Rule 8")
+          #print("Rule 8")
         ##### Shooting Ennemy Commands #####
       elif(enemyDist <= 3000 and heading > (head) and enemyDist != 0 and ai.selfSpeed() > 5):
-        print("Rule 9")
+        #print("Rule 9")
         ai.turnRight(1)
         ai.fireShot()
       elif(enemyDist <= 3000 and heading < (head) and enemyDist != 0 and ai.selfSpeed() > 5):
-        print("Rule 10")
+        #print("Rule 10")
         ai.turnLeft(1)
         ai.fireShot()
       elif(ai.selfSpeed() < 5):
-        print("Rule 11")
+        #print("Rule 11")
         ai.thrust(1)
       else:
-        print("Rule 12")
+        #print("Rule 12")
         ai.thrust(0)
 
       count_frame += 3
       boolean = False
-      print("nothing")
+      #print("nothing")
       
 
 #ai.headlessMode()
