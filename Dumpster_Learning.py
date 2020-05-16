@@ -1,19 +1,23 @@
-### Program 2 -- Mathieu Vigneault, ______ ###
-### Date: 02-14-2020 ###
-### This program uses fuzzy rules to determine the wall avoidance ###
+### Final Project -- Mathieu Vigneault, Mahdia Qadid ###
+### Date: 05-01-2020 ###
+### Dumpster is the fuzzy logic agent and the main agent of the project ###
+### This program uses fuzzy rules to determine the wall avoidance and a genetic algorithm to evolve the fuzzy rules ###
+### This is a file that will make the agent learn over time ###
+
 import libpyAI as ai
 import statistics 
 from Dumpster_Fuzzy import *
 from Learning_Data import * 
 from Dumpster_GA import *
 
-### Setting Up GA ###
+### Setting Up GA -- Important Parameters ###
 population_size = 64
 crossover_prob = 0.7
 mutation_prob = 0.01
 chromosome_size = 52
-### Order of chromosome do not matter when created ###
-population = init_population(population_size, chromosome_size) ## Initialize the Population ##
+### Initialize the Population ###
+##Order of chromosome do not matter when created ##
+population = init_population(population_size, chromosome_size)
 count_frame = 0
 loop = 0
 boolean = False
@@ -26,6 +30,7 @@ done_learning = False
 
 def AI_loop():
   global count_frame, loop, boolean, score, population_size, chromosome_size, population, mutation_prob, crossover_prob, fitness_list, generation, generation_size, first_time, done_learning
+  
   #Release keys
   ai.thrust(0)
   ai.turnLeft(0)
@@ -34,6 +39,11 @@ def AI_loop():
   ## Get A Chromosome in the Population -- Eventually Will go through each individual in the population ##
   current_chromosome = population[loop]
 
+  ## Transform Each Gene insisde A Single Selected Chromosome. 0s & 1s Are Turned Into Intergers For Fuzzy Sets to understand ## 
+  ## Each Value obtained is used to calculate the risk of each 45 degree around the agent ##
+  ## Each value has its own "jump" variable which refers to the distance from each possible points/values ##
+  ## The start and end represents the possible start point and end point for each variable and they depend on
+  ## what the variiable is. It is to ensure a viable fuzzy set and fuzzy functions that these restrictions are applied. ##
   closingRate_SlowTopAlert = current_chromosome[0:4]
   closingRate_SlowTopAlertValue = transform_fuzzy(closingRate_SlowTopAlert, 1, 0, 16) 
   closingRate_MediumTopLeftAlert = current_chromosome[4:8]                 
@@ -45,12 +55,9 @@ def AI_loop():
   
 
   closingRate_SlowBottomAlert = current_chromosome[16:20]  
-
   start = (closingRate_SlowTopAlertValue + (((closingRate_MediumTopLeftAlertValue - closingRate_SlowTopAlertValue)//2)+1))
-  end = (start + (1 * (2**(len(closingRate_SlowBottomAlert))))) 
-                    
+  end = (start + (1 * (2**(len(closingRate_SlowBottomAlert)))))                   
   closingRate_SlowBottomAlertValue = transform_fuzzy(closingRate_SlowBottomAlert, 1, start, end)   
-
 
   closingRate_MediumBottomLeftAlert = current_chromosome[20:24]             
   end = (closingRate_MediumTopLeftAlertValue - (((closingRate_MediumTopLeftAlertValue - closingRate_SlowTopAlertValue)//2)+1))
@@ -58,18 +65,14 @@ def AI_loop():
   if(end < 0):
     end = 0  
   if(start < 0):
-    start = 0    
-    #print(start, end)  
+    start = 0     
   jump = (end - start) // (2**(len(closingRate_MediumBottomLeftAlert)))
   closingRate_MediumBottomLeftAlertValue = transform_fuzzy(closingRate_MediumBottomLeftAlert, jump, start, end)
-  #print("closingRate_MediumBottomLeftAlertValue", closingRate_MediumBottomLeftAlertValue)
   
   closingRate_MediumBottomRightAlert = current_chromosome[24:28]     
   start = (closingRate_MediumTopRightAlertValue + (((closingRate_FastTopAlertValue - closingRate_MediumTopRightAlertValue)//2)+1))
-  end = start + (1 * (2**(len(closingRate_MediumBottomRightAlert))))        
-  #print(start, end)  
+  end = start + (1 * (2**(len(closingRate_MediumBottomRightAlert))))          
   closingRate_MediumBottomRightAlertValue = transform_fuzzy(closingRate_MediumBottomRightAlert, 1, start, end) 
-  #print("closingRate_MediumBottomRightAlertValue", closingRate_MediumBottomRightAlertValue)
 
   closingRate_FastBottomAlert = current_chromosome[28:32]                   
   end = (closingRate_FastTopAlertValue - (((closingRate_FastTopAlertValue - closingRate_MediumTopRightAlertValue)//2)+1))
@@ -80,32 +83,26 @@ def AI_loop():
     start = 0  
   jump = (end - start) // (2**(len(closingRate_FastBottomAlert)))
   closingRate_FastBottomAlertValue = transform_fuzzy(closingRate_FastBottomAlert, jump, start, end)
-  #print("closingRate_FastBottomAlertValue", closingRate_FastBottomAlertValue)
 
   Distance_CloseTopAlert = current_chromosome[32:37]
-  #print(Distance_CloseTopAlert)
   Distance_CloseTopAlertValue = transform_fuzzy(Distance_CloseTopAlert, 50, 0, (50*(2**len(Distance_CloseTopAlert)))) 
-  #print("Distance_CloseTopAlertValue", Distance_CloseTopAlertValue)
   Distance_FarTopAlert = current_chromosome[37:42]
   Distance_FarTopAlertValue = transform_fuzzy(Distance_CloseTopAlert, 50, (Distance_CloseTopAlertValue+50), (Distance_CloseTopAlertValue+50)+(50*(2**len(Distance_CloseTopAlert)))) 
-  #print("Distance_FarTopAlertValue", Distance_FarTopAlertValue)
 
   Distance_CloseBottomAlert = current_chromosome[42:47]
   start = (Distance_CloseTopAlertValue + (((Distance_FarTopAlertValue - Distance_CloseTopAlertValue)//2)+1))
   end = Distance_FarTopAlertValue
   jump = (end - start) // (2**(len(Distance_CloseBottomAlert)))
   Distance_CloseBottomAlertValue = transform_fuzzy(Distance_CloseBottomAlert, jump, start, end) 
-  #print("Distance_CloseBottomAlertValue", Distance_CloseBottomAlertValue)
+
   Distance_FarBottomAlert = current_chromosome[47:52] 
   end = (Distance_FarTopAlertValue - (((Distance_FarTopAlertValue - Distance_CloseTopAlertValue)//2)+1))
   start = Distance_CloseTopAlertValue
   jump = (end - start) // (2**(len(Distance_FarBottomAlert)))
   Distance_FarBottomAlertValue = transform_fuzzy(Distance_FarBottomAlert, jump, start, end)
-  #print("Distance_FarBottomAlertValue", Distance_FarBottomAlertValue)
 
-  #print("got pass the chrom")
 
-  #Set variables
+  #Set variables for Wall feelers, heading and tracking of the agent ##
   heading = int(ai.selfHeadingDeg())
   tracking = int(ai.selfTrackingDeg())
   frontWall = ai.wallFeeler(500,heading)
@@ -118,7 +115,9 @@ def AI_loop():
   backWall = ai.wallFeeler(500,heading-180) 
   trackWall = ai.wallFeeler(500,tracking)
   
+  ## Create an array that represents the closing rate of each 45 degree of the full 360 degrees surrounding the agent ##
   result_list = []
+  ## Array of the same size, but contains the risk of each direction ##
   risk_list = []
   for i in range(8):
     Degree = tracking+(45*i)
@@ -127,52 +126,42 @@ def AI_loop():
     result = Closing_Rate(Degree, tracking, Speed, Distance)
     result_list.append(result)
 
-    ### Fuzzy membership ###
+    ### Calculate the Fuzzy membership ###
+    ### 1. Fuzzy Membership For Closing Rate (Speed + Tracking Involved) ###
+    ### 2. Fuzzy Membership For Distance From Walls ###  
     closing_rate, distance = Closing_Rate(Degree, tracking, Speed, Distance)
     low, medium, fast = Fuzzy_Speed(closing_rate, closingRate_SlowTopAlertValue, closingRate_SlowBottomAlertValue, closingRate_MediumBottomLeftAlertValue, closingRate_MediumTopLeftAlertValue, closingRate_MediumTopRightAlertValue, closingRate_MediumBottomRightAlertValue, closingRate_FastBottomAlertValue, closingRate_FastTopAlertValue)
-    #print("low-med-fast", low, medium, fast)
     close, far = Fuzzy_Distance(distance, Distance_CloseTopAlertValue, Distance_CloseBottomAlertValue, Distance_FarBottomAlertValue, Distance_FarTopAlertValue)
     #print("close-far", close, far)
     risk = Fuzzy_Risk(low, medium, fast, close, far)
     risk_list.append(risk)
 
-  ## Get the direction in deg that is most risky for the robot ##
+  ## Get the direction in deg that is most risky for the robot as well as the least risky direction ##
   max_risk = max(risk_list)
   track_risk = (tracking + (risk_list.index(max_risk)*45) % 360)
-  min_risk = min(risk_list)
-  
-  # print("found max risk", max_risk)
+  min_risk = min(risk_list) ## Note: Biase Towards Left Side since min get the first min when risk might be equal ##
 
-  #######   Shooting Ennemies  ########
-  
+
+  ####### Getters Variable Regarding Important Information About Enemies ########
   ##Find the closest ennemy##
-  ClosestID = ai.closestShipId()
-  #print(ClosestID)
-  ##Get the closest ennemy direction and speed##
-  ClosestSpeed = ai.enemySpeedId(ClosestID)
-  #print(ClosestSpeed)
-  ClosestDir = ai.enemyTrackingDegId(ClosestID)
-  #print(ClosestDir)
-  ## Get the lockheadingdeg ##
   enemy = ai.lockClose()
-  #print(enemy)
+  ## Get the lockheadingdeg of enemy ##
   head = ai.lockHeadingDeg()
-  #print(head)
+  ## Get the dstance from enemy ##
   enemyDist = ai.selfLockDist()
   
-  # print("max_risk: ", max_risk)
-  # print("track_risk: ", track_risk)
-  # print("heading: ", heading)
-  
+  ## If the Enemy is Dead ##
   if(ai.selfAlive() == 0 and boolean == False): 
 
-    ## Calculate Fitness Current Population ##
+    ## Calculate Fitness Current Individual ##
     score_previous = score
     score_current = ai.selfScore()
     fitness_value = fitness(population, count_frame, score_previous, score_current)
     fitness_list.append(fitness_value)
 
+    ## If it went through the whole population and ready to move to next generation ##
     if((loop+1) == population_size):
+      ## Output the fitness of population to allow user to see if learning is happening ##
       print("Generation:", generation)
       print("Agent Fitness:")
       print(fitness_list)
@@ -218,78 +207,63 @@ def AI_loop():
       
       ### DONE -- QUIT ###
       if(generation == generation_size):
-        print("Done")
         quitAI()
 
+    ## Move to the next individual in population ##
     else:   
       loop += 1 
       count_frame = 0
     boolean = True
 
-  ### Rules ###
+
   else:
 
+    ## The agent is Alive ##
     if(ai.selfAlive() == 1):
-      # print("Alive")
 
-      ## Get the angles on both side between tracking and heading ##
+      ## Get the angles on both side between tracking and heading to decide which way to turn ##
       dist = (heading - track_risk) % 360
       dist2 = (360 - dist) % 360
-      # print("dist: ", dist)
-      # print("dist2: ", dist2)
-      
-      ## Production system rules based off fuzzy output ##
+
+      ###### Production System Rules ######
+      ## Turning Rules ##
       if(dist <= 130 and dist >= 0 and ai.selfSpeed() > 0 and max_risk >= 75):
         ai.turnLeft(1)
-        #print("Rule 1")
       elif(dist2 <= 130 and dist2 >= 0 and ai.selfSpeed() > 0 and max_risk >= 75):
         ai.turnRight(1)
-        #print("Rule 2")
       elif(ai.selfSpeed() <= 10):
         ai.thrust(1)
-        #print("Rule 3")
       elif(trackWall <= 150):
         ai.thrust(1)
-        #print("Rule 4")
-        ##### Bullet Avoidance Commands #####
+      ##### Bullet Avoidance Commands #####
       elif(ai.shotAlert(0) >= 0 and ai.shotAlert(0) <= 50):
-        #print("YES")
         if(ai.shotVelDir(0) != -1  and ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() <= 5):
           ai.turnLeft(1)
           ai.thrust(1)
-          #print("Rule 5")
         elif(ai.shotVelDir(0) != -1 and ai.angleDiff(heading, ai.shotVelDir(0)) < 0 and ai.selfSpeed() <= 5): 
           ai.turnRight(1)
           ai.thrust(1)
-          #print("Rule 6")
         elif(ai.shotVelDir(0) != -1 and ai.angleDiff(heading, ai.shotVelDir(0)) > 0 and ai.selfSpeed() > 5):
           ai.turnLeft(1)
-          #print("Rule 7")
         else:
           ai.turnRight(1)
-          #print("Rule 8")
-        ##### Shooting Ennemy Commands #####
+      ##### Shooting Ennemy Commands #####
       elif(enemyDist <= 3000 and heading > (head) and enemyDist != 0 and ai.selfSpeed() > 5):
-        #print("Rule 9")
         ai.turnRight(1)
         ai.fireShot()
       elif(enemyDist <= 3000 and heading < (head) and enemyDist != 0 and ai.selfSpeed() > 5):
-        #print("Rule 10")
         ai.turnLeft(1)
         ai.fireShot()
+      ## Rules if nothing is happening ##
       elif(ai.selfSpeed() < 5):
-        #print("Rule 11")
         ai.thrust(1)
       else:
-        #print("Rule 12")
         ai.thrust(0)
 
       count_frame += 3
       boolean = False
-      #print("nothing")
-      
 
+## Disabling the Game User Interface ##
 ai.headlessMode()
+## Starting the Game and the Agent ##
 ai.start(AI_loop,["-name", "Dumpster", "-join", "localhost"])
-
-#ai.start(AI_loop,["-name", "Dumpster", "-join", "136.244.227.81", "-port", "15350"])

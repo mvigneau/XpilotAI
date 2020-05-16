@@ -1,4 +1,9 @@
-### Program 1 -- Mathieu Vigneault,  
+### Final Project -- Mathieu Vigneault, Mahdia Qadid ###
+### Date: 05-01-2020 ###
+### Rabbit is a smart defensive agent that utilize a GA to learn and get smarter ###
+### This program uses a genetic algorithm to evolve the agent's production system ###
+### This is a file that will make the agent learn over time ###
+
 import libpyAI as ai
 import statistics 
 from Learning_Data import * 
@@ -9,6 +14,8 @@ population_size = 64
 crossover_prob = 0.7
 mutation_prob = 0.01
 chromosome_size = 32
+### Initialize the Population ###
+##Order of chromosome do not matter when created ##
 population = init_population(population_size, chromosome_size)
 count_frame = 0
 loop = 0
@@ -27,11 +34,14 @@ def AI_loop():
   ai.turnLeft(0)
   ai.turnRight(0)
 
-  ## Selects an individual in the population and extract each gene ##
+  ## Get A Chromosome in the Population -- Eventually Will go through each individual in the population ##
   current_chromosome = population[loop]
   
-  ## Each Variable Accounted in the Production System ##
-  ## Transform method take the 0s and 1s and turn them into a number ##
+  ## Transform Each Gene insisde A Single Selected Chromosome. 0s & 1s Are Turned Into Intergers For Fuzzy Sets to understand ## 
+  ## Each Value obtained is used to calculate the risk of each 45 degree around the agent ##
+  ## Each value has its own "jump" variable which refers to the distance from each possible points/values ##
+  ## The start and end represents the possible start point and end point for each variable and they depend on
+  ## what the variiable is. It is to ensure a viable fuzzy set and fuzzy functions that these restrictions are applied. ##
   frontAlert = current_chromosome[0:5]
   frontAlertValue = transform(frontAlert, 25)
 
@@ -68,22 +78,15 @@ def AI_loop():
   trackWall = ai.wallFeeler(500,tracking)
   
 
-  #######   Shooting Ennemies  ########
+  ####### Getters Variable Regarding Important Information About Enemies ########
   ##Find the closest ennemy##
-  ClosestID = ai.closestShipId()
-  #print(ClosestID)
-  ##Get the closest ennemy direction and speed##
-  ClosestSpeed = ai.enemySpeedId(ClosestID)
-  #print(ClosestSpeed)
-  ClosestDir = ai.enemyTrackingDegId(ClosestID)
-  #print(ClosestDir)
-  ## Get the lockheadingdeg ##
-  enemy = ai.lockNext()
-  #print(enemy)
+  enemy = ai.lockClose()
+  ## Get the lockheadingdeg of enemy ##
   head = ai.lockHeadingDeg()
-  #print(head)
+  ## Get the dstance from enemy ##
   enemyDist = ai.selfLockDist()
 
+  ## If the Enemy is Dead ##
   if(ai.selfAlive() == 0 and boolean == False): 
 
     ## Calculate Fitness Current Population ##
@@ -92,7 +95,9 @@ def AI_loop():
     fitness_value = fitness(population, count_frame, score_previous, score_current)
     fitness_list.append(fitness_value)
 
+    ## If it went through the whole population and ready to move to next generation ##
     if((loop+1) == population_size):
+      ## Output the fitness of population to allow user to see if learning is happening ##
       print("Generation:", generation)
       print("Agent Fitness:")
       print(fitness_list)
@@ -127,25 +132,20 @@ def AI_loop():
 
       ## Select Next Generation -- Apply Crossover & Mutation ##
       new_population = select(population, fitness_list)
-      #print("new", new_population)
       new_population = crossover(new_population, chromosome_size, population_size, crossover_prob)
-      #print("crossover", new_population)
       new_population = mutate(new_population, chromosome_size, mutation_prob)
-      #print("mutate", new_population)
       population = new_population
-      #print("population", population)
       
       loop = 0
       count_frame = 0
       generation += 1
       fitness_list.clear()
 
+      ### DONE -- QUIT ###
       if(generation == generation_size):
-        print("Done")
-        ## Set Agent to chromosoze with most fitness ##
         quitAI()
-        ### DONE -- QUIT ###
-      
+    
+    ## Move to the next individual in population ##
     else:   
       loop += 1 
       count_frame = 0
@@ -154,24 +154,20 @@ def AI_loop():
 
   else:
 
+    ## The agent is Alive ##
     if(ai.selfAlive() == 1):
-      
+      ##### Production System Rules ######
       ### Turning Rules ###
       if frontWall <= frontAlertValue and (left45Wall < right45Wall) and ai.selfSpeed() > speedAlertValue: 
-        #print("turning right")
         ai.turnRight(1)
       elif frontWall <= frontAlertValue and (left45Wall > right45Wall) and ai.selfSpeed() > speedAlertValue:
         ai.turnLeft(1)
       elif left90Wall <= frontAlertValue and ai.selfSpeed() > speedAlertValue:
-        #print("turning right")
         ai.turnRight(1) 
       elif right90Wall <= frontAlertValue and ai.selfSpeed() > speedAlertValue:
-        #print("turning left")
         ai.turnLeft(1)
-
       ### Thrust commands ####
       elif ai.selfSpeed() <= speedAlertValue and (frontWall >= frontAlertValue) and (left45Wall >= frontAlertValue) and (right45Wall >= frontAlertValue) and (right90Wall >= frontAlertValue) and (left90Wall >= frontAlertValue) and (left135Wall >= backAlertValue) and (right135Wall >= backAlertValue) and (backWall >= backAlertValue):
-        #print("go forward")
         ai.thrust(1)
       elif trackWall <= TrackFastAlertValue and ai.selfSpeed() >= speedAlertValue:
         ai.thrust(1)
@@ -211,14 +207,13 @@ def AI_loop():
       elif ai.selfSpeed() < speedAlertValue:
         ai.thrust(1)
       else:
-        #print("chilling")
         ai.thrust(0)
 
       count_frame += 3
       boolean = False
 
+## Disabling the Game User Interface ##
 ai.headlessMode()
+## Starting the Game and the Agent ##
 ai.start(AI_loop,["-name","Rabbit","-join", "localhost"])
-
-##-join 136.244.227.80 -port 15351
   

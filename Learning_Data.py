@@ -1,4 +1,7 @@
- 
+### Final Project -- Mathieu Vigneault, Mahdia Qadid ###
+### Date: 05-01-2020 ###
+### This program saves the data in an exel file ###
+
 import sys
 import xlwt
 from xlrd import open_workbook

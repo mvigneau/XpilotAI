@@ -1,4 +1,9 @@
-### Program 1 -- Mathieu Vigneault,  
+### Final Project -- Mathieu Vigneault, Mahdia Qadid ###
+### Date: 05-01-2020 ###
+### Rabbit is a smart defensive agent that utilize a GA to learn and get smarter ###
+### This program uses a genetic algorithm to evolve the agent's production system ###
+### This is a the optimal agent after some learning against xpilot agent was done ###
+
 import libpyAI as ai
 import statistics 
 
@@ -17,7 +22,7 @@ def AI_loop():
   ai.turnLeft(0)
   ai.turnRight(0)
 
-  #Set variables
+  ## Get values of variables for Wall Feelers, Head & Tracking ##
   heading = int(ai.selfHeadingDeg())
   tracking = int(ai.selfTrackingDeg())
   frontWall = ai.wallFeeler(500,heading)
@@ -30,40 +35,26 @@ def AI_loop():
   backWall = ai.wallFeeler(500,heading-180) 
   trackWall = ai.wallFeeler(500,tracking)
   
-
-  #######   Shooting Ennemies  ########
+  ####### Getters Variable Regarding Important Information About Enemies ########
   ##Find the closest ennemy##
-  ClosestID = ai.closestShipId()
-  #print(ClosestID)
-  ##Get the closest ennemy direction and speed##
-  ClosestSpeed = ai.enemySpeedId(ClosestID)
-  #print(ClosestSpeed)
-  ClosestDir = ai.enemyTrackingDegId(ClosestID)
-  #print(ClosestDir)
-  ## Get the lockheadingdeg ##
-  enemy = ai.lockNext()
-  #print(enemy)
+  enemy = ai.lockClose()
+  ## Get the lockheadingdeg of enemy ##
   head = ai.lockHeadingDeg()
-  #print(head)
+  ## Get the dstance from enemy ##
   enemyDist = ai.selfLockDist()
-  #print(enemyDist)
-  #print(count_frame)
 
-  ## Production System Rules ##    
+  ##### Production System Rules ######
+  ### Turning Rules ###  
   if frontWall <= frontAlertValue and (left45Wall < right45Wall) and ai.selfSpeed() > speedAlertValue: 
-    #print("turning right")
     ai.turnRight(1)
   elif frontWall <= frontAlertValue and (left45Wall > right45Wall) and ai.selfSpeed() > speedAlertValue:
     ai.turnLeft(1)
   elif left90Wall <= frontAlertValue and ai.selfSpeed() > speedAlertValue:
-    #print("turning right")
     ai.turnRight(1) 
   elif right90Wall <= frontAlertValue and ai.selfSpeed() > speedAlertValue:
-    #print("turning left")
     ai.turnLeft(1)
   ### Thrust commands ####
   elif ai.selfSpeed() <= speedAlertValue and (frontWall >= frontAlertValue) and (left45Wall >= frontAlertValue) and (right45Wall >= frontAlertValue) and (right90Wall >= frontAlertValue) and (left90Wall >= frontAlertValue) and (left135Wall >= backAlertValue) and (right135Wall >= backAlertValue) and (backWall >= backAlertValue):
-    #print("go forward")
     ai.thrust(1)
   elif trackWall <= TrackFastAlertValue and ai.selfSpeed() >= speedAlertValue:
     ai.thrust(1)
@@ -103,12 +94,11 @@ def AI_loop():
   elif ai.selfSpeed() < speedAlertValue:
     ai.thrust(1)
   else:
-    #print("chilling")
     ai.thrust(0)
 
 
-#ai.headlessMode()
+## Disabling the Game User Interface ##
+## ai.headlessMode()
+## Starting the Game and the Agent ##
 ai.start(AI_loop,["-name","Rabbit","-join", "localhost"])
-
-##-join 136.244.227.80 -port 15351
   
