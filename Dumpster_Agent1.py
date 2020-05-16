@@ -87,17 +87,6 @@ def AI_loop():
     ai.turnLeft(1)
   elif(dist2 <= 130 and dist2 >= 0 and ai.selfSpeed() > 0 and max_risk >= 75):
     ai.turnRight(1)
-<<<<<<< HEAD
-  elif(ai.selfSpeed() <= 10):
-    ai.thrust(1)
-||||||| merged common ancestors
-    #print("Rule 2")
-  elif(ai.selfSpeed() <= 10):
-    ai.thrust(1)
-    #print("Rule 3")
-=======
-    #print("Rule 2")
->>>>>>> 88b35d2ed7e1bae3ad275efe3ae59e02c157701e
   elif(trackWall <= 150):
     ai.thrust(1)
   ##### Bullet Avoidance Commands #####
@@ -113,21 +102,14 @@ def AI_loop():
     else:
       ai.turnRight(1)
   ##### Shooting Ennemy Commands #####
-  elif(enemyDist <= 3000 and heading > (head) and enemyDist != 0 and ai.selfSpeed() > 5):
+  elif(enemyDist <= 3000 and heading > (head) and enemyDist != 0 and ai.selfSpeed() > 2):
     ai.turnRight(1)
     ai.fireShot()
-  elif(enemyDist <= 3000 and heading < (head) and enemyDist != 0 and ai.selfSpeed() > 5):
+  elif(enemyDist <= 3000 and heading < (head) and enemyDist != 0 and ai.selfSpeed() > 2):
     ai.turnLeft(1)
     ai.fireShot()
-<<<<<<< HEAD
   ## Rules if nothing is happening ##
   elif(ai.selfSpeed() < 5):
-||||||| merged common ancestors
-  elif(ai.selfSpeed() < 5):
-    #print("Rule 11")
-=======
-  elif(ai.selfSpeed() <= 10):
->>>>>>> 88b35d2ed7e1bae3ad275efe3ae59e02c157701e
     ai.thrust(1)
   else:
     ai.thrust(0)
