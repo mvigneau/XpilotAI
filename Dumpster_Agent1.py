@@ -97,9 +97,6 @@ def AI_loop():
   elif(dist2 <= 130 and dist2 >= 0 and ai.selfSpeed() > 0 and max_risk >= 75):
     ai.turnRight(1)
     #print("Rule 2")
-  elif(ai.selfSpeed() <= 10):
-    ai.thrust(1)
-    #print("Rule 3")
   elif(trackWall <= 150):
     ai.thrust(1)
     #print("Rule 4")
@@ -129,8 +126,7 @@ def AI_loop():
     #print("Rule 10")
     ai.turnLeft(1)
     ai.fireShot()
-  elif(ai.selfSpeed() < 5):
-    #print("Rule 11")
+  elif(ai.selfSpeed() <= 10):
     ai.thrust(1)
   else:
     #print("Rule 12")
